@@ -51,7 +51,7 @@
                     <li><a target="_blank" href="https://flexboxfroggy.com/#es">Juego flex-box</a></li>
                 </ul>
             </div>
-            <div class="container">
+            <div class="container width600">
                 <div>
                     <p>hijo 1</p>
                 </div>
