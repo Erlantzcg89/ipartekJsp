@@ -77,7 +77,7 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("recuerdame", recuerdame);
 
 			// ir a vista
-			request.getRequestDispatcher("procesarLogin.jsp").forward(request, response);
+			request.getRequestDispatcher("/ejemplos/jsp/procesarLogin.jsp").forward(request, response);
 
 		} else {
 
@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("error", error);
 
 			// ir a vista
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			request.getRequestDispatcher("/ejemplos/jsp/login.jsp").forward(request, response);
 
 		}
 

@@ -1,0 +1,30 @@
+/* css del juego arkanoid
+    @author: Erlantz
+*/
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+}
+
+h1 {
+    text-align: center;
+
+    color: #000000;
+    background: #FFFFFF;
+    text-shadow: 2px 2px 0 #bcbcbc, 4px 4px 0 #9c9c9c;
+    color: #000000;
+    background: #FFFFFF;
+}
+
+canvas {
+
+    border: 1px solid;
+    display: block;
+    margin: 0 auto;
+}

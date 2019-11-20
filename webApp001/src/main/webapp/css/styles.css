@@ -1,23 +1,27 @@
+@charset "UTF-8";
+
 /*
   hoja de estilos
   esto es un comentario de bloque
   @auto: erlantz
   @version: 1.0
-  @tags: css, basic, etc..
-  @licencia: mit
+  @tags: css
   
 */
 
 /*  Estructura correcta de la hoja de estilos
     1. reset
     2. keyframes
-    3. a todas las etiquetas estilos generales
+    3. normalizar (estilos básicos)
     4. layouts
     5. clases
     6. ids, cosas más específicas
+    7. font awesome
      */
 
-/* Reset */
+/* @import url("/helloweb/css/reset.css"); */
+/* @import url("/helloweb/css/normalize.css"); */
+/* @import url("/helloweb/css/impresora.css") print; */
 
 * {
     box-sizing: border-box;
@@ -26,7 +30,7 @@
 /* Keyframes */
 
 
-/* Etiquetas Básicas */
+/* Etiquetas BÃ¡sicas */
 
 body {
     font-size: 16px;
@@ -98,7 +102,7 @@ section p {
 }
 
 /* ------------------------------------------------------------------------------------ */
-/* form básico -------------------------------------------------------------------------*/
+/* form bÃ¡sico -------------------------------------------------------------------------*/
 form {
     padding: 20px;
 }
@@ -116,7 +120,7 @@ input[type="text"]:invalid {
 }
 
 /* ------------------------------------------------------------------------------------ */
-/* tabla básica ------------------------------------------------------------------------*/
+/* tabla bÃ¡sica ------------------------------------------------------------------------*/
 table {
     max-width: 300px;
     margin: auto;
@@ -180,7 +184,7 @@ footer p {
     margin: 0px 0px 0px 0px;
     padding: 0px;
 
-    background-image: url('../images/nicolas-lobos-NR_tXTuyTak-unsplash.jpg');
+    background-image: url('/helloweb/images/nicolas-lobos-NR_tXTuyTak-unsplash.jpg');
 
     /* Set a specific height */
     height: 500px;

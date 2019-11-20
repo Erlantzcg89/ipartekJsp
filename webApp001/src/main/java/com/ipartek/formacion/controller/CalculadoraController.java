@@ -85,7 +85,7 @@ public class CalculadoraController extends HttpServlet {
 		request.setAttribute("op3", operacion);
 
 		// ir a vista
-		request.getRequestDispatcher("resultado.jsp").forward(request, response);
+		request.getRequestDispatcher("/ejemplos/jsp/resultado.jsp").forward(request, response);
 
 	}
 
