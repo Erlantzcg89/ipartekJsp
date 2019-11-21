@@ -4,6 +4,7 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 
+<div class="menuWrapper">
      <nav class="menu">
      	<a href="index.jsp">Volver</a>
         <a href="ejemplos/html/etiquetas-basicas.jsp">Etiquetas b&aacute;sicas</a>
@@ -12,6 +13,8 @@
         <a href="ejemplos/html/formularios.jsp">Formularios</a>
         <a href="ejemplos/html/login.jsp">Login</a>
     </nav>
+</div>
+ 
     <main>
         <h1 class="blanco">Ejercicios Html</h1>
 

@@ -4,10 +4,12 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 
-   <nav class="menu" id="menu">
+<div class="menuWrapper">
+    <nav class="menu" id="menu">
         <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/html/index.jsp">Volver a ejercicios Html</a>
+        <a href="ejemplos/html/index.jsp">Volver a ejemplos Html</a>
     </nav>
+</div>
 
     <main>
         <h1 class="blanco">Etiquetas b&aacute;sicas</h1>
@@ -63,10 +65,16 @@
         <section>
             <h2>Enlaces</h2>
             <nav class="blockAuto width600">
-                <a href="tel:685456544">685 456 544</a>
-                <a target="_blank" href="https://htmlcheatsheet.com/js/">Cheat Sheets</a>
-                <a target="_blank" href="https://www.rapidtables.com/web/html/html-codes.html">Carácteres en html</a>
-                <a target="_blanck" href="http://html5pattern.com/">Patterns Html5 para Forms</a>
+            	<ul>
+            		<li><a href="tel:685456544">685 456 544</a></li>
+                	<li><a target="_blank" href="https://htmlcheatsheet.com/js/">Cheat Sheets</a></li>
+                	<li><a target="_blank" href="https://www.rapidtables.com/web/html/html-codes.html">Carácteres en html</a></li>
+                	<li><a target="_blanck" href="http://html5pattern.com/">Patterns Html5 para Forms</a></li>
+                	<li><a target="_blanck" href="https://datatables.net/">Pluggin para tablas</a></li>
+                	
+                	
+                	
+                </ul>
             </nav>
         </section>
 

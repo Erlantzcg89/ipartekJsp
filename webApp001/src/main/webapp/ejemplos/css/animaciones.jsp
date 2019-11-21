@@ -27,10 +27,12 @@
         }
     </style>
 
-    <nav class="menu" id="menu">
-        <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/css/index.jsp">Volver a ejercicios Css</a>
+<div class="menuWrapper">
+     <nav class="menu" id="menu">
+          <a href="index.jsp">Inicio</a>
+        <a href="ejemplos/css/index.jsp">Volver</a>
     </nav>
+</div>
 
     <main>
         <h1 class="blanco">Animaciones @Keyframe</h1>

@@ -4,10 +4,14 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 
-<nav class="menu" id="menu">
+<div class="menuWrapper">
+	<nav class="menu" id="menu">
         <a href="index.jsp">Volver</a>
-        <a href="ejemplos/js/game-tuto.jsp">Arkanoid</a>
-    </nav>
+        <a href="ejemplos/js/arkanoid.jsp">Arkanoid</a>
+        <a href="ejemplos/js/datatable.jsp">Datatable</a>
+  	</nav>
+</div>
+
     <main>
         <h1 class="blanco">Ejercicios Js</h1>
 

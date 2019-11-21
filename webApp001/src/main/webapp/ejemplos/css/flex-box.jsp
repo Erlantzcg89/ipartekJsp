@@ -5,7 +5,7 @@
 <%@include file="/includes/cabecera.jsp" %>
 
    <style>
-        .container {
+        .container2 {
             border: 5px solid black;
             margin: auto;
 
@@ -15,7 +15,7 @@
             flex-wrap: wrap;
         }
 
-        .container div {
+        .container2 div {
             border: 5px solid teal;
             background-color: pink;
             width: 50%;
@@ -26,10 +26,12 @@
         }
     </style>
 
-    <nav class="menu" id="menu">
-        <a href="index.jsp">Inicio</a>
+  <div class="menuWrapper">
+     <nav class="menu" id="menu">
+          <a href="index.jsp">Inicio</a>
         <a href="ejemplos/css/index.jsp">Volver</a>
     </nav>
+</div>
 
     <main>
         <h1 class="blanco">Flex-box</h1>
@@ -51,7 +53,7 @@
                     <li><a target="_blank" href="https://flexboxfroggy.com/#es">Juego flex-box</a></li>
                 </ul>
             </div>
-            <div class="container width600">
+            <div class="container2 width600">
                 <div>
                     <p>hijo 1</p>
                 </div>

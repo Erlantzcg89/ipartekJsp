@@ -4,10 +4,13 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 
+<div class="menuWrapper">
     <nav class="menu" id="menu">
         <a href="index.jsp">Inicio</a>
         <a href="ejemplos/html/index.jsp">Volver a ejemplos Html</a>
     </nav>
+</div>
+ 
 
     <main>
         <h1 class="blanco">Formulario con login (Java Server)</h1>

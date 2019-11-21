@@ -4,7 +4,8 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 
-    <nav class="menu" id="menu">
+<div class="menuWrapper">
+     <nav class="menu" id="menu">
         <a href="index.jsp">Volver</a>
         <a href="ejemplos/css/especificidad.jsp">Especificidad</a>
         <a href="ejemplos/css/selectores-basico.jsp">Selectores b&aacute;sico</a>
@@ -13,6 +14,8 @@
         <a href="ejemplos/css/font-awesome.jsp">Font-Awesome</a>
         <a href="ejemplos/css/flex-box.jsp">Flex-box</a>
     </nav>
+</div>
+
     <main>
         <h1 class="blanco">Ejercicios Css</h1>
 

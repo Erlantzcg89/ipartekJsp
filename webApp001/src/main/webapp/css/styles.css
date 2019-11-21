@@ -19,9 +19,15 @@
     7. font awesome
      */
 
-/* @import url("/helloweb/css/reset.css"); */
-/* @import url("/helloweb/css/normalize.css"); */
-/* @import url("/helloweb/css/impresora.css") print; */
+@import url("reset.css");
+@import url("normalize.css");
+@import url("etiquetas.css");
+@import url("animaciones.css");
+@import url("layouts.css");
+@import url("clases.css");
+@import url("custom.css");
+
+@import url("impresora.css") print;
 
 * {
     box-sizing: border-box;
@@ -44,8 +50,9 @@ body {
 }
 
 main {
-    padding: 0px 50px;
-    margin-bottom: 120px;
+	
+	max-width: 1024px;
+    margin:0 auto 120px;
 }
 
 h1,
@@ -66,12 +73,14 @@ h1 {
 
 h2 {
     font-size: 1.5em;
+    margin: 0 10px 20px;
 }
 
 
 
 p {
     padding: 10px;
+   	line-height: 25px;
 }
 
 nav {
@@ -102,7 +111,7 @@ section p {
 }
 
 /* ------------------------------------------------------------------------------------ */
-/* form bÃ¡sico -------------------------------------------------------------------------*/
+/* form basico -------------------------------------------------------------------------*/
 form {
     padding: 20px;
 }
@@ -128,9 +137,9 @@ table {
 
 td {
     width: 50%;
-    border: 1px solid #000;
+/*     border: 3px solid teal; */
 
-    padding: 5px 10px;
+    padding: 10px 10px;
 
     font-size: 18px;
     font-weight: 500;
@@ -147,8 +156,17 @@ img {
     width: 100%;
 }
 
-dl {
-    padding: 0px 10px;
+ol, ul, dl{
+	padding: 20px;
+	line-height: 30px;
+}
+
+ol li{
+	list-style-type: decimal;
+}
+
+ul li{
+	list-style-type: circle;
 }
 
 dt {
@@ -156,18 +174,24 @@ dt {
     margin: 0px 0px 5px 0px;
 }
 
+button{
+	margin: 10px;
+}
+
 code {
     background-color: rgba(255, 255, 0, 0.521);
 }
 
-footer {
-    display: inline-block;
-    width: 100%;
+.footerWrapper {
     background-color: rgba(0, 0, 0, 0.507);
-
+    width: 100%;
     position: fixed;
     bottom: 0;
+}
 
+footer {
+    max-width: 1024px;
+    margin: auto;
     padding: 15px 30px;
 }
 
@@ -176,6 +200,10 @@ footer p {
     color: white;
     font-weight: 300;
     margin: 0px 0px 0px 0px;
+}
+
+.copy{
+	margin: 0 20px 0 0;
 }
 
 /* ------------------------------------------------------------------------------------ */
@@ -214,14 +242,19 @@ footer p {
     color: rgb(245, 210, 81);
 }
 
-.menu {
+.menuWrapper {
+    background-color: black;
     position: sticky;
     top: 0;
+    z-index:999;
+}
 
-    margin: 0px 0px 0px 0px;
+.menu {
+    max-width: 1024px;
+    margin: auto;
     padding: 15px 30px;
     /* background-color: rgba(255, 255, 0, 0.521); */
-    background-color: black;
+
 }
 
 .menu a {
@@ -243,7 +276,7 @@ footer p {
 
 .blockAuto {
     display: block;
-    margin: auto;
+    margin:  auto;
 }
 
 .lineaForm {
@@ -262,6 +295,10 @@ footer p {
     max-width: 600px;
 }
 
+/* Tablas*/
+.tablaAlumnos td{
+	border: 3px solid teal;
+}
 
  /* Formulario */
 
@@ -412,7 +449,7 @@ footer p {
 /* Clases para Botones -----------------------------------------------------------------*/
 .botonEstilo001 {
 
-    margin: 0 auto;
+    margin: 0 auto 20px;
     font-size: 2.0rem;
     padding: 1.25rem 2.5rem;
     display: block;
@@ -454,4 +491,17 @@ footer p {
 #botonIrTop:hover {
 
     color: white;
+}
+
+/* ------------------------------------------------------------------------------------ */
+/* Font-awesome ------------------------------------------------------------------------*/
+.iconoFooter {
+    font-size: 18px;
+    color: white;
+    margin: 0px 5px;
+}
+.iconoMenu{
+	font-size: 18px;
+	color: white;
+	margin: 0 10px 0 0;
 }

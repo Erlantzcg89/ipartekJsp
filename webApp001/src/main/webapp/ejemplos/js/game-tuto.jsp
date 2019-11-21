@@ -21,8 +21,7 @@
 <body>
     <a href="index.jsp">Inicio</a>
     <a href="ejemplos/js/index.jsp">Volver</a>
-    <a target="_blank"
-        href="https://developer.mozilla.org/es/docs/Games/Workflows/Famoso_juego_2D_usando_JavaScript_puro">Tutorial</a>
+    <a target="_blank" href="https://developer.mozilla.org/es/docs/Games/Workflows/Famoso_juego_2D_usando_JavaScript_puro">Tutorial</a>
 
     <h1>Arkanoid</h1>
 

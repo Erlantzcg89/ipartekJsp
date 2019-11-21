@@ -5,23 +5,26 @@
 <%@include file="/includes/cabecera.jsp" %>
 <%@include file="/includes/parallax.jsp" %>
 
+<div class="menuWrapper">
     <nav class="menu">
         <a href="ejemplos/html/index.jsp">Ejercicios Html</a>
         <a href="ejemplos/css/index.jsp">Ejercicios Css</a>
         <a href="ejemplos/js/index.jsp">Ejercicios Js</a>
         <a href="ejemplos/jsp/index.jsp">Ejercicios Jsp</a>
+       	<a href="ejemplos/howTos/menuPro.jsp">Menu Pro 0.1</a>
     </nav>
+</div>
 
     <main>
 
         <h1 class="blanco">Alumn@s Ipartek</h1>
         <section>
             <div>
-                <button class="blockAuto botonEstilo001" onclick="buscarVoluntario()">¿Quien Lee?</button>
+                <button class="blockAuto botonEstilo001" onclick="buscarVoluntario()">¿Quién Lee?</button>
                 <h2>var voluntario = <span id="nombre"></span></h2>
             </div>
 
-            <table id="ipartek" class="tabla border">
+            <table id="ipartek" class="tablaAlumnos">
                 <tr>
                     <td>Aitor</td>
                     <td></td>
