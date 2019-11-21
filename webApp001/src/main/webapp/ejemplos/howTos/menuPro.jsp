@@ -9,7 +9,7 @@ body {margin:0;font-family:Arial}
 
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: black;
   padding: 0;
 }
 
@@ -51,10 +51,16 @@ body {margin:0;font-family:Arial}
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #333;
+  background-color: black;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  pointer-events:none;
+}
+
+button i{
+	pointer-events:none;
+
 }
 
 .dropdown-content a {
@@ -76,9 +82,9 @@ body {margin:0;font-family:Arial}
   color: white;
 }
 
-.dropdown:target .dropdown-content {
+/* .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child), .dropdown .dropbtn {
@@ -119,8 +125,8 @@ body {margin:0;font-family:Arial}
   <a href="#home" class="active">Inicio</a>
   <a href="#news">News</a>
   <a href="#desplegable">Contact</a>
-  <div class="dropdown">
-    <button id="boton" class="dropbtn">Dropdown 
+  <div id="dropdown" class="dropdown">
+    <button id="boton" onclick="mostrar()" class="dropbtn">Dropdown 
       <i class="fa fa-caret-down"></i>
     </button>
     <div id="desplegable" class="dropdown-content">
@@ -133,7 +139,13 @@ body {margin:0;font-family:Arial}
   <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
 </nav>
 
-<script>
+    <main id="contenido">
+        <h1 class="blanco">Menú responsive</h1>
+
+        <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
+    </main>
+    
+    <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -143,19 +155,41 @@ function myFunction() {
   }
 }
 
-function myFunction2() {
-	  var boton = document.getElementById("boton");
-	  var desplegable = document.getElementById("desplegable");
-		
-	  desplegable.style.display = "block";
-	}
+function mostrar() {
+	console.info('estoy en la funcion mostrar');
+	var desplegable = document.getElementById("desplegable");
+	
+	desplegable.style.display = "block";
+	  
+/* 	setTimeout(ocultar, 3000); */
+}
+
+function ocultar(){
+	console.info('estoy en la funcion ocultar');
+	var desplegable = document.getElementById("desplegable");
+
+	desplegable.style.display = "none";
+	console.info('despues del timeout display none');
+}
+
+var body = document.getElementById('cuerpo');
+var contenido = document.getElementById('contenido');
+var except = document.getElementById('dropdown');
+
+
+body.addEventListener("click", function () {
+	desplegable.style.display = "none";
+}, false);
+
+contenido.addEventListener("click", function () {
+	desplegable.style.display = "none";
+}, false);
+
+except.addEventListener("click", function (ev) {
+    ev.stopPropagation();
+}, false);
+	
 </script>
-
-
-    <main>
-        <h1 class="blanco">Menú responsive</h1>
-
-        <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
-    </main>
+    
 <%@include file="/includes/footer.jsp" %>
 <%@include file="/includes/pie.jsp" %>

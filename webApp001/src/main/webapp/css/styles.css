@@ -110,6 +110,10 @@ section p {
     font-size: 18px;
 }
 
+a{
+	text-decoration: none;
+}
+
 /* ------------------------------------------------------------------------------------ */
 /* form basico -------------------------------------------------------------------------*/
 form {
@@ -166,7 +170,7 @@ ol li{
 }
 
 ul li{
-	list-style-type: circle;
+	list-style-type: disc;
 }
 
 dt {
@@ -296,8 +300,19 @@ footer p {
 }
 
 /* Tablas*/
+
 .tablaAlumnos td{
-	border: 3px solid teal;
+	background-color: teal;
+	border: 3px solid white;
+	font-weight: 700;
+	color: white;
+}
+.tablaAlumnos td:hover{
+	background-color: white;
+	color: black;
+}
+.tablaAlumnos .negro{
+	background-color: black;
 }
 
  /* Formulario */

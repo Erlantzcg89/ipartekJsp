@@ -11,7 +11,7 @@
         <a href="ejemplos/css/index.jsp">Ejercicios Css</a>
         <a href="ejemplos/js/index.jsp">Ejercicios Js</a>
         <a href="ejemplos/jsp/index.jsp">Ejercicios Jsp</a>
-       	<a href="ejemplos/howTos/menuPro.jsp">Menu Pro 0.1</a>
+       	<a href="ejemplos/howTos/menuPro.jsp">How To</a>
     </nav>
 </div>
 

@@ -7,7 +7,7 @@
    <style>
         .container2 {
             border: 5px solid black;
-            margin: auto;
+            margin:25px auto;
 
             /* flex-box */
             display: flex;
