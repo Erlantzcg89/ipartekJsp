@@ -1,0 +1,12 @@
+   				/* KEYFRAMES */
+   			
+@keyframes mymove {
+	from {
+		background-color: #0099CC;
+		border-radius: 0;
+	}
+    to {
+		background-color: red;
+		border-radius: 50%;
+    }
+}

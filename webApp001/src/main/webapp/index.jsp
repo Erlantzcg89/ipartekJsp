@@ -7,11 +7,11 @@
 
 <div class="menuWrapper">
     <nav class="menu">
-        <a href="ejemplos/html/index.jsp">Ejercicios Html</a>
-        <a href="ejemplos/css/index.jsp">Ejercicios Css</a>
-        <a href="ejemplos/js/index.jsp">Ejercicios Js</a>
-        <a href="ejemplos/jsp/index.jsp">Ejercicios Jsp</a>
-       	<a href="ejemplos/howTos/menuPro.jsp">How To</a>
+        <a href="ejemplos/html/index.jsp">Ejercicios html</a>
+        <a href="ejemplos/css/index.jsp">Ejercicios css</a>
+        <a href="ejemplos/js/index.jsp">Ejercicios js</a>
+        <a href="ejemplos/jsp/index.jsp">Ejercicios jsp</a>
+       	<a href="ejemplos/howTos/menuPro.jsp">Howto</a>
     </nav>
 </div>
 
@@ -58,7 +58,7 @@
                     <td>Mikel</td>
                 </tr>
                 <tr>
-                    <td colspan="2">ander</td>
+                    <td id="ander" colspan="2">Profesor: Ander</td>
                 </tr>
             </table>
         </section>

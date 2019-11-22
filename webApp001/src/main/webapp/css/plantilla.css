@@ -1,0 +1,37 @@
+/*
+								Hoja de estilos 0.2
+ @autor: erlantz
+ @version: 0.2
+ @tags: css 
+
+Orden de imports:
+
+	1. Reset
+	2. Normalización
+	3. Keyframes
+	4. Estilos para ordenadores
+	5. Estilos para tablets
+	6. Estilos para mobiles
+	7. Estilos para impresión
+	
+Orden de selectores:
+	
+	1. Layout
+	2. Texto
+	3. Enlaces
+	4. Imágenes
+	5. Tablas
+	6. Litas
+	7. Utilidades
+
+*/
+
+@charset "UTF-8";
+
+@import url("reset.css");
+@import url("normalize.css");
+@import url("keyframes.css");
+@import url("ordenadores.css"); 
+@import url("tablets.css");
+@import url("mobiles.css");
+@import url("impresora.css") print;

@@ -124,8 +124,11 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
+	
+	if (window.matchMedia('screen and (max-width: 425px)').matches) {
+		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+			mybutton.style.display = "block";
+		}
     } else {
         mybutton.style.display = "none";
     }

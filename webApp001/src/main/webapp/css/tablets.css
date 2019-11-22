@@ -1,5 +1,7 @@
-   				/* DISEÑO PARA IMPRESORAS */
-	
+   				/* DISEÑO PARA TABLETS */
+   				
+@media screen and (min-width: 426px) and (max-width: 768px){
+		
 								/* LAYOUT */
 /* html
    ========================================================================== */
@@ -49,3 +51,5 @@
 								/* UTILIDADES */
 /* hr, progress, meter
    ========================================================================== */
+   
+}	

@@ -1,6 +1,6 @@
     <div class="parallax">
 
-        <h1>Prueba Técnica</h1>
+        <h1>PRUEBA TECNICA</h1>
         <h2 class="subTitulo">Erlantz Caballero</h2>
 
     </div>

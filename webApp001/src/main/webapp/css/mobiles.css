@@ -1,4 +1,6 @@
-   				/* DISEÑO PARA IMPRESORAS */
+   				/* DISEÑO PARA MOBILES */
+   				
+@media screen and (min-width: 425px){
 	
 								/* LAYOUT */
 /* html
@@ -49,3 +51,5 @@
 								/* UTILIDADES */
 /* hr, progress, meter
    ========================================================================== */
+   
+}

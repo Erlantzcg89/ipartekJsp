@@ -1,19 +1,31 @@
 <%
-	String titulo = "Animaciones Css";
+	String titulo = "@Media";
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
 
 <style>
-        .box-animacion {
+	@media screen and (min-width: 426px) and (max-width: 768px){
+		section{
+			background-color: purple;
+			border-color: purple;
+		}
+		h1{
+			color: purple !important;
+		}
+	}
+	
+	@media screen and (max-width: 425px){
+		section{
+			background-color: pink;
+			border-color: pink;
+		}
+		h1{
+			color: pink !important;
+		}
+	}
+	
 
-            display: block;
-            margin: auto;
-            width: 150px;
-            height: 150px;
-            background-color: #0099CC;
-            animation: mymove 2s infinite alternate;
-        }
 </style>
 
 <div class="menuWrapper">
@@ -22,15 +34,14 @@
         <a href="ejemplos/css/index.jsp">Volver</a>
     </nav>
 </div>
-
+    
     <main>
-        <h1 class="blanco">Animaciones @Keyframe</h1>
+
+        <h1 class="blanco">@Media Query</h1>
 
         <section>
-            <h2>@Keyframe en un &lt;div&gt;</h2>
-            <div class="box-animacion"></div>
+        	<p>Se utilizan para el diseño responsivo</p>
         </section>
-    </main>
 
         <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
     </main>
