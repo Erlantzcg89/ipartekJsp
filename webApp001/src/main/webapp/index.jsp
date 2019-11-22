@@ -20,7 +20,7 @@
         <h1 class="blanco">Alumn@s Ipartek</h1>
         <section>
             <div>
-                <button class="blockAuto botonEstilo001" onclick="buscarVoluntario()">¿Quién Lee?</button>
+                <button class="botonEstilo001" onclick="buscarVoluntario()">¿Quién Lee?</button>
                 <h2>var voluntario = <span id="nombre"></span></h2>
             </div>
 
