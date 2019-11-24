@@ -3,11 +3,7 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
-
-    <nav class="menu">
-        <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/jsp/index.jsp">Volver a ejercicios Jsp</a>
-    </nav>
+<%@include file="/includes/navegacion.jsp" %>
 
     <main>
         <h1 class="blanco">Formulario para iniciar sesión</h1>

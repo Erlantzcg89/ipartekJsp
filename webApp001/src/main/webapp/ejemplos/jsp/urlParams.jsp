@@ -3,18 +3,17 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
-
-    <nav class="menu">
-        <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/jsp/index.jsp">Volver a ejercicios Jsp</a>
-    </nav>
+<%@include file="/includes/navegacion.jsp" %>
 
     <main>
-        <h1 class="blanco">Url con parámetros GET</h1>
+        <h1 class="blanco">Url con parámetros</h1>
         <section>
-            <div class="container">
-				<a target="_blank" href="https://es.wallapop.com/search?keywords=cafetera&max_sale_price=50">Realizar búsqueda de cafetera por parámetros de la query</a>
-            </div>
+        <h2>Parámetros <code>?</code> y <code>&</code></h2>
+        <p>Los diferentes parámetros son añadidos al final de la url:</p>
+		<p>
+			<a target="_blank" href="https://es.wallapop.com/search?keywords=cafetera&max_sale_price=50">Realizar búsqueda de cafetera</a>
+        </p>
+        <p>A la búsqueda de la cafetera se le ha especificado los parámetros ?=keywords=cafetera y &max_sale_price=50</p>
         </section>
     </main>
     

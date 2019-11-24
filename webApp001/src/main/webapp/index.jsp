@@ -4,16 +4,7 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 <%@include file="/includes/parallax.jsp" %>
-
-<div class="menuWrapper">
-    <nav class="menu">
-        <a href="ejemplos/html/index.jsp">Ejercicios html</a>
-        <a href="ejemplos/css/index.jsp">Ejercicios css</a>
-        <a href="ejemplos/js/index.jsp">Ejercicios js</a>
-        <a href="ejemplos/jsp/index.jsp">Ejercicios jsp</a>
-       	<a href="ejemplos/howTos/menuPro.jsp">Howto</a>
-    </nav>
-</div>
+<%@include file="/includes/navegacion.jsp" %>
 
     <main>
 

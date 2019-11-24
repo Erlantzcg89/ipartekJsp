@@ -123,9 +123,14 @@ window.onscroll = function () {
     scrollFunction()
 };
 
+window.onresize = function () {
+    scrollFunction()
+};
+
 function scrollFunction() {
 	
-	if (window.matchMedia('screen and (max-width: 425px)').matches) {
+//	para tablets y mobiles el boton scrollTop
+	if (window.matchMedia('screen and (max-width: 768px)').matches) {
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 			mybutton.style.display = "block";
 		}
@@ -153,5 +158,19 @@ function verTexto() {
     } else {
         iContrasena.type = "text";
         event.target.innerHTML = "Ocultar";
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+/*              función para el menu responsive                                          */
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+function menuResponsive() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
     }
 }

@@ -3,6 +3,7 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
+<%@include file="/includes/navegacion.jsp" %>
 
 <style>
 	@media screen and (min-width: 426px) and (max-width: 768px){
@@ -27,20 +28,15 @@
 	
 
 </style>
-
-<div class="menuWrapper">
-     <nav class="menu" id="menu">
-          <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/css/index.jsp">Volver</a>
-    </nav>
-</div>
     
     <main>
 
         <h1 class="blanco">@Media Query</h1>
 
         <section>
-        	<p>Se utilizan para el diseño responsivo</p>
+        	<p>Se utilizan para el diseño responsivo, para que la aplicación adapte el diseño según la pantalla del dispositivo</p>
+        	<p><code>@media screen and (max-width: 425px){}</code></p>
+        	<p><code>@media screen and (min-width: 426px) and (max-width: 768px){}</code></p>	
         </section>
 
         <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>

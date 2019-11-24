@@ -3,6 +3,7 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
+<%@include file="/includes/navegacion.jsp" %>
 
     <style>
         p {
@@ -28,13 +29,6 @@
             background-color: white;
         }
     </style>
-
-<div class="menuWrapper">
-     <nav class="menu" id="menu">
-          <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/css/index.jsp">Volver</a>
-    </nav>
-</div>
     
     <main>
 

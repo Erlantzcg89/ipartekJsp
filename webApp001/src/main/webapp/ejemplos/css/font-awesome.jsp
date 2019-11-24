@@ -2,7 +2,8 @@
 	String titulo = "Font-awesome";
 %>
 
-<%@include file="/includes/cabecera.jsp" %>   
+<%@include file="/includes/cabecera.jsp" %>  
+<%@include file="/includes/navegacion.jsp" %> 
  
    <style>
         .divIcono {
@@ -18,13 +19,6 @@
             color: white;
         }
     </style>
-
- <div class="menuWrapper">
-     <nav class="menu" id="menu">
-          <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/css/index.jsp">Volver</a>
-    </nav>
-</div>
 
     <main>
         <h1 class="blanco"><span class=".plumaBlanca fas fa-feather"></span> Font-awesome</h1>

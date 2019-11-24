@@ -3,6 +3,7 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
+<%@include file="/includes/navegacion.jsp" %>
 
 <style>
 canvas {
@@ -11,14 +12,6 @@ canvas {
     margin: 0 auto;
 }
 </style>
-
-<div class="menuWrapper">
-	<nav class="menu" id="menu">
-        <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/js/index.jsp">Volver a ejercicios Js</a>
-        <a target="_blank" href="https://developer.mozilla.org/es/docs/Games/Workflows/Famoso_juego_2D_usando_JavaScript_puro">Tutorial</a>    
-    </nav>
-</div>
 
     <main>
         <h1 class="blanco">Arkanoid</h1>

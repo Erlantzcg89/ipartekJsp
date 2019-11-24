@@ -1,6 +1,16 @@
-<div class="menuWrapper">
-   <nav class="topnav" id="myTopnav">
-    <a href="index.jsp">Inicio</a>
+<%
+	String titulo = "Menu Dropdown";
+%>
+
+<%@include file="/includes/cabecera.jsp" %>
+<%@include file="/includes/navegacion.jsp" %>
+
+<main id="contenido">
+    <h1 class="blanco">Menú responsive</h1>
+    <section>
+    	<sample>
+    		<nav class="topnav" id="myTopnav">
+    <a href="#home" class="active">Inicio</a>
     <div class="dropdown">
         <button class="dropbtn">Ejercicios html
             <i class="fa fa-caret-down"></i>
@@ -49,4 +59,12 @@
     </div>
     <a href="javascript:void(0);" class="icon" onclick="menuResponsive()">&#9776;</a>
 </nav>
-</div>
+    	</sample>
+    </section>
+
+    <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
+</main>
+
+    
+<%@include file="/includes/footer.jsp" %>
+<%@include file="/includes/pie.jsp" %>

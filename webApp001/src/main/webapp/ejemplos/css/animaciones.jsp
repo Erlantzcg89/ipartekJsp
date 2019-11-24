@@ -3,6 +3,7 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
+<%@include file="/includes/navegacion.jsp" %>
 
 <style>
         .box-animacion {
@@ -15,13 +16,6 @@
             animation: mymove 2s infinite alternate;
         }
 </style>
-
-<div class="menuWrapper">
-     <nav class="menu" id="menu">
-          <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/css/index.jsp">Volver</a>
-    </nav>
-</div>
 
     <main>
         <h1 class="blanco">Animaciones @Keyframe</h1>

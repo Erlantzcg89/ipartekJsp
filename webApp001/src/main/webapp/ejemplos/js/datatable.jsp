@@ -4,13 +4,7 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 <%@include file="/includes/tableResources.jsp" %>
-
-<div class="menuWrapper">
-	<nav class="menu" id="menu">
-        <a href="index.jsp">Inicio</a>
-        <a href="ejemplos/js/index.jsp">Volver a ejercicios Js</a>
-    </nav>
-</div>
+<%@include file="/includes/navegacion.jsp" %>
 
     <main>
         <h1 class="blanco">Datatable plugin</h1>
