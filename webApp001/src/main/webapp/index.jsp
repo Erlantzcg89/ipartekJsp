@@ -4,6 +4,7 @@
 
 <%@include file="/includes/cabecera.jsp" %>
 <%@include file="/includes/parallax.jsp" %>
+<%@include file="/includes/tableResources.jsp" %>
 <%@include file="/includes/navegacion.jsp" %>
 
     <main>
@@ -15,7 +16,7 @@
                 <h2>var voluntario = <span id="nombre"></span></h2>
             </div>
 
-            <table id="ipartek" class="tablaAlumnos">
+            <table class="tablaData hover" style="width:100%">
                 <tr>
                     <td>Aitor</td>
                     <td></td>
