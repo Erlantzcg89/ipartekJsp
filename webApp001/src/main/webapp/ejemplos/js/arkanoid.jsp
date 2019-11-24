@@ -23,6 +23,6 @@ canvas {
         <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
        
     </main>
-    <script src="js/game.js"></script>
+    <script src="js/game.js?time=<%=System.currentTimeMillis()%>"></script>
 <%@include file="/includes/footer.jsp" %>
 <%@include file="/includes/pie.jsp" %>

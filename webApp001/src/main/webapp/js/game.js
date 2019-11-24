@@ -112,7 +112,7 @@ function collisionDetection() {
                     b.status = 0;
                     score++;
                     if (score == brickRowCount * brickColumnCount) {
-                        alert("YOU WIN, CONGRATS!");
+                        alert("Jon eres una cruck!");
                         document.location.reload();
                     }
                 }
@@ -184,7 +184,7 @@ function colorAleatorio() {
 
 /* main */
 function draw() {
-
+	colorAleatorio();
     /* limpiar canvas */
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     /* implementar todo */
@@ -207,7 +207,7 @@ function draw() {
         } else {
             lives--;
             if (!lives) {
-                alert("GAME OVER");
+                alert("Loida eres pesima");
                 document.location.reload();
             } else {
                 x = canvas.width / 2;
@@ -232,7 +232,7 @@ function draw() {
 
     // requestAnimationFrame(draw);
 }
-colorAleatorio();
+
 canvas.style.backgroundImage =
-    setInterval(draw, 10);
+    setInterval(draw, 3);
 // draw();

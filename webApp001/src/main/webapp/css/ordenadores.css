@@ -429,31 +429,36 @@ td {
     text-transform: capitalize;
 }
 
-td:hover {
-    background-color: pink;
-}
-
 .tablaAlumnos{
-	margin: 40px auto 0px;
+	border: 1px solid black;
+	border-radius: 5px;
 	
 	-webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.tablaAlumnos td{
+.tablaAlumnos tr:nth-child(even) {
+	background: #CCC
+	}
+	
+.tablaAlumnos tr:hover:nth-child(even){
+	background: pink;
+}
+
+.tablaAlumnos2 td{
 	font-size: 24px;
 	background-color: white;
 	border: 3px solid black;
 	color: black;
 	text-align: left;
 }
-.tablaAlumnos td:hover{
+.tablaAlumnos2 td:hover{
 	background-color: teal;
 	color: white;
 }
 
-.tablaAlumnos .negro{
+.tablaAlumnos2 .negro{
 	background-color: black;
 }
    

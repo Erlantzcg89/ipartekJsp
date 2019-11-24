@@ -20,7 +20,7 @@
     <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="css/plantilla.css?time=<%=System.currentTimeMillis()%>">
+    <link rel="stylesheet" href="css/styles.css?time=<%=System.currentTimeMillis()%>">
 </head>
 
 <body id="cuerpo">

@@ -3,8 +3,8 @@
 %>
 
 <%@include file="/includes/cabecera.jsp" %>
-<%@include file="/includes/parallax.jsp" %>
 <%@include file="/includes/tableResources.jsp" %>
+<%@include file="/includes/parallax.jsp" %>
 <%@include file="/includes/navegacion.jsp" %>
 
     <main>
@@ -16,7 +16,8 @@
                 <h2>var voluntario = <span id="nombre"></span></h2>
             </div>
 
-            <table class="tablaData hover" style="width:100%">
+            <table class="tablaAlumnos tablaData stripe" style="width:100%; padding: 20px;">
+            	<tbody>
                 <tr>
                     <td>Aitor</td>
                     <td></td>
@@ -52,6 +53,7 @@
                 <tr>
                     <td id="ander" colspan="2">Profesor: Ander</td>
                 </tr>
+                </tbody>
             </table>
         </section>
         <button onclick="topFunction()" id="botonIrTop" title="Go to top">Top</button>
