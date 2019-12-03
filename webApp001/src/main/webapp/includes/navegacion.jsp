@@ -45,6 +45,7 @@
             <a href="ejemplos/jsp/calculadora.jsp">Calculadora</a>
             <a href="ejemplos/jsp/login.jsp">Login</a>
             <a href="ejemplos/jsp/urlParams.jsp">Parámetros por url</a>
+            <a href="ejemplos/jsp/conversor.jsp">Conversor</a>
         </div>
     </div>
     <a href="javascript:void(0);" class="icon" onclick="menuResponsive()">&#9776;</a>
