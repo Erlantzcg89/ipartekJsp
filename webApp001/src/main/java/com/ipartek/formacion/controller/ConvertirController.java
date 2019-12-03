@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/convertir")
 public class ConvertirController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final double METROS_PIES = 3.28084;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,13 +40,32 @@ public class ConvertirController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		double metros = Double.parseDouble(request.getParameter("op1"));
+		try {
+			double metros = Double.parseDouble(request.getParameter("op1"));
 
-		double pies = metros * 3.28084;
+			double pies = metros * METROS_PIES;
 
-		request.setAttribute("pies", pies);
+//			Envio si sale todo bien
+			request.setAttribute("metros", "" + metros);
+			request.setAttribute("pies", "" + pies);
 
-		request.getRequestDispatcher("/ejemplos/jsp/conversor.jsp").forward(request, response);
+			request.getRequestDispatcher("/ejemplos/jsp/conversor.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+			String mensageError = "Introduce un número correcto";
+
+//			Envio si hay error en el input
+			request.setAttribute("mensageError", mensageError);
+
+			request.getRequestDispatcher("/ejemplos/jsp/conversor.jsp").forward(request, response);
+		} catch (Exception e) {
+			String mensageError = "Introduce un número correcto";
+
+//			Envio si hay error en el input
+			request.setAttribute("mensageError", mensageError);
+
+			request.getRequestDispatcher("/ejemplos/jsp/conversor.jsp").forward(request, response);
+		}
+
 	}
 
 }
