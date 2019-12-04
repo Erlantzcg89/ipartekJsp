@@ -1,0 +1,27 @@
+/* Css custom para la app jspBootstrap */
+
+.form-control:valid {
+    color: #1cc88a;
+}
+
+.form-control:focus:invalid {
+    color: #e74a3b;
+    border-color: #e74a3b;
+    box-shadow: 0 0 0 0.2rem rgb(231, 74, 59, 0.25);
+}
+
+/* imagenes tarjetas */
+.bg-imagen-1 {
+    background: url("https://source.unsplash.com/FOYsU4uQqqM/300");
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(1);
+}
+
+@media (min-width: 576px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
