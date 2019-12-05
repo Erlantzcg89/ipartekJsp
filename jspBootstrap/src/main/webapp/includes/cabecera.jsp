@@ -18,6 +18,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://picsum.photos/id/1009/50/50" />
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css?time=<%=System.currentTimeMillis()%>">
     <!-- Font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">

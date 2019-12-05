@@ -1,4 +1,13 @@
 /* Css custom para la app jspBootstrap */
+body {
+    position: relative;
+}
+
+.usuario-logeado {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+}
 
 .form-control:valid {
     color: #1cc88a;

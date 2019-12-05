@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet({ "/LoginController", "/login" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String PASSWORD = "1234";
+	private static final String USUARIO = "pepito";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -39,8 +41,6 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String contra = "1234";
-		String usuario = "pepito";
 		Boolean login = false;
 		Boolean error = false;
 
@@ -59,7 +59,7 @@ public class LoginController extends HttpServlet {
 
 		{
 
-			if ((nombre.equals(usuario)) && (password.equals(contra))) {
+			if ((USUARIO.equals(nombre)) && (PASSWORD.equals(password))) {
 				login = true;
 			}
 
