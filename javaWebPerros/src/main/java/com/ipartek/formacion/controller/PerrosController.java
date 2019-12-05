@@ -39,6 +39,18 @@ public class PerrosController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// Borrar perro si el parámetro idBorrar encaja con un número
+		try {
+			String regex = "[0-9]";
+			String id = request.getParameter("idBorrar");
+
+			if (id.matches(regex)) {
+				perros.remove(Integer.parseInt(id) - 1);
+			}
+		} catch (Exception e) {
+
+		}
+
 		// mandar el array de perros
 		request.setAttribute("perros", perros);
 		request.getRequestDispatcher("perros.jsp").forward(request, response);

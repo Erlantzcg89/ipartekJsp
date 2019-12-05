@@ -28,7 +28,7 @@ listado
 <ol>
 	<% for ( Perro perro :  perros ){ %>
 	
-		<li><img src="<%=perro.getFoto()%>"> id <%=perro.getId()%> - <%=perro.getNombre()%> - <%=perro.getRaza()%> - <a href="perros?id=<%=perro.getId()%>">eliminar</a></li>
+		<li><img src="<%=perro.getFoto()%>"> id <%=perro.getId()%> - <%=perro.getNombre()%> - <%=perro.getRaza()%> - <a href="perros?idBorrar=<%=perro.getId()%>">eliminar</a></li>
 		
 	<% } %>
 </ol>
