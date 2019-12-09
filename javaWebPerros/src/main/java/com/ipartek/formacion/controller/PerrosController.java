@@ -22,6 +22,7 @@ import com.ipartek.formacion.model.pojo.Perro;
 public class PerrosController extends HttpServlet {
 
 //	constantes
+	private int contador = 0;
 	private final static Logger LOG = Logger.getLogger(PerrosController.class);
 	private String mensaje = "";
 	private static final long serialVersionUID = 1L;
@@ -41,11 +42,13 @@ public class PerrosController extends HttpServlet {
 		super.init(config);
 
 //		Iniciamos el array de perros en el init
-		perros.add(new Perro("bubba", "mastín", "https://source.unsplash.com/100x100/?dog, mastin"));
-		perros.add(new Perro("rataplan", "pastor aleman", "https://source.unsplash.com/100x100/?dog, sheppard"));
-		perros.add(new Perro("mosca", "pastor belga", "https://source.unsplash.com/100x100/?dog, belgium"));
-		perros.add(new Perro("txakur", "chiguaua", "https://source.unsplash.com/100x100/?dog, chiguagua"));
-		perros.add(new Perro("lagun", "golden retriever", "https://source.unsplash.com/100x100/?dog, retriever"));
+		perros.add(new Perro(1, "bubba", "mastín", "https://source.unsplash.com/100x100/?dog, mastin"));
+		perros.add(new Perro(2, "rataplan", "pastor aleman", "https://source.unsplash.com/100x100/?dog, sheppard"));
+		perros.add(new Perro(3, "mosca", "pastor belga", "https://source.unsplash.com/100x100/?dog, belgium"));
+		perros.add(new Perro(4, "txakur", "chiguaua", "https://source.unsplash.com/100x100/?dog, chiguagua"));
+		perros.add(new Perro(5, "lagun", "golden retriever", "https://source.unsplash.com/100x100/?dog, retriever"));
+
+		contador = 6;
 	}
 
 	@Override
@@ -123,14 +126,44 @@ public class PerrosController extends HttpServlet {
 		LOG.trace("metodo Post");
 		// recibir datos del form
 
+		int id = Integer.parseInt(request.getParameter("id"));
 		String nombre = request.getParameter("nombre");
 		String raza = request.getParameter("raza");
 
-		// crear perro
-		Perro perro = new Perro(nombre, raza);
+		// TODO validar parametros
 
-		// guardar en lista
-		perros.add(perro);
+		if (id > 0) {
+
+			LOG.trace("Modificar el perro");
+			Perro perro = null;
+			for (Perro p : perros) {
+				if (p.getId() == id) {
+					perro = p;
+					break;
+				}
+			}
+			perro.setNombre(nombre);
+			perro.setRaza(raza);
+
+			mensaje = "Perro modificado con exito";
+
+		} else {
+
+			LOG.trace("Crear perro nuevo");
+
+			// crear perro
+			Perro p = new Perro();
+			p.setNombre(nombre);
+			p.setRaza(raza);
+			p.setId(contador);
+			contador++;
+
+			mensaje = "Gracias por dar de alta un nuevo perro";
+
+			// guardar en lista
+			perros.add(p);
+
+		}
 
 	}
 

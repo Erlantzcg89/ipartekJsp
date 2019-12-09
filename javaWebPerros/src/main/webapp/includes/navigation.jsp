@@ -1,2 +1,2 @@
 <hr>
-NAV
+<span>NAV</span>

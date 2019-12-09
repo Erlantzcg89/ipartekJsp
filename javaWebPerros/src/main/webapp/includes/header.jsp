@@ -1,2 +1,1 @@
-<hr>
-HEAD
+<span>HEAD</span>

@@ -1,7 +1,6 @@
 package com.ipartek.formacion.model.pojo;
 
 public class Perro {
-	private static int contador = 0;
 	private int id;
 	private String nombre;
 	private String raza;
@@ -9,14 +8,15 @@ public class Perro {
 
 	public Perro() {
 		super();
-		contador++;
-		this.id = contador;
+		this.id = 0;
 		this.nombre = "";
+		this.raza = "";
 		this.foto = "https://source.unsplash.com/100x100/?dog";
 	}
 
-	public Perro(String nombre, String raza, String url) {
+	public Perro(int id, String nombre, String raza, String url) {
 		this();
+		this.id = id;
 		this.nombre = nombre;
 		this.raza = raza;
 		this.foto = url;
@@ -26,14 +26,6 @@ public class Perro {
 		this();
 		this.nombre = nombre;
 		this.raza = raza;
-	}
-
-	public static int getContador() {
-		return contador;
-	}
-
-	public static void setContador(int contador) {
-		Perro.contador = contador;
 	}
 
 	public int getId() {
