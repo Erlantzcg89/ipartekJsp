@@ -8,7 +8,8 @@
 
 %>
 
-<a href="perros">Ir a CRUD Perros</a>
+<a href="perros">Ir a CRUD Perros</a><br>
+<a href="perros2">Ir a CRUD Perros con JSTL</a><br>
 
 
 <%@include file="includes/footer.jsp" %>
