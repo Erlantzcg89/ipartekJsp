@@ -12,6 +12,12 @@ max-width: 100px;
 ol{
 list-style: none;
 }
+ol li span{
+position:relative;
+bottom: 45px;
+left: 20px;
+}
+
 </style>
 
 <h1>Perros</h1>
@@ -28,14 +34,14 @@ listado
 <ol>
 	<% for ( Perro perro :  perros ){ %>
 	
-		<li><img src="<%=perro.getFoto()%>"> id <%=perro.getId()%> - <%=perro.getNombre()%> - <%=perro.getRaza()%> - <a href="perros?idBorrar=<%=perro.getId()%>">eliminar</a></li>
+		<li><img src="<%=perro.getFoto()%>"><span> id <%=perro.getId()%> - <%=perro.getNombre()%> - <%=perro.getRaza()%> - <a href="perros?id=<%=perro.getId()%>&editar=s">modificar</a> - <a href="perros?id=<%=perro.getId()%>">eliminar</a></span></li>
 		
 	<% } %>
 </ol>
 
 <hr>
 
-Formulario añadir perro
+Añadir perro
 
 <form action="perros" method="post">
 	
