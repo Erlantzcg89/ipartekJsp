@@ -10,19 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class IndexController
+ * Servlet implementation class LogoutController
  */
-@WebServlet({ "/pruebaIndex" })
-public class IndexController extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public IndexController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -41,10 +33,10 @@ public class IndexController extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		session.invalidate();
+		session = null;
 
-//		checkear sesion para pintar el inicio.
-
-		request.getRequestDispatcher("/inicio.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	}
 

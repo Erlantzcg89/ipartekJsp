@@ -5,6 +5,8 @@
 <%@include file="includes/header.jsp" %>
 <%@include file="includes/navigation.jsp" %>
 
+<% String titulo = "perrosApp | perros"; %>
+
 <style>
 body{
 	background-color: #57423F;

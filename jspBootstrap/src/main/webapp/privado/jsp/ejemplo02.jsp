@@ -6,15 +6,26 @@
 <%@include file="/includes/enlacesDatatable.jsp" %>
 <%@include file="/includes/enlacesCustom.jsp" %>
 <%@include file="/includes/menuJsp.jsp" %>
+<%@include file="/includes/submenu.jsp"%>
 
-<main class="container-fluid pt-3">
-	<h3>Ejemplo nº2</h3>
-	<p>
+<div class="container-fluid p-4">
+	
+	<main class="ejemplo02-main">
+	<h4 class="text-center text-dark">Ejemplo nº2</h4>
+	<p class="text-center">
 		Rellena los parámetros nombre y password mediante un formulario
-		<button type="button" class="btn btn-secondary d-block mt-2" data-toggle="modal" data-target="#exampleModal">Rellenar Parámetros</button>
 	</p>
 	
-	 <!-- Formulario de registro modal -->
+	<div class="ejemplo02-caja-centrado">
+	<button type="button" class="btn btn-secondary d-block my-2" data-toggle="modal" data-target="#exampleModal">Rellenar Parámetros</button>	
+	<ul>
+		<li>Nombre: ${nombre}</li>
+		<li>Password: ${password}</li>
+		<li>Movil: ${movil}</li>
+	</ul>
+	</div>
+	
+		 <!-- Formulario de registro modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -46,14 +57,10 @@
         </div>
     </div>
     <!-- fin del formulario -->
-	
-	<ul>
-		<li>Nombre: ${nombre}</li>
-		<li>Password: ${password}</li>
-		<li>Movil: ${movil}</li>
-	</ul>
-</main>
-	
+	</main>
+</div>
+
+<%@include file="/includes/footer-fixed.jsp"%>
 <%@include file="/includes/scriptsMain.jsp" %>
 <%@include file="/includes/scriptsDatatable.jsp" %>
 <%@include file="/includes/pie.jsp" %>

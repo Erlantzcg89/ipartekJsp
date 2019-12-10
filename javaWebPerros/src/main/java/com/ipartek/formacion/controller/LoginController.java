@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -58,14 +57,14 @@ public class LoginController extends HttpServlet {
 			String mensaje = "";
 
 			switch (idioma) {
-			case "Castellano":
-				mensaje = (recuerdame == null) ? "Bienvenido" : "Bienvenido. Se guardará tu nombre";
+			case "es":
+				mensaje = (recuerdame == null) ? "BienVenido amigo" : "BienVenido amigo tu seras recordato";
 				break;
-			case "Euskera":
-				mensaje = (recuerdame == null) ? "Ongietorri" : "Ongietorri. Zure izena gogoratuko da";
+			case "eu":
+				mensaje = (recuerdame == null) ? "Ongietorri Txo" : "Ongietorri Txo gogoratua izango zara";
 				break;
-			case "English":
-				mensaje = (recuerdame == null) ? "Wellcome" : "Wellcome. Your name will be saved";
+			case "en":
+				mensaje = (recuerdame == null) ? "Wellcome folk" : "Wellcome folk you will remenber forevever and ever";
 				break;
 
 			default:
@@ -73,12 +72,12 @@ public class LoginController extends HttpServlet {
 			}
 
 			request.setAttribute("mensaje", mensaje);
-			vista = "login-exitoso.jsp";
+			vista = "login-exito.jsp";
 
 		} else {
 
 			request.setAttribute("mensaje", "Credenciales Incorrectas, por favor prueba de nuevo");
-			vista = "index.jsp";
+			vista = "login.jsp";
 		}
 
 		// ir a JSP

@@ -1,36 +1,77 @@
 /* Css custom para la app jspBootstrap */
 body {
-    position: relative;
+	position: relative;
+	min-width: 340px;
 }
 
-.usuario-logeado {
-    position: fixed;
-    top: 5px;
-    right: 5px;
+.submenu {
+	padding: 8px 8px 8px;
+	border-bottom: 1px solid #DC3545;
+}
+
+.submenu p {
+	margin: 0;
+}
+
+.submenu div{
+	display: inline-block;
+	min-width: 80px;
+}
+
+.login-exito-bienvenida {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 20px;
+}
+
+.ejemplo02-caja-centrado{
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.footer-wrapper {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px 12px;
+	background-color: rgb(0, 0, 0, 0.7);
+	color: white;
+}
+
+span.menu-copy {
+	font-size: 14px;
+	position: relative;
+	bottom: 2px;
 }
 
 .form-control:valid {
-    color: #1cc88a;
+	color: #1cc88a;
 }
 
 .form-control:focus:invalid {
-    color: #e74a3b;
-    border-color: #e74a3b;
-    box-shadow: 0 0 0 0.2rem rgb(231, 74, 59, 0.25);
+	color: #e74a3b;
+	border-color: #e74a3b;
+	box-shadow: 0 0 0 0.2rem rgb(231, 74, 59, 0.25);
 }
 
 /* imagenes tarjetas */
 .bg-imagen-1 {
-    background: url("https://source.unsplash.com/FOYsU4uQqqM/300");
-    background-position: center;
-    background-size: cover;
-    filter: grayscale(1);
+	background: url("https://source.unsplash.com/FOYsU4uQqqM/300");
+	background-position: center;
+	background-size: cover;
+	filter: grayscale(1);
 }
 
-@media (min-width: 576px) {}
+@media ( min-width : 576px) {
+}
 
-@media (min-width: 768px) {}
+@media ( min-width : 768px) {
+}
 
-@media (min-width: 992px) {}
+@media ( min-width : 992px) {
+}
 
-@media (min-width: 1200px) {}
+@media ( min-width : 1200px) {
+}

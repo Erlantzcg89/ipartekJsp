@@ -44,6 +44,8 @@ public class LogoutController extends HttpServlet {
 		session.invalidate();
 		session = null;
 
+		request.setAttribute("mensajeDespedida", "Hasta luego");
+
 		request.getRequestDispatcher("/").forward(request, response);
 	}
 

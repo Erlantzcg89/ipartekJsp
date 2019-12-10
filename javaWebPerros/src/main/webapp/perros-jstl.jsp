@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<% String titulo = "perrosApp | perros-jslt"; %>
+
 <h1>Perros JSTL</h1>
 <p>Mismo ejemplo para hacer un CRUD pero usando taglibs y EL (Expresion Languages)</p>
 
@@ -21,6 +23,11 @@
 </ul>
 
 Añadir perro
+
+<c:if test="${empty perroEditar}">
+	<!-- si no existe el perroEditar useBeans -->
+	
+</c:if>
 
 <form action="perros" method="post">
 	

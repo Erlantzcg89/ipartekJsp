@@ -35,10 +35,10 @@ public class PerrosController2 extends HttpServlet {
 
 		LOG.trace("init del servlet");
 		super.init(config);
-		
-		if() {
-			
-		}
+
+//		if() {
+//			
+//		}
 
 //		Iniciamos el array de perros en el init
 		perros.add(new Perro(1, "bubba", "mastín", "https://source.unsplash.com/100x100/?dog, mastin"));
@@ -71,7 +71,6 @@ public class PerrosController2 extends HttpServlet {
 
 //		enviar mensage y lista al jsp
 
-		request.setAttribute("perroEditar", perroEditar);
 		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("perros", perros);
 		request.getRequestDispatcher("perros-jstl.jsp").forward(request, response);
