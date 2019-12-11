@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
 			}
 
 			request.setAttribute("mensaje", mensaje);
-			vista = "login-exitoso.jsp";
+			vista = "privado/home";
 
 		} else {
 

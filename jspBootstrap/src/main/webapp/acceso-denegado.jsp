@@ -67,6 +67,9 @@
 	}
 %>
 
+<div class="index-acceso-denegado">
+	<img src="images/acceso_denegado.jpg">
+</div>
 
 
 <%@include file="/includes/footer-fixed.jsp"%>

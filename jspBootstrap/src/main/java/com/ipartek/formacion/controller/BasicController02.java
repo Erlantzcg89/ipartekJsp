@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class HelloController
  */
-@WebServlet("/ejemplo02")
+@WebServlet("/privado/jsp-pinta")
 public class BasicController02 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String NOMBRE = "pepe";

@@ -19,7 +19,7 @@ body {
 }
 
 .login-exito-bienvenida {
-	width: 200px;
+	max-width: 400px;
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 20px;
@@ -29,6 +29,16 @@ body {
 	width: 180px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.index-acceso-denegado{
+	max-width: 400px;
+	margin: auto;
+	padding: 60px 0 0;
+}
+
+.index-acceso-denegado img{
+	width: 100%;
 }
 
 .footer-wrapper {

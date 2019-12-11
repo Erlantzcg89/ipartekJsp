@@ -18,8 +18,8 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> Jsp básicos </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="ejemplo01">servlet pinta</a> <a
-						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jsp
+					<a class="dropdown-item" href="privado/servlet-pinta">servlet pinta</a> <a
+						class="dropdown-item" href="privado/jsp-pinta">jsp
 						pinta</a>
 				</div></li>
 
@@ -28,7 +28,7 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> Perros </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="ejemplo01">scriplets</a> <a
+					<a class="dropdown-item" href="privado/ejemplo01">scriplets</a> <a
 						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jslt</a>
 				</div></li>
 

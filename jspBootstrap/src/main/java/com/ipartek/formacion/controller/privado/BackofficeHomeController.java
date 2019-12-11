@@ -1,4 +1,4 @@
-package com.ipartek.formacion.controller;
+package com.ipartek.formacion.controller.privado;
 
 import java.io.IOException;
 
@@ -7,19 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class IndexController
+ * Servlet implementation class BackofficeHomeController
  */
-@WebServlet({ "/pruebaIndex" })
-public class IndexController extends HttpServlet {
+@WebServlet("/privado/home")
+public class BackofficeHomeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public IndexController() {
+	public BackofficeHomeController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,12 +39,7 @@ public class IndexController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession();
-
-//		checkear sesion para pintar el inicio.
-
-		request.getRequestDispatcher("/inicio.jsp").forward(request, response);
-
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
