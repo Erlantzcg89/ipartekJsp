@@ -68,7 +68,7 @@
 %>
 
 <div class="index-acceso-denegado">
-	<img src="images/acceso_denegado.jpg">
+	<img src="images/error403.jpg">
 </div>
 
 

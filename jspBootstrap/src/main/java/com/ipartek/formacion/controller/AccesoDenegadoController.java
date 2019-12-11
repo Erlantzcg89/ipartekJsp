@@ -39,7 +39,7 @@ public class AccesoDenegadoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("acceso-denegado.jsp").forward(request, response);
+		request.getRequestDispatcher("errores/error403.jsp").forward(request, response);
 
 //		String base = request.getContextPath();
 //		response.sendRedirect(base + "/acceso-denegado.jsp");
