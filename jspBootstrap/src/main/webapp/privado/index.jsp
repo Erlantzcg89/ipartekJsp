@@ -1,3 +1,5 @@
+<%@ page errorPage="error.jsp" %>
+
 <% String titulo = "jspBootstrap | Inicio"; %>
 
 <%@include file="/includes/cabecera.jsp"%>

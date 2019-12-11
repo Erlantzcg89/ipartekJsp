@@ -1,3 +1,5 @@
+<%@ page errorPage="error.jsp" %>
+
 <%
 	String titulo = "CMS Jsp y Bootstrap";
 %>

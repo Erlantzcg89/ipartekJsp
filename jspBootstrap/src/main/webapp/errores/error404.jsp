@@ -1,3 +1,4 @@
+<%@ page isErrorPage="true" %>  
 
 <%
 	String titulo = "CMS Jsp y Bootstrap";

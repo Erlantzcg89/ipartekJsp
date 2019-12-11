@@ -1,6 +1,8 @@
+<%@ page errorPage="error.jsp" %>
 
 <%
 	String titulo = "CMS Jsp y Bootstrap";
+	asdfasdf
 %>
 
 <%@include file="/includes/cabecera.jsp"%>

@@ -1,3 +1,4 @@
+<%@page pageEncoding="UTF-8" isErrorPage="true" %>
 
 <%
 	String titulo = "CMS Jsp y Bootstrap";
@@ -24,35 +25,35 @@
 			</div>
 			<div class="modal-body">
 				<form action="login" method="post">
-					
-						<div class="form-group">
-							<input type="text" class="form-control" name="usuario"
-								placeholder="Usuario (admin)" required>
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="contrasena"
-								placeholder="Contraseña (admin)" required>
-						</div>
-						<div class="form-group">
-							<select class="form-control" name="idioma">
-								<option value="Castellano">Castellano</option>
-								<option value="Euskera" selected>Euskera</option>
-								<option value="English">Ingles</option>
-							</select>
-						</div>
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input"
-								id="exampleCheck1" name="recuerdame"> <label
-								class="form-check-label" for="exampleCheck1">Recuerdame</label>
-						</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" name="usuario"
+							placeholder="Usuario (admin)" required>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="contrasena"
+							placeholder="ContraseÃ±a (admin)" required>
+					</div>
+					<div class="form-group">
+						<select class="form-control" name="idioma">
+							<option value="Castellano">Castellano</option>
+							<option value="Euskera" selected>Euskera</option>
+							<option value="English">Ingles</option>
+						</select>
+					</div>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="exampleCheck1"
+							name="recuerdame"> <label class="form-check-label"
+							for="exampleCheck1">Recuerdame</label>
+					</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 				<input type="submit" class="btn btn-primary" value="Login">
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 
 <!-- mensaje login incorrecto -->
@@ -70,6 +71,12 @@
 <div class="index-acceso-denegado">
 	<img src="images/error500.png">
 </div>
+
+<!-- Stack trace -->
+<div class="error500 text-danger">
+
+</div>
+<%request.getAttribute("javax.servlet.error.exception").printStackTrace(new java.io.PrintWriter(out))%>
 
 
 <%@include file="/includes/footer-fixed.jsp"%>
