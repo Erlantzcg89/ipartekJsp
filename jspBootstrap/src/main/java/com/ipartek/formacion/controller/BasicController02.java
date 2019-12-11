@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HelloController
+ * 
  */
 @WebServlet("/privado/jsp-pinta")
 public class BasicController02 extends HttpServlet {
@@ -42,19 +42,23 @@ public class BasicController02 extends HttpServlet {
 
 //		Respuestas
 		if (TETERA.equals(nombre)) {
+			request.setAttribute("mensaje", "<h1 class=\"text-danger pb-2 text-center\">ERROR 418<br>Eres una tetera <i class=\"fas fa-coffee\"></i></h1>");
 			response.setStatus(418);
 			request.getRequestDispatcher("/privado/jsp/418.jsp").forward(request, response);
 		}
 
-		if (NOMBRE.equals(nombre) && PASSWORD.equals(password)) {
+		else if (NOMBRE.equals(nombre) && PASSWORD.equals(password)) {
+			request.setAttribute("mensaje", "<h1 class=\"text-success pb-2 text-center\">CODIGO 200<br><span class=\"h4\">SUCCESS</span></h1>");
 			response.setStatus(200);
+			request.getRequestDispatcher("/privado/jsp/ejemplo02.jsp").forward(request, response);
 		} else {
+			request.setAttribute("mensaje", "<h1 class=\"text-danger pb-2 text-center\">ERROR 401<br><span class=\"h4\">PARÁMETROS INCORRECTOS</span></h1>");
 			response.setStatus(401);
 			request.getRequestDispatcher("/privado/jsp/401.jsp").forward(request, response);
 
 		}
 
-		request.getRequestDispatcher("/privado/jsp/ejemplo02.jsp").forward(request, response);
+		
 	}
 
 	/**

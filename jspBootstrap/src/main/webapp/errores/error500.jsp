@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8" isErrorPage="true" %>
+
 
 <%
 	String titulo = "CMS Jsp y Bootstrap";
@@ -32,7 +32,7 @@
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" name="contrasena"
-							placeholder="ContraseÃ±a (admin)" required>
+							placeholder="Contraseña (admin)" required>
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="idioma">
@@ -72,11 +72,6 @@
 	<img src="images/error500.png">
 </div>
 
-<!-- Stack trace -->
-<div class="error500 text-danger">
-
-</div>
-<%request.getAttribute("javax.servlet.error.exception").printStackTrace(new java.io.PrintWriter(out))%>
 
 
 <%@include file="/includes/footer-fixed.jsp"%>

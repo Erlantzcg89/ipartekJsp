@@ -1,4 +1,4 @@
-<%@ page errorPage="error.jsp" %>
+<%@ page errorPage="privado/error500.jsp" %>
 
 <% String titulo = "jspBootstrap | Inicio"; %>
 

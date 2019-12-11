@@ -58,7 +58,7 @@ public class BasicController01 extends HttpServlet {
 		out.print("<title>ejemplo1</title>");
 		out.print("</head>");
 		out.print("<body>");
-		out.print("<a href=\"index.jsp\"><span>Inicio<span></a>");
+		out.print("<a href=\"../index.jsp\"><span>Inicio<span></a>");
 		out.print("<h1>Servlet pintando html</h1>");
 		out.print(
 				"<p>El servlet es el controlador, el protocolo http funciona con request y response, y java así como otros lenguajes tienen los objetos y métodos para trabajar con este modelo.</p>");

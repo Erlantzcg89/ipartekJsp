@@ -1,5 +1,4 @@
-<%@ page errorPage="error.jsp" %>
-
+<%@ page errorPage="privado/error500.jsp" %>
 <%
 	String titulo = "CMS Jsp y Bootstrap";
 %>
@@ -26,6 +25,7 @@
 		<li>Movil: ${movil}</li>
 	</ul>
 	</div>
+	${mensaje}
 	
 		 <!-- Formulario de registro modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -39,15 +39,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="ejemplo02" method="get">
+                    <form action="privado/jsp-pinta" method="get">
                         <form>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="nombre"
-                                    placeholder="Nombre (Cualquier caracter válido)" required>
+                                    placeholder="Nombre (pepe/tetera)" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="password"
-                                    placeholder="Contraseña (Cualquier caracter válido)" required>
+                                    placeholder="Contraseña (1234)" required>
                             </div>
                 </div>
                 <div class="modal-footer">

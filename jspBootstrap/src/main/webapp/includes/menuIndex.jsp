@@ -38,7 +38,7 @@
 				aria-expanded="false"> Jsp básicos </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="privado/servlet-pinta">servlet pinta</a> <a
-						class="dropdown-item" href="privado/jsp-pinta">jsp
+						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jsp
 						pinta</a>
 				</div></li>
 
@@ -48,7 +48,7 @@
 				aria-expanded="false"> Perros </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item" href="privado/servlet-pinta">scriplets</a> <a
-						class="dropdown-item" href="privado/jsp-pinta">jslt</a>
+						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jslt</a>
 				</div></li>
 
 
