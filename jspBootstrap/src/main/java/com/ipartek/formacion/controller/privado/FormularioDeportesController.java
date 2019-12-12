@@ -43,8 +43,16 @@ public class FormularioDeportesController extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String email = request.getParameter("email");
 		String[] deportes = request.getParameterValues("deportes");
+		String mensaje = "";
+
+		if (deportes.length >= 3) {
+
+		} else {
+			mensaje = "introduce al menos 3 deportes";
+		}
 
 		// preparar atributos
+		request.setAttribute("mensaje", mensaje);
 		request.setAttribute("nombre", nombre);
 		request.setAttribute("email", email);
 		request.setAttribute("deportes", deportes);

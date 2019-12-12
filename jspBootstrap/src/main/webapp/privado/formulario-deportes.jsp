@@ -13,18 +13,23 @@
 
 	<main class="ejemplo02-main">
 		<h4 class="text-center text-dark mb-4">Formulario deportes</h4>
-
+		<p class="text-danger text-center">${mensaje}</p>
 		<div class="ejemplo02-caja-centrado">
+			<ul>
+				<c:forEach items="${deportes}" var="deporte">
+					<li>${deporte}</li>
+				</c:forEach>
+			</ul>
 
 			<div class="formulario-deportes">
 				<form action="privado/deportes" method="post">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Nombre"
-							name="nombre" required>
+							name="nombre" required value="${nombre}">
 					</div>
 					<div class="form-group">
 						<input type="email" class="form-control" placeholder="Email"
-							name="email" required>
+							name="email" required value="${email}">
 					</div>
 					<p>Deportes favoritos:</p>
 					<div class="form-check">
@@ -57,14 +62,7 @@
 					<button type="submit" class="btn btn-primary">Enviar</button>
 				</form>
 			</div>
-			<p class="mt-4">
-				Nombre: ${nombre}<br> Email: ${email}
-			</p>
-				<ul>
-				<c:forEach items="${deportes}" var="deporte" varStatus="i">
-  					<li>${deporte}</li>
-				</c:forEach>
-				</ul>
+
 
 		</div>
 
