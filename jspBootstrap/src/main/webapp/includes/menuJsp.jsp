@@ -18,9 +18,9 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> Jsp básicos </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="privado/servlet-pinta">servlet pinta</a> <a
-						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jsp
-						pinta</a>
+					<a class="dropdown-item" href="privado/servlet-pinta">servlet pinta</a>
+					<a class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jsp pinta</a>
+					<a class="dropdown-item" href="privado/formulario-deportes.jsp">formulario deportes</a>
 				</div></li>
 
 			<li class="nav-item dropdown"><a
@@ -28,8 +28,9 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> Perros </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="privado/servlet-pinta">scriplets</a> <a
-						class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jslt</a>
+					<a class="dropdown-item" href="privado/servlet-pinta">scriplets</a>
+					<a class="dropdown-item" href="privado/jsp/ejemplo02.jsp">jslt</a>
+					<a class="dropdown-item" href="privado/formulario-deportes.jsp">formulario deportes</a>
 				</div></li>
 
 		</ul>
