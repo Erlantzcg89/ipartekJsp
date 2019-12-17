@@ -15,7 +15,8 @@
 
 		<ul class="navbar-nav mr-auto">
 
-			<li class="nav-link pl-3 active">Inicio</li>
+			<li class="nav-item active"><a class="nav-link pl-3"
+				href="index.jsp">Inicio</a></li>
 
 			<%
 				String user = (String) session.getAttribute("usuarioLogeado");

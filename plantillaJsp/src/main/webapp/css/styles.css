@@ -1,5 +1,4 @@
-/* Css custom para la app jspBootstrap */
-/* El cuerpo tiene un ancho mínimo de 350 píxeles */
+
 body {
 	min-width: 350px;
 
@@ -24,6 +23,7 @@ main {
 }
 
 /* Contenedor flex */
+
 .contenedor-flex {
     display: flex;
     flex-direction: column;
@@ -31,11 +31,33 @@ main {
     flex: 1;
 }
 
+.error500{
+	padding: 20px 20px 0;
+}
+
+.ejemplo02-caja-centrado{
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.index-acceso-denegado{
+	max-width: 500px;
+	margin: auto;
+	padding: 60px 0;
+}
+
+.index-acceso-denegado img{
+	width: 100%;
+}
+
+/* Tarjetas index
+**********************************************************/
+
 .item {
     margin-top: 20px;
 }
 
-/* tarjeta */
 .tarjeta {
     width: 175px;
     height: 400px;
@@ -112,7 +134,6 @@ main {
 }
 
 
-
 .tarjeta-precio span {
     color: #9D999D;
     font-size: 14px;
@@ -181,6 +202,13 @@ main {
     color: white;
 }
 
+/* Fin tarjetas
+**********************************************************/
+
+
+/* Formularios
+**********************************************************/
+
 .form-control:valid {
     color: #1cc88a;
 }
@@ -190,6 +218,9 @@ main {
     border-color: #e74a3b;
     box-shadow: 0 0 0 0.2rem rgb(231, 74, 59, 0.25);
 }
+
+/* Fin formularios
+***********************************************************/
 
 .navbar-brand a {
     text-decoration: none;
