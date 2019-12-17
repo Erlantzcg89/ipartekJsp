@@ -11,6 +11,9 @@
 
 <main>
 	<div class="dashboard-wrapper">
+	
+		<%@include file="/includes/mensaje-alerta.jsp"%>
+	
 		<h1>Dashboard</h1>
 		<a href="seguridad/producto?accion=listar" class="btn btn-dark btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true">Listar productos</a><br>
 		<a href="seguridad/producto?accion=nuevo" class="btn btn-dark btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Nuevo producto</a><br>

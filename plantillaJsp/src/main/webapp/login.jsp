@@ -8,6 +8,9 @@
 <%@include file="/includes/enlacesCustom.jsp"%>
 
 <div class="login-form-wrapper">
+
+	<%@include file="/includes/mensaje-alerta.jsp"%>
+
 	<form class="login-form" action="login">
 		<h1 class="h3 mb-3 font-weight-normal">Accede a tu usuario</h1>
 		<input type="text" name="nombre" class="form-control"

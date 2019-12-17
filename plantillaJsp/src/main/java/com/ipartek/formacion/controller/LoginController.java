@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.controller.clases.Alerta;
 import com.ipartek.formacion.controller.listener.SesionesListener;
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
 
 /**
  * Servlet implementation class LoginController
@@ -22,14 +24,22 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
+	
+	private static Alerta mensajeAlerta = null;
+	
 	private static final String USUARIO_ADMIN = "admin";
 	private static final String PASSWORD_ADMIN = "admin";
 	private static final String VISTA_DASHBOARD = "seguridad/index.jsp";
 	private static final String VISTA_LOGIN = "login.jsp";
-	private static final String MSG_BIENVENIDO = "Bienvenido al Dashboard";
+	private static final String MSG_BIENVENIDO = "Bienvenido";
 	private static final String MSG_REPETIR = "Credenciales Incorrectas, por favor prueba de nuevo";
 	
-
+	@Override
+	public void destroy() {
+		super.destroy();
+		
+		mensajeAlerta = null;
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -60,11 +70,13 @@ public class LoginController extends HttpServlet {
 //		String recuerdame = request.getParameter("recuerdame");
 
 		// 2. logica de negocio
+		
+		HttpSession session = request.getSession();
 
 		if (USUARIO_ADMIN.equalsIgnoreCase(nombre) && PASSWORD_ADMIN.equalsIgnoreCase(password)) {
 
-			// recuperar session del usuario == browser
-			HttpSession session = request.getSession();
+
+			
 			session.setAttribute("usuarioLogeado", "Administrador");
 //			session.setAttribute("idioma", idioma);
 			session.setMaxInactiveInterval(-1); // nunca caduca
@@ -86,19 +98,20 @@ public class LoginController extends HttpServlet {
 //				break;
 //			}
 			
-			mensaje = MSG_BIENVENIDO;
 			vista = VISTA_DASHBOARD;
+			
+			mensajeAlerta = new Alerta( Alerta.TIPO_SUCCESS, MSG_BIENVENIDO + ", " + session.getAttribute("usuarioLogeado"));
+			
+			request.setAttribute("mensajeAlerta", mensajeAlerta);
 
 		} else {
 			
-			mensaje = MSG_REPETIR;
+			mensajeAlerta = new Alerta( Alerta.TIPO_DANGER, MSG_REPETIR);
+			
+			request.setAttribute("mensajeAlerta", mensajeAlerta);
 			vista = VISTA_LOGIN;
 			
 		}
-		
-		request.setAttribute("mensaje", mensaje);
-		
-		LOG.debug("vamos a la vista");
 		
 		// ir a JSP
 		request.getRequestDispatcher(vista).forward(request, response);

@@ -21,6 +21,10 @@ main {
     min-height: 70vh;
 }
 
+ul li{
+	list-style: none;
+}
+
 .dashboard-wrapper{
 	margin-top: 5vh;
 	/* text-align: center; */
@@ -28,6 +32,19 @@ main {
 	min-width: 350px;
 	margin-right: auto;
 	margin-left: auto;
+}
+
+.listado-wrapper{
+	margin-top: 5vh;
+	/* text-align: center; */
+	width: 40%;
+	min-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.listado-wrapper h1{
+
 }
 
 .dashboard-wrapper h1{

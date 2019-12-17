@@ -94,6 +94,10 @@ public class AppListener implements ServletContextListener, ServletContextAttrib
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
 	 */
 	public void contextDestroyed(ServletContextEvent sce) {
+		
+		ServletContext sc = sce.getServletContext();
+		sc.setAttribute("numeroUsuariosConectados", 0);
+		
 		LOG.info("La App se cierra");
 	}
 
