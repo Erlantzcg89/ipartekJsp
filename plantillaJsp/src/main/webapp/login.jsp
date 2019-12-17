@@ -8,7 +8,7 @@
 <%@include file="/includes/enlacesCustom.jsp"%>
 
 <div class="login-form-wrapper">
-	<form class="login-form" action="seguridad/index.jsp">
+	<form class="login-form" action="login">
 		<h1 class="h3 mb-3 font-weight-normal">Accede a tu usuario</h1>
 		<input type="text" name="nombre" class="form-control"
 			placeholder="Nombre" required autofocus> <input

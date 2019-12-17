@@ -1,24 +1,22 @@
-package com.ipartek.formacion.pojos;
+package com.ipartek.formacion.modelo.pojos;
 
-public class Perro {
-
+public class Producto {
+	
 	private int id;
 	private String nombre;
-	private String foto;
-
-	public Perro(int id, String nombre, String foto) {
+	
+	public Producto(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.foto = foto;
 	}
-
-	public Perro() {
+	
+	public Producto() {
 		super();
 		this.id = 0;
 		this.nombre = "";
-		this.foto = "https://picsum.photos/id/237/200/300";
 	}
+	
 
 	public int getId() {
 		return id;
@@ -36,16 +34,13 @@ public class Perro {
 		this.nombre = nombre;
 	}
 
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
 	@Override
 	public String toString() {
-		return "Perro [id=" + id + ", nombre=" + nombre + ", foto=" + foto + "]";
+		return "Producto [id=" + id + ", nombre=" + nombre + "]";
 	}
+	
+	
+	
+	
+
 }

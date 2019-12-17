@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class SeguridadFilter
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE,
-		DispatcherType.ERROR }, urlPatterns = { "/privado/*" })
+		DispatcherType.ERROR }, urlPatterns = { "/seguridad/*" })
 public class SeguridadFilter implements Filter {
 
 	/**

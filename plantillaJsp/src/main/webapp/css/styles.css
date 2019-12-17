@@ -1,7 +1,6 @@
 
 body {
 	min-width: 350px;
-
 }
 
 .submenu {
@@ -19,7 +18,7 @@ body {
 }
 
 main {
-    min-height: 80vh;
+    min-height: 70vh;
 }
 
 /* Contenedor flex */

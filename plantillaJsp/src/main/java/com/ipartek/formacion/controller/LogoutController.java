@@ -41,12 +41,13 @@ public class LogoutController extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+//		session.removeAttribute("usuarioLogeado");
 		session.invalidate();
 		session = null;
 
-		request.setAttribute("mensajeDespedida", "Hasta luego");
+		request.setAttribute("mensaje", "Hasta luego");
 
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }
