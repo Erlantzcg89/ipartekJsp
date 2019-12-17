@@ -8,18 +8,9 @@
 <%@include file="/includes/menuJsp.jsp"%>
 <%@include file="/includes/submenu.jsp"%>
 
-<div class="login-exito-bienvenida">
+bienvenido a la sección privada
 
-<div class="alert alert-secondary alert-dismissible fade show text-center text-dark" role="alert">
-  Logeado Correctamente<br>${mensaje}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-</div>
-
-<%@include file="/includes/footer-fixed.jsp"%>
+<%@include file="/includes/footer.jsp"%>
 <%@include file="/includes/scriptsMain.jsp"%>
 <%@include file="/includes/scriptsDatatable.jsp"%>
 <%@include file="/includes/pie.jsp"%>
