@@ -24,7 +24,7 @@ public class LoginController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	private static final String USUARIO_ADMIN = "admin";
 	private static final String PASSWORD_ADMIN = "admin";
-	private static final String VISTA_LISTAR = "seguridad/productos?accion=listar";
+	private static final String VISTA_DASHBOARD = "seguridad/index.jsp";
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String MSG_BIENVENIDO = "Bienvenido al Dashboard";
 	private static final String MSG_REPETIR = "Credenciales Incorrectas, por favor prueba de nuevo";
@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
 //			}
 			
 			mensaje = MSG_BIENVENIDO;
-			vista = VISTA_LISTAR;
+			vista = VISTA_DASHBOARD;
 
 		} else {
 			

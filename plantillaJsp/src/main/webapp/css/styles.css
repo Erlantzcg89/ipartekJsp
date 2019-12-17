@@ -21,6 +21,19 @@ main {
     min-height: 70vh;
 }
 
+.dashboard-wrapper{
+	margin-top: 5vh;
+	/* text-align: center; */
+	width: 40%;
+	min-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.dashboard-wrapper h1{
+	text-align: center;
+}
+
 /* Contenedor flex */
 
 .contenedor-flex {
