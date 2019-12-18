@@ -21,6 +21,8 @@ import com.ipartek.formacion.utilidades.Alerta;
 @WebServlet("/libros")
 public class LibroController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	// Declaración de variables para el uso del controlador
 
 	private final static Logger LOG = Logger.getLogger(LibroController.class);
 
@@ -46,6 +48,8 @@ public class LibroController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		
+		// inicio del controlador
 
 		dao = LibroDAO.getInstance();
 	}
@@ -54,6 +58,8 @@ public class LibroController extends HttpServlet {
 	public void destroy() {
 		super.destroy();
 
+		// destrucción del controlador
+		
 		dao = null;
 		mensajeAlerta = null;
 	}
@@ -64,6 +70,8 @@ public class LibroController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// método get. Se utiliza para listar el registro de libros
 
 		try {
 
@@ -94,6 +102,8 @@ public class LibroController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		// método post. Se utiliza para crear nuevos libros
 
 		pNombre = request.getParameter("nombre");
 		pPrecio = request.getParameter("precio");
@@ -119,6 +129,7 @@ public class LibroController extends HttpServlet {
 
 			mensajeValidacion += "El nombre debe tener entre 2 y 150 caractéres. ";
 			errorValidacion = true;
+			request.setAttribute("nombreLibro", pNombre);
 
 		} else {
 			nombreLibro = pNombre;
@@ -131,10 +142,11 @@ public class LibroController extends HttpServlet {
 			mensajeValidacion += "Por favor, rellena el campo precio. ";
 			errorValidacion = true;
 
-		} else if ((Double.parseDouble(pPrecio)) <= 0) {
+		} else if (Double.parseDouble(pPrecio) <= 0) {
 			
 			mensajeValidacion += "El precio es un numero separado por punto y mayor que 0. ";
 			errorValidacion = true;
+			request.setAttribute("precioLibro", pPrecio);
 		} else {
 			precioLibro = Double.parseDouble(pPrecio);
 			
@@ -144,14 +156,16 @@ public class LibroController extends HttpServlet {
 		if ("".equals(pDescuento)) {
 
 			mensajeValidacion += "El descuento por defecto es  del 0%. ";
+			
 
 		} else if (Integer.parseInt(pDescuento) < 0 || Integer.parseInt(pDescuento) > 100) {
 			
 			mensajeValidacion += "El descuento es un número entre 0 y 100. ";
 			errorValidacion = true;
+			request.setAttribute("descuentoLibro", pDescuento);
 		} else {
 			descuentoLibro = Integer.parseInt(pDescuento);
-
+			
 			request.setAttribute("descuentoLibro", descuentoLibro);
 		}
 

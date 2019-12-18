@@ -20,12 +20,11 @@
 		<input type="text" name="nombre" value="${nombreLibro}" class="form-control"
 			placeholder="Nombre (entre 2 y 150 letras)" autofocus>
 		<input type="text" name="precio" value="${precioLibro}" class="form-control"
-			placeholder="Precio (con punto, mayor que 0, máximo 2 decimales)">
+			placeholder="Precio (con punto, mayor que 0)">
 		<input type="text" name="descuento" value="${descuentoLibro}" class="form-control"
 			placeholder="Descuento (entre 0 y 100)">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>
 		<p class="mt-3 mb-3 text-muted">
-			© Ipartek 2019<br>
 			<a href="index.jsp">volver al dashboard</a><br>
 			<a href="libros">ver listado</a>
 		</p>
