@@ -17,6 +17,17 @@
 
 			<li class="nav-item active"><a class="nav-link pl-3"
 				href="index.jsp">Dashboard</a></li>
+		
+
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+			href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false"> Libros </a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="libros">Listado de libros</a> <a class="dropdown-item" href="libros/nuevo-libro.jsp">
+				Crear nuevo libro</a>
+			</div></li>
+		
 		</ul>
+
 	</div>
 </nav>
