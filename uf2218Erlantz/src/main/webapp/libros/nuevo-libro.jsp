@@ -20,7 +20,7 @@
 		<input type="text" name="nombre" value="${nombreLibro}" class="form-control"
 			placeholder="Nombre (entre 2 y 150 letras)" autofocus>
 		<input type="text" name="precio" value="${precioLibro}" class="form-control"
-			placeholder="Precio (dos decimales y mayor que 0)">
+			placeholder="Precio (con punto, mayor que 0, máximo 2 decimales)">
 		<input type="text" name="descuento" value="${descuentoLibro}" class="form-control"
 			placeholder="Descuento (entre 0 y 100)">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Guardar</button>

@@ -20,10 +20,14 @@
 		<div class="listado my-5">
 
 			<c:forEach items="${libros}" var="libro">
-
+			
+			
+			
+			<fmt:formatNumber var="p" minFractionDigits="2" type="number" value="${libro.precio}" />  
+			
 				<ul>
 					<li><b>Id:</b> ${libro.id} | <b>Nombre:</b> ${libro.nombre} |
-						<b>Precio:</b> ${libro.precio}&euro; | <b>Descuento:</b>
+						<b>Precio:</b> ${p}&euro; | <b>Descuento:</b>
 						${libro.descuento}&#37;</li>
 				</ul>
 

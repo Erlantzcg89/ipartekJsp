@@ -131,9 +131,9 @@ public class LibroController extends HttpServlet {
 			mensajeValidacion += "Por favor, rellena el campo precio. ";
 			errorValidacion = true;
 
-		} else if (BigDecimal.valueOf(Double.parseDouble(pPrecio)).scale() > 2) {
+		} else if ((Double.parseDouble(pPrecio)) <= 0) {
 			
-			mensajeValidacion += "El precio es un numero de con máximo dos decimales. ";
+			mensajeValidacion += "El precio es un numero separado por punto y mayor que 0. ";
 			errorValidacion = true;
 		} else {
 			precioLibro = Double.parseDouble(pPrecio);
@@ -165,7 +165,7 @@ public class LibroController extends HttpServlet {
 				Libro libroNuevo = new Libro(++LibroDAO.indice, nombreLibro, precioLibro, descuentoLibro);
 				dao.create(libroNuevo);
 
-				mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Libro " + nombreLibro + " creado con éxito");
+				mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Libro \"" + nombreLibro + "\" creado con éxito");
 
 			} catch (Exception e) {
 
