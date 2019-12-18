@@ -12,9 +12,8 @@
 <main>
 	<div class="dashboard-wrapper">
 	
-		<h1>Dashboard</h1>
-		<a href="libros" class="btn btn-dark btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true">Listar libros</a><br>
-		<a href="libros/nuevo-libro.jsp" class="btn btn-dark btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Nuevo libro</a><br>
+		<a href="libros" class="btn btn-primary btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true">Ver listado de libros</a><br>
+		<a href="libros/nuevo-libro.jsp" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Crear nuevo libro</a><br>
 	</div>
 </main>
 

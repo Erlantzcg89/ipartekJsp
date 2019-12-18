@@ -6,6 +6,7 @@
 
 <%@include file="/includes/cabecera.jsp"%>
 <%@include file="/includes/enlacesCustom.jsp"%>
+<%@include file="/includes/menuJsp.jsp"%>
 
 <div class="login-form-wrapper">
 

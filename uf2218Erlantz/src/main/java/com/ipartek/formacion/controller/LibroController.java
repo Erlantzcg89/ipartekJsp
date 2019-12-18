@@ -69,7 +69,7 @@ public class LibroController extends HttpServlet {
 
 			request.setAttribute("libros", dao.getAll());
 
-			mensajeAlerta = new Alerta(Alerta.TIPO_SUCCESS, "Libros en el registro: " + dao.getAll().size());
+			mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Libros en el registro: " + dao.getAll().size());
 
 			vista = VIEW_LISTA;
 
@@ -99,9 +99,11 @@ public class LibroController extends HttpServlet {
 		pPrecio = request.getParameter("precio");
 		pDescuento = request.getParameter("descuento");
 		
+		mensajeAlerta = null;
+		
 		String nombreLibro = "";
-		Double precioLibro;
-		int descuentoLibro;
+		Double precioLibro = 0.00;
+		int descuentoLibro = 0;
 
 		String mensajeValidacion = "";
 		Boolean errorValidacion = false;
@@ -129,9 +131,9 @@ public class LibroController extends HttpServlet {
 			mensajeValidacion += "Por favor, rellena el campo precio. ";
 			errorValidacion = true;
 
-		} else if (BigDecimal.valueOf(Double.parseDouble(pPrecio)).scale() > 1) {
+		} else if (BigDecimal.valueOf(Double.parseDouble(pPrecio)).scale() > 2) {
 			
-			mensajeValidacion += "El precio es numero de dos decimales. ";
+			mensajeValidacion += "El precio es un numero de con máximo dos decimales. ";
 			errorValidacion = true;
 		} else {
 			precioLibro = Double.parseDouble(pPrecio);
@@ -163,7 +165,7 @@ public class LibroController extends HttpServlet {
 				Libro libroNuevo = new Libro(++LibroDAO.indice, nombreLibro, precioLibro, descuentoLibro);
 				dao.create(libroNuevo);
 
-				mensajeAlerta = new Alerta(Alerta.TIPO_SUCCESS, "Libro " + nombreLibro + " creado con éxito");
+				mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Libro " + nombreLibro + " creado con éxito");
 
 			} catch (Exception e) {
 
