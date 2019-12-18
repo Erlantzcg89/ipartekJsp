@@ -6,7 +6,7 @@
 
 <%@include file="/includes/cabecera.jsp"%>
 <%@include file="/includes/enlacesCustom.jsp"%>
-<%@include file="/includes/menuIndex.jsp"%>
+<%@include file="/includes/menuJsp.jsp"%>
 <%@include file="/includes/submenu.jsp"%>
 
 <div class="index-acceso-denegado">

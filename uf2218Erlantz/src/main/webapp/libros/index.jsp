@@ -1,4 +1,4 @@
-<%@ page errorPage="privado/error500.jsp"%>
+<%@ page errorPage="errores/error500.jsp"%>
 
 <%
 	String titulo = "Dashboard - listado";
