@@ -16,7 +16,7 @@
 		<ul class="navbar-nav mr-auto">
 
 			<li class="nav-item active"><a class="nav-link pl-3"
-				href="index.jsp">Inicio</a></li>
+				href="inicio">Listado</a></li>
 
 			<li class="nav-item"><a class="nav-link pl-3"
 				href="backoffice/index.jsp">Dashboard</a></li>

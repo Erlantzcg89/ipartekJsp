@@ -51,8 +51,20 @@ public class LibroDAO implements IDAO<Libro>{
 
 	@Override
 	public Libro delete(int id) throws Exception {
+		
+		Libro libro = null;
+		
+		for (Libro l : registros) {
 
-		return null;
+			if (l.getId() == id) {
+				
+				registros.remove(l);
+				break;
+				
+			}
+		}
+
+		return libro;
 	}
 
 	@Override

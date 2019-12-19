@@ -6,6 +6,7 @@
 
 <%@include file="/includes/cabecera.jsp"%>
 <%@include file="/includes/enlacesCustom.jsp"%>
+<%@include file="/includes/menuIndex.jsp"%>
 
 <div class="login-form-wrapper">
 
@@ -23,7 +24,7 @@
 			</label>
 		</div> -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-		<p class="mt-3 mb-3 text-muted">© Ipartek 2019<br><a href="index.jsp">volver</a></p>
+		<p class="mt-3 mb-3 text-muted">© Ipartek 2019<br><a href="inicio">volver</a></p>
 	</form>
 </div>
 

@@ -2,7 +2,7 @@
 <%@ page errorPage="errores/error500.jsp"%>
 
 <%
-	String titulo = "Dashboard";
+	String titulo = "Inicio - Listado de libros";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>
@@ -13,23 +13,7 @@
 <main>
 	<div class="listado-wrapper">
 
-		<c:if test="${not empty mensajeAlertaListado }">
-
-			<div
-				class="alert alert-${mensajeAlertaListado.tipo} alert-dismissible fade show mt-3"
-				role="alert">
-				${mensajeAlertaListado.texto}
-				<button type="button" class="close" data-dismiss="alert"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-
-		</c:if>
-
-		<h1 class="h3 mt-5 font-weight-normal text-center">Listado de
-			libros</h1>
-
+		<%@include file="/includes/mensaje-alerta.jsp"%>
 
 		<div class="listado my-5">
 
@@ -41,7 +25,19 @@
 				<ul>
 					<li><b>Id:</b> ${libro.id} | <b>Nombre:</b> ${libro.nombre} |
 						<b>Precio:</b> ${p}&euro; | <b>Descuento:</b>
-						${libro.descuento}&#37;</li>
+						${libro.descuento}&#37; | <b>Autor:</b>
+						${libro.autor} | <b>Imagen:</b>
+						${libro.imagen}
+						
+<%
+	if (usuario != null) {
+%>
+| <a href="backoffice/modificar?id=${libro.id}&nombre=${libro.nombre}">modificar</a> - <a href="backoffice/borrar?id=${libro.id}&nombre=${libro.nombre}">eliminar</a>
+<%
+}
+%>
+	
+						</li>
 				</ul>
 
 			</c:forEach>

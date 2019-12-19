@@ -26,7 +26,7 @@ public class Libro {
 		this.precio = 0.00;
 		this.descuento = 0;
 		this.autor = "";
-		this.imagen = "";
+		this.imagen = "desconocido";
 	}
 
 	public int getId() {

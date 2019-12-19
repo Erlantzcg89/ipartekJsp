@@ -6,6 +6,7 @@ import javax.servlet.ServletContextAttributeListener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -64,9 +65,9 @@ public class AppListener implements ServletContextListener, ServletContextAttrib
 		ServletContext sc = sce.getServletContext();
 		sc.setAttribute("numeroUsuariosConectados", 0); // atributo global usuariosConectados a 0
     	
-    	Libro libro1 = new Libro(++LibroDAO.indice, "El quijote", 12.0, 0, "Miguel de Cervantes", "");
-    	Libro libro2 = new Libro(++LibroDAO.indice, "Superman", 19.99, 10, "Autor 2", "");
-    	Libro libro3 = new Libro(++LibroDAO.indice, "Mortadelo y Filemon", 12.0, 0, "Escritor de humor", "");
+    	Libro libro1 = new Libro(++LibroDAO.indice, "El quijote", 12.0, 0, "Miguel de Cervantes", "imagen 1");
+    	Libro libro2 = new Libro(++LibroDAO.indice, "Superman", 19.99, 10, "Autor 2", "imagen 2");
+    	Libro libro3 = new Libro(++LibroDAO.indice, "Mortadelo y Filemon", 12.0, 0, "Escritor de humor", "imagen 3");
     	
     	try {
 			dao.create(libro1);
@@ -75,12 +76,7 @@ public class AppListener implements ServletContextListener, ServletContextAttrib
 			
 		} catch (Exception e) {
 			LOG.error("error al crear objetos");
-		}
-    	
-		sc.setAttribute("libros", dao.getAll());
-		sc.setAttribute("mensajeAlertaListado", new Alerta(Alerta.TIPO_INFO, "Libros en el registro: " + dao.getAll().size()));
-		
-		
+		}		
 		
     	
 	}
@@ -92,7 +88,8 @@ public class AppListener implements ServletContextListener, ServletContextAttrib
 		
 		ServletContext sc = sce.getServletContext();
 		sc.setAttribute("numeroUsuariosConectados", 0);
-		
+		sc = null;
+
 		LOG.info("La App se cierra");
 	}
 
