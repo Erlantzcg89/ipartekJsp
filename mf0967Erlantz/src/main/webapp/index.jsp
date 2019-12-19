@@ -14,6 +14,17 @@
 	<div class="listado-wrapper">
 
 		<%@include file="/includes/mensaje-alerta.jsp"%>
+		
+		<div class="row">
+			<div class="col-lg-4 detalle-wrapper">
+				
+			</div>
+			<div class="col-lg-4">hola</div>
+			<div class="col-lg-4">hola</div>
+			<div class="col-lg-4">hola</div>
+			<div class="col-lg-4">hola</div>
+			<div class="col-lg-4">hola</div>
+		</div>
 
 		<div class="listado my-5">
 
@@ -32,7 +43,7 @@
 <%
 	if (usuario != null) {
 %>
-| <a href="backoffice/modificar?id=${libro.id}&nombre=${libro.nombre}">modificar</a> - <a href="backoffice/borrar?id=${libro.id}&nombre=${libro.nombre}">eliminar</a>
+| <a href="backoffice/modificar?id=${libro.id}&nombre=${libro.nombre}&precio=${libro.precio}&descuento=${libro.descuento}&autor=${libro.autor}&imagen=${libro.imagen}">modificar</a> - <a href="backoffice/borrar?id=${libro.id}&nombre=${libro.nombre}">eliminar</a>
 <%
 }
 %>
