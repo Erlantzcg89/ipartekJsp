@@ -1,0 +1,162 @@
+
+body {
+	min-width: 350px;
+}
+
+.submenu {
+	padding: 8px 8px 8px;
+	border-bottom: 1px solid #DC3545;
+}
+
+.submenu p {
+	margin: 0;
+}
+
+.submenu div{
+	display: inline-block;
+	min-width: 80px;
+}
+
+main {
+    min-height: 50vh;
+    padding: 20px;
+}
+
+ul li{
+	list-style: none;
+}
+
+.dashboard-wrapper{
+
+	/* text-align: center; */
+	width: 40%;
+	min-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.dashboard-wrapper h1{
+	margin-bottom: 30px;
+}
+
+.listado-wrapper{
+	margin-bottom: 15vh;
+	/* text-align: center; */
+	width: 60%;
+	min-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.listado-wrapper h1{
+
+}
+
+.dashboard-wrapper h1{
+	text-align: center;
+}
+
+/* Contenedor flex */
+
+.error500{
+	padding: 20px 20px 0;
+}
+
+.ejemplo02-caja-centrado{
+	width: 180px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.index-acceso-denegado{
+	max-width: 500px;
+	margin: auto;
+	padding: 60px 0;
+}
+
+.index-acceso-denegado img{
+	width: 100%;
+}
+
+/* Formularios
+**********************************************************/
+
+.form-control:valid {
+    color: #1cc88a;
+}
+
+.form-control:focus:invalid {
+    color: #e74a3b;
+    border-color: #e74a3b;
+    box-shadow: 0 0 0 0.2rem rgb(231, 74, 59, 0.25);
+}
+
+.login-form-wrapper{
+	margin-top: 15vh;
+	text-align: center;
+	width: 40%;
+	min-width: 350px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.login-form-wrapper .checkbox{
+	text-align: left;
+}
+
+form input, form .checkbox{
+	margin-bottom: 5px;
+}
+
+/* Fin formularios
+***********************************************************/
+
+.navbar-brand a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer {
+    justify-content: left;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: lightblue;
+}
+
+/* imagenes tarjetas */
+
+/* font-awesome */
+.menu-icono {
+
+}
+
+#botonIrTop:hover {
+    color: white;
+}
+
+@media (min-width: 576px) {
+
+    iframe {
+        height: 250px;
+    }
+}
+
+@media (min-width: 768px) {
+    iframe {
+        height: 350px;
+    }
+}
+
+@media (min-width: 992px) {
+    iframe {
+        height: 500px;
+    }
+}
+
+@media (min-width: 1200px) {}
