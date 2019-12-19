@@ -15,16 +15,7 @@
 
 		<%@include file="/includes/mensaje-alerta.jsp"%>
 		
-		<div class="row">
-			<div class="col-lg-4 detalle-wrapper">
-				
-			</div>
-			<div class="col-lg-4">hola</div>
-			<div class="col-lg-4">hola</div>
-			<div class="col-lg-4">hola</div>
-			<div class="col-lg-4">hola</div>
-			<div class="col-lg-4">hola</div>
-		</div>
+		
 
 		<div class="listado my-5">
 
@@ -56,6 +47,59 @@
 		</div>
 
 	</div>
+	
+	<p>En construcción...</p>
+		<div class="3libros row">
+
+			<div class="col-sm-4 detalle-wrapper">
+				<div class="detalle">
+					<hr>
+					<div class="detalle-imagen">
+						<img src="https://source.unsplash.com/600x800/?book">
+					</div>
+					<hr>
+					<div class="detalle-texto">
+					</div>
+					<div class="detalle-precio row">
+						<div class="col3"><span>11,35&euro; </span></div>
+						<div class="col3"><span>11,95&euro; </span></div>
+						<div class="col3"><span>-5&#37;</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 detalle-wrapper">
+				<div class="detalle">
+					<hr>
+					<div class="detalle-imagen">
+						<img src="https://source.unsplash.com/600x800/?books">
+					</div>
+					<hr>
+					<div class="detalle-texto">
+					</div>
+					<div class="detalle-precio row">
+						<div class="col3"><span>11,35&euro; </span></div>
+						<div class="col3"><span>11,95&euro; </span></div>
+						<div class="col3"><span>-5&#37;</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4 detalle-wrapper">
+				<div class="detalle">
+					<hr>
+					<div class="detalle-imagen">
+						<img src="https://source.unsplash.com/600x800/?writing">
+					</div>
+					<hr>
+					<div class="detalle-texto">
+					</div>
+					<div class="detalle-precio row">
+						<div class="col3"><span>11,35&euro; </span></div>
+						<div class="col3"><span>11,95&euro; </span></div>
+						<div class="col3"><span>-5&#37;</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
 </main>
 
 <%@include file="/includes/footer.jsp"%>

@@ -78,6 +78,24 @@ ul li{
 	width: 100%;
 }
 
+/* detalle libros
+*************************************************************/
+.3libros{
+	width: 80vw;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.detalle-wrapper{
+	max-width: 200px;
+}
+
+.detalle-wrapper img{
+	width: 100%;
+}
+
+
+
 /* Formularios
 **********************************************************/
 
