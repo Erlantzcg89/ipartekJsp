@@ -15,7 +15,6 @@
     <meta name="description" content="">
     <meta name="author" content="Erlantz">
     <title>Supermercado</title>
-    <base href="/supermercado/">
 
    <!-- Bootstrap core CSS -->
    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
