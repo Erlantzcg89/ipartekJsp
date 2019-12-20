@@ -3,6 +3,7 @@ package com.ipartek.formacion.supermercado.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,36 +18,24 @@ import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
  */
 @WebServlet("/inicio")
 public class InicioController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-	ProductoDAO gestorProductos = null; 
-
+	private static ProductoDAO dao;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InicioController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-    
-    @Override
-    public void init() throws ServletException {
-    	super.init();
-    	
-    	gestorProductos = ProductoDAO.getInstance();
-    }
-    
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	super.service(request, response);
-    	
-		request.setAttribute("productos", gestorProductos.getAll());
-		
-		request.getRequestDispatcher("index.jsp").forward(request, response);
-    	
-    }
-
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {	
+		super.init(config);
+		dao = ProductoDAO.getInstance();
+	}
+	
+	
+	@Override
+	public void destroy() {	
+		super.destroy();
+		dao = null;
+	}
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -59,8 +48,14 @@ public class InicioController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//llamar al DAO capa modelo
+		ArrayList<Producto> productos = (ArrayList<Producto>) dao.getAll();
+		request.setAttribute("productos", productos );		
+		request.setAttribute("mensajeAlerta", new Alerta( Alerta.TIPO_PRIMARY , "Los últimos productos destacados.") );		
 		
-
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		
 	}
 
 }

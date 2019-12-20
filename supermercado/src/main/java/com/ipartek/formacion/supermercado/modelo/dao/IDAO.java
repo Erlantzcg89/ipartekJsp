@@ -1,9 +1,12 @@
 package com.ipartek.formacion.supermercado.modelo.dao;
 
+
 import java.util.List;
+
 
 public interface IDAO<P> {
 	
+		
 	/**
 	 * Obtiene todos los datos
 	 * @return lista de pojos

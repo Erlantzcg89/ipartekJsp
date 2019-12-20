@@ -1,12 +1,16 @@
 package com.ipartek.formacion.supermercado.modelo.pojo;
 
 public class Producto {
+
+	
+	public static final int DESCUENTO_MIN = 0;
+	public static final int DESCUENTO_MAX = 100;
 	
 	private int id;
 	private String nombre;
-	private double precio;
+	private float precio;
 	private String imagen;
-	private String description;
+	private String descripcion;
 	private int descuento;
 	
 	public Producto() {
@@ -14,24 +18,10 @@ public class Producto {
 		this.id = 0;
 		this.nombre = "";
 		this.precio = 0;
-		this.imagen = "img/vodka.jpg";
-		this.description = "";
-		this.descuento = 0;
+		this.imagen = "https://image.flaticon.com/icons/png/512/372/372627.png";
+		this.descripcion = "";
+		this.descuento = DESCUENTO_MIN;
 	}
-	
-	
-
-	public Producto(int id, String nombre, double precio, String imagen, String description, int descuento) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.precio = precio;
-		this.imagen = imagen;
-		this.description = description;
-		this.descuento = descuento;
-	}
-
-
 
 	public int getId() {
 		return id;
@@ -49,11 +39,11 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
+	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
 
@@ -65,12 +55,12 @@ public class Producto {
 		this.imagen = imagen;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public int getDescuento() {
@@ -81,20 +71,14 @@ public class Producto {
 		this.descuento = descuento;
 	}
 	
-	public double getPrecioDescuento() {
-		
-		Double precioDescuento = null;
-		
-		precioDescuento = (this.precio) - (this.precio * this.descuento / 100);
-		
-		return precioDescuento;
-		
+	public float getPrecioDescuento() {
+		return (  (this.precio * ( 100 - this.descuento )) / 100  );
 	}
 
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", imagen=" + imagen
-				+ ", description=" + description + ", descuento=" + descuento + "]";
+				+ ", descripcion=" + descripcion + ", descuento=" + descuento + "]";
 	}
-	
+		
 }

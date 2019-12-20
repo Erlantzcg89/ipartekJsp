@@ -66,13 +66,14 @@ main{
 }
 
 .producto img{
-    width: 100%;
-    height: auto;
+   width: auto;
+    height: 200px;
+    margin: auto;
+    display: block;
 }
 
 .producto .body{
     padding: 0 0.75rem;
-    min-height: 118px;
 
 }
 

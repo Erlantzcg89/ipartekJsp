@@ -4,31 +4,30 @@
 	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	      version="3.0">
 	      
-	      <!-- tambien podemos poner la url de un Controlador -->
+	     
 	      <welcome-file-list>
 	      	<welcome-file>inicio</welcome-file>
 	      </welcome-file-list>
 	      
-	      <!-- 
+	      <!--  TODO para el final, si hay tiempo 
 	      
 	      	paginas de errores para los controladores
 	      	en los JSPs hay que indiccar con una directiva cual es la pagina a donde tiene que ir en caso de error
 	      	 
-	      -->
-<!-- 	      <error-page>	
+	     
+	      <error-page>	
 	      	<error-code>500</error-code>
 	      	<location>/error.jsp</location>
-	      </error-page>	 -->     
+	      </error-page>	     
+	      
 
 	      
-	      
-	     <!--  tambien se puede poner Exceptions 
-	      <error-page>	
-	      	<exception-type>java.lang.NullPointerException</exception-type>
-	      	<location>/error.jsp</location>
+	      <error-page>
+	      	<error-code>404</error-code>
+	      	<location>/pagina404.jsp</location>
 	      </error-page>
-	     -->
 	      
-
+	       -->
 	      
+	   
 </web-app>

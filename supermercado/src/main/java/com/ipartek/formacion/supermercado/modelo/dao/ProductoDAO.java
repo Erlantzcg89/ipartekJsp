@@ -1,46 +1,60 @@
 package com.ipartek.formacion.supermercado.modelo.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ipartek.formacion.supermercado.model.ConnectionManager;
 import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
 
-public class ProductoDAO implements IDAO<Producto>{
+public class ProductoDAO implements IDAO<Producto> {
 	
-	
-	// patron singleton
 	private static ProductoDAO INSTANCE;
-	private ArrayList<Producto> registros;
-	public static int indice = 25;
-	
-	private ProductoDAO() {
-		super();
 		
-		registros = new ArrayList<Producto>();
+	private static final String SQL_GET_ALL = "SELECT id, nombre FROM producto ORDER BY id DESC LIMIT 500;";
+		
+	
+	private ProductoDAO() {		
+		super();			
 	}
 	
-	public synchronized static ProductoDAO getInstance() {
+	public static synchronized ProductoDAO getInstance() {
 		
-		if (INSTANCE == null) {
-			INSTANCE = new ProductoDAO();
+		if ( INSTANCE == null ) {
+			INSTANCE = new ProductoDAO(); 
 		}
 		
 		return INSTANCE;
 	}
-
-	@Override
-	public Producto create(Producto pojo) throws Exception {
-		Producto resul = null;
-		
-		registros.add(pojo);
-		
-		return resul;
-	}
 	
-	@Override
-	public List<Producto> getAll() {
+	
 
-		return registros;
+	@Override
+	public List<Producto> getAll() {		
+		
+		ArrayList<Producto> lista = new ArrayList<Producto>();
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_GET_ALL);
+				ResultSet rs = pst.executeQuery()) {
+
+			while (rs.next()) {
+				
+				Producto p = new Producto();
+				p.setId( rs.getInt("id"));
+				p.setNombre(rs.getString("nombre"));
+				lista.add(p);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 
 	@Override
@@ -61,8 +75,12 @@ public class ProductoDAO implements IDAO<Producto>{
 		return null;
 	}
 
+	@Override
+	public Producto create(Producto pojo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
 	
-
 }
