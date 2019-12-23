@@ -1,7 +1,7 @@
 <!-- Menu Jsp -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
 	<span class="navbar-brand"><span
-		class="menu-icono fas fa-book-open mr-2"></span>CMS Gestión de libros</span>
+		class="menu-icono fas fa-dice-d6 mr-2"></span>CMS Productos</span>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -22,7 +22,7 @@
 				href="backoffice/index.jsp">Dashboard</a></li>
 
 
-			<li class="nav-item dropdown"><a
+			<!-- <li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false"> Libros </a>
@@ -31,7 +31,7 @@
 						class="dropdown-item" href="backoffice/modificar">Modificar
 						libro</a> <a class="dropdown-item" href="backoffice/borrar">Borrar
 						libro</a>
-				</div></li>
+				</div></li> -->
 
 		</ul>
 

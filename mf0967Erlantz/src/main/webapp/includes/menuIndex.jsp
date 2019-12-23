@@ -1,7 +1,7 @@
 <!-- Menu Index -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
 	<span class="navbar-brand"><span
-		class="menu-icono fas fa-book-open mr-2"></span>CMS Gestión de libros</span>
+		class="menu-icono fas fa-dice-d6 mr-2"></span>CMS Productos</span>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"

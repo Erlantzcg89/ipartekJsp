@@ -1,27 +1,58 @@
 <%@ page errorPage="privado/error500.jsp"%>
 
 <%
-	String titulo = "Dashboard";
+	String titulo = "Listado";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>
 <%@include file="/includes/enlacesCustom.jsp"%>
+<%@include file="/includes/enlacesDatatable.jsp"%>
 <%@include file="/includes/menuJsp.jsp"%>
 <%@include file="/includes/submenu.jsp"%>
 
 <main>
-	<div class="dashboard-wrapper mt-3">
-	
-		<%@include file="/includes/mensaje-alerta.jsp"%>
-	
-		<a href="backoffice/libros/nuevo-libro.jsp" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Crear libro</a><br>
-		<a href="inicio" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Modificar libro</a><br>
-		<a href="inicio" class="btn btn-danger btn-lg btn-block" tabindex="-1" role="button" aria-disabled="true">Borrar libro</a>
-		<p class="mt-3 mb-3 text-muted text-center">
-			<a href="inicio">ver listado</a>
-		</p>
-	</div>
+	<main>
+		<div class="listado-wrapper">
+
+			<%@include file="/includes/mensaje-alerta.jsp"%>
+
+			<table class="dataTable display" style="width: 100%">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>nombre</th>
+						<%
+							if (usuario != null) {
+						%>
+						<th>Editar</th>
+						<%
+							}
+						%>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${productos}" var="p">
+						<tr>
+							<td>${p.id}</td>
+							<td>${p.nombre }</td>
+							<%
+								if (usuario != null) {
+							%>
+							<td><a
+								href="backoffice/productos?accion=formulario&id=${p.id}">Editar</a></td>
+							<%
+								}
+							%>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
+		</div>
+		<!-- fin listado-wrapper -->
+	</main>
 </main>
 
 <%@include file="/includes/scriptsMain.jsp"%>
+<%@include file="/includes/scriptsDatatable.jsp"%>
 <%@include file="/includes/pie.jsp"%>

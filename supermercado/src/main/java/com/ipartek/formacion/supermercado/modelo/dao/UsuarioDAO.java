@@ -1,4 +1,4 @@
-package com.ipartek.formacion.supermercado.modelo.dao;
+package com.ipartek.formacion.model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.ipartek.formacion.supermercado.model.ConnectionManager;
-import com.ipartek.formacion.supermercado.modelo.pojo.Usuario;
+import com.ipartek.formacion.model.ConnectionManager;
+import com.ipartek.formacion.model.pojo.Rol;
+import com.ipartek.formacion.model.pojo.Usuario;
 
 public class UsuarioDAO {
 
@@ -164,7 +165,7 @@ public class UsuarioDAO {
 				PreparedStatement pst = con.prepareStatement(SQL_UPDATE)) {
 
 			pst.setString(1, pojo.getNombre());
-			pst.setString(2, pojo.getPassword());
+			pst.setString(2, pojo.getContrasenya());
 			pst.setInt(3, pojo.getId());
 
 			int affectedRows = pst.executeUpdate();
@@ -182,7 +183,7 @@ public class UsuarioDAO {
 				PreparedStatement pst = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
 
 			pst.setString(1, pojo.getNombre());
-			pst.setString(2, pojo.getPassword());
+			pst.setString(2, pojo.getContrasenya());
 
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
@@ -204,14 +205,14 @@ public class UsuarioDAO {
 		Usuario u = new Usuario();
 		u.setId(rs.getInt("id"));
 		u.setNombre(rs.getString("nombre"));
-		u.setPassword(rs.getString("contrasenya"));
-//		u.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-//		u.setFechaEliminacion(rs.getTimestamp("fecha_eliminacion"));
+		u.setContrasenya(rs.getString("contrasenya"));
+		u.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+		u.setFechaEliminacion(rs.getTimestamp("fecha_eliminacion"));
 		
-//		Rol rol = new Rol();
-//		rol.setId( rs.getInt("id_rol"));
-//		rol.setNombre( rs.getString("nombre_rol"));
-//		u.setRol(rol);
+		Rol rol = new Rol();
+		rol.setId( rs.getInt("id_rol"));
+		rol.setNombre( rs.getString("nombre_rol"));
+		u.setRol(rol);
 		
 		return u;
 	}

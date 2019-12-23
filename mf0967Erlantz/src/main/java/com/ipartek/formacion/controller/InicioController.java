@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.ipartek.formacion.modelo.dao.LibroDAO;
+import com.ipartek.formacion.modelo.dao.ProductoDAO;
 import com.ipartek.formacion.utilidades.Alerta;
 
 /**
@@ -28,7 +28,7 @@ public class InicioController extends HttpServlet {
 		
 		private static final String VIEW_LISTA = "index.jsp";
 
-		private static LibroDAO dao;
+		private static ProductoDAO dao;
        
 		
 		@Override
@@ -37,7 +37,7 @@ public class InicioController extends HttpServlet {
 			
 			// inicio del controlador
 
-			dao = LibroDAO.getInstance();
+			dao = ProductoDAO.getInstance();
 		}
 		
 		@Override
@@ -62,19 +62,19 @@ public class InicioController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// método get. Se utiliza para listar el registro de libros
+		// método get. Se utiliza para listar el registro de productos
 
 				try {
 
-					request.setAttribute("libros", dao.getAll());
+					request.setAttribute("productos", dao.getAll());
 
-					mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Libros en el registro: " + dao.getAll().size());
+					mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Productos en el registro: " + dao.getAll().size());
 
 					
 
 				} catch (Exception e) {
 
-					mensajeAlerta = new Alerta(Alerta.TIPO_DANGER, "Error al mostrar la lista de libros");
+					mensajeAlerta = new Alerta(Alerta.TIPO_DANGER, "Error al mostrar la lista de productos");
 
 					LOG.error("error en el get", e);
 

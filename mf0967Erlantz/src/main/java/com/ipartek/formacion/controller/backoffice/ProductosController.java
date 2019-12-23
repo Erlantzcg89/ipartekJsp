@@ -1,7 +1,6 @@
-package com.ipartek.formacion.supermercado.controller.seguridad;
+package com.ipartek.formacion.controller.backoffice;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -15,18 +14,18 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.ipartek.formacion.supermercado.controller.Alerta;
-import com.ipartek.formacion.supermercado.modelo.dao.ProductoDAO;
-import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
+import com.ipartek.formacion.modelo.dao.ProductoDAO;
+import com.ipartek.formacion.modelo.pojos.Producto;
+import com.ipartek.formacion.utilidades.Alerta;
 
 /**
  * Servlet implementation class ProductosController
  */
-@WebServlet("/seguridad/productos")
+@WebServlet("/backoffice/productos")
 public class ProductosController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String VIEW_TABLA = "productos/index.jsp";
+	private static final String VIEW_TABLA = "../index.jsp";
 	private static final String VIEW_FORM = "productos/formulario.jsp";
 	private static String vistaSeleccionda = VIEW_TABLA;
 	private static ProductoDAO dao;
