@@ -27,8 +27,8 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">Productos</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="backoffice/listarProductos">Listar productos</a> <a
-						class="dropdown-item" href="backoffice/nuevoProducto">Nuevo producto</a>
+					<a class="dropdown-item" href="backoffice/productos?accion=listar">Ver productos</a> <a
+						class="dropdown-item" href="backoffice/productos?accion=formulario">Nuevo producto</a>
 				</div></li>
 				
 						<li class="nav-item dropdown"><a
@@ -36,8 +36,8 @@
 				role="button" data-toggle="dropdown" aria-haspopup="true"
 				aria-expanded="false">Usuarios</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="backoffice/listarUsuarios">Listar Usuarios</a> <a
-						class="dropdown-item" href="backoffice/nuevoUsuario">Nuevo usuario</a>
+					<a class="dropdown-item" href="backoffice/usuarios?accion=listar">Ver Usuarios</a> <a
+						class="dropdown-item" href="backoffice/usuarios?accion=formulario">Nuevo usuario</a>
 				</div></li>
 
 		</ul>

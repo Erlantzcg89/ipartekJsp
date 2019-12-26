@@ -1,7 +1,7 @@
 <%@ page errorPage="errores/error500.jsp"%>
 
 <%
-	String titulo = "Nuevo producto";
+	String titulo = "Formulario producto";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>
@@ -16,21 +16,26 @@
 	<p class="text-danger">${mensajeValidacion}</p>
 
 	<form class="login-form" action="backoffice/productos" method="post">
-		<h1 class="h3 mb-3 font-weight-normal">Formulario de Producto</h1>
-		<input type="text" name="id" value="${producto.id}" class="form-control"
-		readonly>
-		<input type="text" name="nombre" value="${producto.nombre}"
-			class="form-control" placeholder="Nombre (entre 2 y 150 letras)"
-			autofocus>
-		<input
-			class="btn btn-lg btn-primary btn-block" type="submit"
-			value="${(producto.id>0)?"Modificar":"Crear" }"></input>
-				<!-- Button trigger modal -->
-		<button type="button" class="btn btn-lg btn-block btn-outline-danger"
-			data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+		<h1 class="h3 mb-3 font-weight-normal">Producto</h1>
+		
+		<input type="text" name="id" value="${producto.id}" class="form-control" readonly>
+		<input type="text" name="nombre" value="${producto.nombre}" class="form-control"
+		placeholder="Nombre (entre 2 y 150 letras)" autofocus>
+			
+		<input type="hidden" name="accion" value="guardar">
+			
+		<input class="btn btn-lg btn-primary btn-block" type="submit"
+		value="${(producto.id>0)?"Modificar":"Crear" }"></input>
+		
+		<!-- Button trigger modal -->
+		<c:if test="${producto.id > 0}">
+			<button type="button" class="btn btn-lg btn-block btn-outline-danger"
+				data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+		</c:if>
+		
 		<p class="mt-3 mb-3 text-muted">
 			<a href="backoffice/index.jsp">volver al dashboard</a><br> <a
-				href="inicio">ver listado</a>
+				href="backoffice/productos?accion=listar">ver productos</a>
 		</p>
 	</form>
 
@@ -42,13 +47,14 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Eliminar el producto</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">¿Estas seguro de que quieres eliminarlo?</div>
+					<div class="modal-body">¿Estas seguro de que quieres
+						eliminar el producto?<br> { Id: ${producto.id}, Nombre: <b>${producto.nombre} }</b></div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Cancelar</button>

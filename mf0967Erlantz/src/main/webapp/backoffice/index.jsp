@@ -17,10 +17,10 @@
 	
 		<%@include file="/includes/mensaje-alerta.jsp"%>
 	
-		<a href="backoffice/productos?accion=listar" class="btn btn-dark btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true">Listar productos</a><br>
-		<a href="backoffice/usuarios?accion=listar" class="btn btn-dark btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Listar usuarios</a><br>
-		<a href="backoffice/productos?accion=formulario" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Nuevo producto</a><br>
-		<a href="backoffice/productos?accion=formulario" class="btn btn-primary btn-lg btn-block" tabindex="-1" role="button" aria-disabled="true">Nuevo usuario</a>
+		<a href="backoffice/productos?accion=listar" class="btn btn-primary btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true"><i class="far fa-eye"></i> Ver productos</a><br>
+		<a href="backoffice/usuarios?accion=listar" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true"><i class="far fa-eye"></i> Ver usuarios</a><br>
+		<a href="backoffice/productos?accion=formulario" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true"><i class="fas fa-plus"></i> Nuevo producto</a><br>
+		<a href="backoffice/usuarios?accion=formulario" class="btn btn-primary btn-lg btn-block" tabindex="-1" role="button" aria-disabled="true"><i class="fas fa-plus"></i> Nuevo usuario</a>
 	</div>
 
 	</main>

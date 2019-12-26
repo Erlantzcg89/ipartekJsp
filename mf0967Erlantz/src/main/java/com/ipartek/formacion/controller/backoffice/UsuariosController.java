@@ -16,6 +16,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Producto;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.utilidades.Alerta;
 
@@ -136,17 +137,17 @@ public class UsuariosController extends HttpServlet {
 
 	private void irFormulario(HttpServletRequest request, HttpServletResponse response) {
 		
-		Usuario pEditar = new Usuario();
+		Usuario uEditar = new Usuario();
 		
 		if ( pId != null ) {
 			
 			int id = Integer.parseInt(pId);
-			pEditar = dao.getById(id);
+			uEditar = dao.getById(id);
 			
 		}
 		
 		
-		request.setAttribute("usuario", pEditar );
+		request.setAttribute("usuario", uEditar );
 		vistaSeleccionda = VIEW_FORM;
 		
 	}

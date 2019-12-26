@@ -20,7 +20,7 @@
 					<tr>
 						<th>id</th>
 						<th>nombre</th>
-						<th>Editar</th>
+						<th>editar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -29,7 +29,7 @@
 							<td>${p.id}</td>
 							<td>${p.nombre }</td>
 							<td><a
-								href="backoffice/productos?accion=formulario&id=${p.id}">Editar</a></td>
+								href="backoffice/productos?accion=formulario&id=${p.id}">editar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -20,7 +20,8 @@
 					<tr>
 						<th>id</th>
 						<th>nombre</th>
-						<th>Editar</th>
+						<th>contraseña</th>
+						<th>editar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -28,8 +29,9 @@
 						<tr>
 							<td>${u.id}</td>
 							<td>${u.nombre }</td>
+							<td>${u.contrasenia }</td>
 							<td><a
-								href="backoffice/usuarios?accion=formulario&id=${u.id}">Editar</a></td>
+								href="backoffice/usuarios?accion=formulario&id=${u.id}">editar</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

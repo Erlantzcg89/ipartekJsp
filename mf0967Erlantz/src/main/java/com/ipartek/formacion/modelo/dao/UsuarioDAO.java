@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 	private static UsuarioDAO INSTANCE;
 
 	private static final String SQL_GET_ALL = "SELECT id, nombre, contrasenia FROM usuario ORDER BY id DESC LIMIT 500;";
-	private static final String SQL_GET_BY_ID ="SELECT id, nombre FROM usuario WHERE id = ? ;"; 
-	private static final String SQL_GET_INSERT ="INSERT INTO usuario ( nombre) VALUES ( ? );";
-	private static final String SQL_GET_UPDATE ="UPDATE usuario SET nombre = ? WHERE id = ? ;";
+	private static final String SQL_GET_BY_ID ="SELECT id, nombre, contrasenia FROM usuario WHERE id = ? ;"; 
+	private static final String SQL_GET_INSERT ="INSERT INTO usuario (nombre, contrasenia) VALUES ( ? , ? );";
+	private static final String SQL_GET_UPDATE ="UPDATE usuario SET nombre = ?, contrasenia = ? WHERE id = ? ;";
 	private static final String SQL_DELETE ="DELETE FROM usuario WHERE id = ? ;";
 	private static final String SQL_EXIST = "SELECT id, nombre, contrasenia FROM usuario WHERE nombre = ? AND contrasenia = ? ;";
 
@@ -69,26 +70,100 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	@Override
 	public Usuario getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Usuario registro = null;
+		
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_GET_BY_ID);
+				) {
+			
+			// sustituyo parametros en la SQL, en este caso 1º ? por id			
+			pst.setInt(1, id);
+			
+			//ejecuto la consulta
+			try( ResultSet rs = pst.executeQuery() ){
+
+				while (rs.next()) {
+					
+					registro = new Usuario();
+					registro.setId( rs.getInt("id"));
+					registro.setNombre(rs.getString("nombre"));
+					registro.setContrasenia(rs.getString("contrasenia"));
+						
+				}
+			}	
+
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
+		
+		
+		return registro;
 	}
 
 	@Override
 	public Usuario delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Usuario registro = null;
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_DELETE)) {
+
+			pst.setInt(1, id);			
+			
+			registro = this.getById(id); //recuperar
+			
+			
+			int affectedRows = pst.executeUpdate();  //eliminar
+			if (affectedRows != 1) {
+				registro = null;
+				throw new Exception("No se puede eliminar " + registro);
+			}
+
+		}
+		return registro;
 	}
 
 	@Override
 	public Usuario update(int id, Usuario pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(SQL_GET_UPDATE)) {
+
+			pst.setString(1, pojo.getNombre());
+			pst.setInt(2, id);
+			
+			int affectedRows = pst.executeUpdate();  // lanza una excepcion si nombre repetido
+			if (affectedRows == 1) {
+				pojo.setId(id);				
+			}else {
+				throw new Exception("No se encontro registro para id=" + id);
+			}
+
+		}
+		return pojo;
 	}
 
 	@Override
 	public Usuario create(Usuario pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement( SQL_GET_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+
+			pst.setString(1, pojo.getNombre());			
+
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				// conseguimos el ID que acabamos de crear
+				ResultSet rs = pst.getGeneratedKeys();
+				if (rs.next()) {
+					pojo.setId(rs.getInt(1));
+				}
+
+			}
+
+		}
+
+		return pojo;
 	}
 
 	@Override
