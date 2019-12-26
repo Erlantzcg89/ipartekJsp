@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.utilidades.Alerta;
 
 /**
@@ -25,8 +27,8 @@ public class LoginController extends HttpServlet {
 	
 	private static Alerta mensajeAlerta = null;
 	
-	private static final String USUARIO_ADMIN = "admin";
-	private static final String PASSWORD_ADMIN = "123456";
+	private static UsuarioDAO dao = null;
+	
 	private static final String VISTA_DASHBOARD = "backoffice/index.jsp";
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String MSG_BIENVENIDO = "Bienvenido";
@@ -36,8 +38,19 @@ public class LoginController extends HttpServlet {
 	public void destroy() {
 		super.destroy();
 		
+		dao = null;
 		mensajeAlerta = null;
 	}
+	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		
+		dao = UsuarioDAO.getInstance();
+	}
+	
+	
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -66,22 +79,25 @@ public class LoginController extends HttpServlet {
 
 		// 2. logica de negocio
 		
-		HttpSession session = request.getSession();
+		Usuario usuario = dao.exist(nombre, password);
 
-		if (USUARIO_ADMIN.equalsIgnoreCase(nombre) && PASSWORD_ADMIN.equalsIgnoreCase(password)) {
+		if (usuario != null) {
 
-
+			LOG.info("login correcto " + usuario);
+			HttpSession session = request.getSession();
 			
-			session.setAttribute("usuarioLogeado", "Administrador");
+			session.setAttribute("usuarioLogeado", usuario);
 			session.setMaxInactiveInterval(-1); // nunca caduca
 			
 			vista = VISTA_DASHBOARD;
 			
-			mensajeAlerta = new Alerta( Alerta.TIPO_SUCCESS, MSG_BIENVENIDO + ", " + session.getAttribute("usuarioLogeado"));
+			mensajeAlerta = new Alerta( Alerta.TIPO_SUCCESS, MSG_BIENVENIDO + ", " + usuario.getNombre());
 			
 			request.setAttribute("mensajeAlerta", mensajeAlerta);
 
 		} else {
+			
+			LOG.error("error al loguear");
 			
 			mensajeAlerta = new Alerta( Alerta.TIPO_DANGER, MSG_REPETIR);
 			

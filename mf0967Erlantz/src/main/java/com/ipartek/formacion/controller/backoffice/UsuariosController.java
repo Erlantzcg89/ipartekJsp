@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller.backoffice;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;
@@ -14,21 +15,21 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import com.ipartek.formacion.modelo.dao.ProductoDAO;
-import com.ipartek.formacion.modelo.pojos.Producto;
+import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.utilidades.Alerta;
 
 /**
  * Servlet implementation class ProductosController
  */
-@WebServlet("/backoffice/productos")
-public class ProductosController extends HttpServlet {
+@WebServlet("/backoffice/usuarios")
+public class UsuariosController extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String VIEW_TABLA = "productos/index.jsp";
-	private static final String VIEW_FORM = "productos/formulario.jsp";
+	private static final String VIEW_TABLA = "usuarios/index.jsp";
+	private static final String VIEW_FORM = "usuarios/formulario.jsp";
 	private static String vistaSeleccionda = VIEW_TABLA;
-	private static ProductoDAO dao;
+	private static UsuarioDAO dao;
 	
 	//acciones
 	public static final String ACCION_LISTAR = "listar";
@@ -54,7 +55,7 @@ public class ProductosController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {		
 		super.init(config);
-		dao = ProductoDAO.getInstance();
+		dao = UsuarioDAO.getInstance();
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
@@ -135,7 +136,7 @@ public class ProductosController extends HttpServlet {
 
 	private void irFormulario(HttpServletRequest request, HttpServletResponse response) {
 		
-		Producto pEditar = new Producto();
+		Usuario pEditar = new Usuario();
 		
 		if ( pId != null ) {
 			
@@ -145,7 +146,7 @@ public class ProductosController extends HttpServlet {
 		}
 		
 		
-		request.setAttribute("producto", pEditar );
+		request.setAttribute("usuario", pEditar );
 		vistaSeleccionda = VIEW_FORM;
 		
 	}
@@ -154,15 +155,14 @@ public class ProductosController extends HttpServlet {
 		
 		
 		int id = Integer.parseInt(pId);
-		Producto pGuardar = new Producto();		
+		Usuario pGuardar = new Usuario();		
 		pGuardar.setId(id);
 		pGuardar.setNombre(pNombre);
-		pGuardar.setDescuento( Integer.parseInt(pDescuento));
 		
 		
-		Set<ConstraintViolation<Producto>> validaciones = validator.validate(pGuardar);
+		Set<ConstraintViolation<Usuario>> validaciones = validator.validate(pGuardar);
 		if( validaciones.size() > 0 ) {			
-			mensajeValidacion(request, validaciones);
+//			mensajeValidacion(request, validaciones);
 		}else {	
 		
 				try {
@@ -191,10 +191,10 @@ public class ProductosController extends HttpServlet {
 		
 	}
 
-	private void mensajeValidacion(HttpServletRequest request, Set<ConstraintViolation<Producto>> validaciones ) {
+	private void mensajeValidacion(HttpServletRequest request, Set<ConstraintViolation<Usuario>> validaciones ) {
 
 		StringBuilder mensaje = new StringBuilder();
-		for (ConstraintViolation<Producto> cv : validaciones) {
+		for (ConstraintViolation<Usuario> cv : validaciones) {
 			
 			mensaje.append("<p>");
 			mensaje.append(cv.getPropertyPath()).append(": ");
@@ -211,7 +211,7 @@ public class ProductosController extends HttpServlet {
 	
 		int id = Integer.parseInt(pId);
 		try {
-			Producto pEliminado = dao.delete(id);
+			Usuario pEliminado = dao.delete(id);
 			request.setAttribute("mensajeAlerta", new Alerta(Alerta.TIPO_PRIMARY, "Eliminado " + pEliminado.getNombre() ));
 		} catch (Exception e) {
 			request.setAttribute("mensajeAlerta", new Alerta(Alerta.TIPO_DANGER, "No se puede Eliminar el producto"));
@@ -224,7 +224,7 @@ public class ProductosController extends HttpServlet {
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) {
 		
-		request.setAttribute("productos", dao.getAll() );
+		request.setAttribute("usuarios", dao.getAll() );
 		vistaSeleccionda = VIEW_TABLA;
 		
 	}

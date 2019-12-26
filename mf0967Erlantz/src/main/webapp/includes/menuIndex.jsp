@@ -1,4 +1,5 @@
-<!-- Menu Index -->
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
 	<span class="navbar-brand"><span
 		class="menu-icono fas fa-dice-d6 mr-2"></span>CMS Productos</span>
@@ -16,13 +17,13 @@
 		<ul class="navbar-nav mr-auto">
 
 			<li class="nav-item active"><a class="nav-link pl-3"
-				href="inicio">Listado</a></li>
+				href="inicio">Inicio</a></li>
 
 			<li class="nav-item"><a class="nav-link pl-3"
 				href="backoffice/index.jsp">Dashboard</a></li>
 
 			<%
-				String user = (String) session.getAttribute("usuarioLogeado");
+				Usuario user = (Usuario) session.getAttribute("usuarioLogeado");
 				if (user == null) {
 			%>
 			<li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>

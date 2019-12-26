@@ -68,7 +68,7 @@ public class InicioController extends HttpServlet {
 
 					request.setAttribute("productos", dao.getAll());
 
-					mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Productos en el registro: " + dao.getAll().size());
+					mensajeAlerta = new Alerta(Alerta.TIPO_INFO, "Productos en la base de datos: " + dao.getAll().size());
 
 					
 

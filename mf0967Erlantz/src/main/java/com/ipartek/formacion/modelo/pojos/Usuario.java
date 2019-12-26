@@ -1,23 +1,33 @@
 package com.ipartek.formacion.modelo.pojos;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Usuario {
 	
 	private int id;
+	
+	@NotBlank
+	@Size( min = 2, max = 50 )
 	private String nombre;
-	private String password;
+	
+	@NotBlank
+	@Size( min = 2, max = 50 )
+	private String contrasenia;
 	
 	public Usuario(int id, String nombre, String password) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.password = password;
+		this.contrasenia = password;
 	}
 	
 	public Usuario() {
 		super();
 		this.id = 0;
 		this.nombre = "";
-		this.password = "";
+		this.contrasenia = "";
 	}
 
 	public int getId() {
@@ -36,17 +46,17 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", password=" + password + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", contrasenia=" + contrasenia + "]";
 	}
 	
 	

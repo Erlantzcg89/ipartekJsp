@@ -16,22 +16,29 @@
 		<ul class="navbar-nav mr-auto">
 
 			<li class="nav-item"><a class="nav-link pl-3"
-				href="inicio">Listado</a></li>
+				href="inicio">Inicio</a></li>
 
 			<li class="nav-item active"><a class="nav-link pl-3"
 				href="backoffice/index.jsp">Dashboard</a></li>
 
 
-			<!-- <li class="nav-item dropdown"><a
+			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> Libros </a>
+				aria-expanded="false">Productos</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="backoffice/crear">Crear libro</a> <a
-						class="dropdown-item" href="backoffice/modificar">Modificar
-						libro</a> <a class="dropdown-item" href="backoffice/borrar">Borrar
-						libro</a>
-				</div></li> -->
+					<a class="dropdown-item" href="backoffice/listarProductos">Listar productos</a> <a
+						class="dropdown-item" href="backoffice/nuevoProducto">Nuevo producto</a>
+				</div></li>
+				
+						<li class="nav-item dropdown"><a
+				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+				role="button" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false">Usuarios</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="backoffice/listarUsuarios">Listar Usuarios</a> <a
+						class="dropdown-item" href="backoffice/nuevoUsuario">Nuevo usuario</a>
+				</div></li>
 
 		</ul>
 

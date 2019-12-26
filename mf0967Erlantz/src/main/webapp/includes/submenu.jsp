@@ -1,5 +1,7 @@
+<%@page import="com.ipartek.formacion.modelo.pojos.Usuario"%>
+
 <%
-	String usuario = (String) session.getAttribute("usuarioLogeado");
+	Usuario usuario = (Usuario) session.getAttribute("usuarioLogeado");
 	if (usuario == null) {
 %>
 <div class="submenu"><p><span class="submenu-text">Bienvenido al CMS<br>
@@ -8,8 +10,8 @@ El usuario puede <a href="login.jsp">hacer login</a> puede crear nuevos producto
 	} else {
 %>
 <div class="submenu">
-	<span class="submenu-text">Usuario: <%=usuario%> | Usuarios logeados: ${applicationScope.numeroUsuariosConectados}
-		| <div><a class="" href="logout">Cerrar Sesión</a></div></span>
+	<span class="submenu-text">Usuario: <%=usuario.getNombre()%> | <!-- Usuarios logeados: ${applicationScope.numeroUsuariosConectados}
+		| --> <div><a class="" href="logout">Cerrar Sesión</a></div></span>
 </div>
 <%
 	}

@@ -1,7 +1,7 @@
 <%@ page errorPage="privado/error500.jsp"%>
 
 <%
-	String titulo = "Listado";
+	String titulo = "Dashboard";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>
@@ -12,44 +12,17 @@
 
 <main>
 	<main>
-		<div class="listado-wrapper">
+	
+	<div class="dashboard-wrapper">
+	
+		<%@include file="/includes/mensaje-alerta.jsp"%>
+	
+		<a href="backoffice/productos?accion=listar" class="btn btn-dark btn-lg btn-block mt-3 mb-2" tabindex="-1" role="button" aria-disabled="true">Listar productos</a><br>
+		<a href="backoffice/usuarios?accion=listar" class="btn btn-dark btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Listar usuarios</a><br>
+		<a href="backoffice/productos?accion=formulario" class="btn btn-primary btn-lg btn-block mb-2" tabindex="-1" role="button" aria-disabled="true">Nuevo producto</a><br>
+		<a href="backoffice/productos?accion=formulario" class="btn btn-primary btn-lg btn-block" tabindex="-1" role="button" aria-disabled="true">Nuevo usuario</a>
+	</div>
 
-			<%@include file="/includes/mensaje-alerta.jsp"%>
-
-			<table class="dataTable display" style="width: 100%">
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>nombre</th>
-						<%
-							if (usuario != null) {
-						%>
-						<th>Editar</th>
-						<%
-							}
-						%>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${productos}" var="p">
-						<tr>
-							<td>${p.id}</td>
-							<td>${p.nombre }</td>
-							<%
-								if (usuario != null) {
-							%>
-							<td><a
-								href="backoffice/productos?accion=formulario&id=${p.id}">Editar</a></td>
-							<%
-								}
-							%>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
-		</div>
-		<!-- fin listado-wrapper -->
 	</main>
 </main>
 

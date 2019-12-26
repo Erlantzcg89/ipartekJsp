@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page errorPage="errores/error500.jsp"%>
 
 <%
@@ -12,43 +11,7 @@
 <%@include file="/includes/submenu.jsp"%>
 
 <main>
-	<div class="listado-wrapper">
 
-		<%@include file="/includes/mensaje-alerta.jsp"%>
-
-		<table class="dataTable display" style="width: 100%">
-			<thead>
-				<tr>
-					<th>id</th>
-					<th>nombre</th>
-					<%
- 						if (usuario != null) {
- 					%>
-					<th>Editar</th>
-					<%
-						}
-					%>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${productos}" var="p">
-					<tr>
-						<td>${p.id}</td>
-						<td>${p.nombre }</td>
-						<%
- 							if (usuario != null) {
- 						%>
-						<td><a href="backoffice/productos?accion=formulario&id=${p.id}">Editar</a></td>
-						<%
-							}
-						%>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-
-	</div>
-	<!-- fin listado-wrapper -->
 </main>
 
 <%@include file="/includes/footer.jsp"%>
