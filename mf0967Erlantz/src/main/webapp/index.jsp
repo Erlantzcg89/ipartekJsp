@@ -1,7 +1,7 @@
 <%@ page errorPage="errores/error500.jsp"%>
 
 <%
-	String titulo = "Inicio - Listado de productos";
+	String titulo = "Inicio";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>

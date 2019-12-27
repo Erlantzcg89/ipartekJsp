@@ -97,7 +97,7 @@ public class LoginController extends HttpServlet {
 
 		} else {
 			
-			LOG.error("error al loguear");
+			LOG.error("usuario null");
 			
 			mensajeAlerta = new Alerta( Alerta.TIPO_DANGER, MSG_REPETIR);
 			

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.ProductoDAO;
+import com.ipartek.formacion.modelo.db.ConnectionManager;
 import com.ipartek.formacion.utilidades.Alerta;
 
 /**
@@ -48,6 +49,19 @@ public class InicioController extends HttpServlet {
 			
 			dao = null;
 			mensajeAlerta = null;
+		}
+		
+		@Override
+		protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+			if ( null == ConnectionManager.getConnection() ) {
+				resp.sendRedirect( req.getContextPath() + "/errores/error-conexion.jsp");
+			}else {
+				
+				LOG.info("conexión exitosa");
+				// llama a GET o POST
+				super.service(req, resp);
+			}	
 		}
 
 	/**
