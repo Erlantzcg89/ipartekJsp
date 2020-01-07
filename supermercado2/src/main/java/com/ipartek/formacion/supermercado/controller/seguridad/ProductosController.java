@@ -1,7 +1,6 @@
 package com.ipartek.formacion.supermercado.controller.seguridad;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -18,9 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import com.ipartek.formacion.supermercado.controller.Alerta;
 import com.ipartek.formacion.supermercado.modelo.dao.ProductoDAO;
-import com.ipartek.formacion.supermercado.modelo.dao.UsuarioDAO;
 import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
-import com.ipartek.formacion.supermercado.modelo.pojo.Usuario;
 
 /**
  * Servlet implementation class ProductosController
@@ -32,8 +29,7 @@ public class ProductosController extends HttpServlet {
 	private static final String VIEW_TABLA = "productos/index.jsp";
 	private static final String VIEW_FORM = "productos/formulario.jsp";
 	private static String vistaSeleccionda = VIEW_TABLA;
-	private static ProductoDAO daoProducto;
-	private static UsuarioDAO daoUsuario;
+	private static ProductoDAO dao;
 	
 	//acciones
 	public static final String ACCION_LISTAR = "listar";
@@ -54,14 +50,12 @@ public class ProductosController extends HttpServlet {
 	String pImagen;
 	String pDescripcion;
 	String pDescuento;
-	String pUsuarioId;
 	
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {		
 		super.init(config);
-		daoProducto = ProductoDAO.getInstance();
-		daoUsuario = UsuarioDAO.getInstance();
+		dao = ProductoDAO.getInstance();
 		factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
@@ -69,8 +63,7 @@ public class ProductosController extends HttpServlet {
 	@Override
 	public void destroy() {	
 		super.destroy();
-		daoProducto = null;
-		daoUsuario = null;
+		dao = null;
 		factory = null;
 		validator = null;
 	}
@@ -101,7 +94,6 @@ public class ProductosController extends HttpServlet {
 			pImagen = request.getParameter("imagen");
 			pDescripcion = request.getParameter("descripcion");
 			pDescuento = request.getParameter("descuento");
-			pUsuarioId = request.getParameter("usuarioId");
 			
 			
 			try {
@@ -149,11 +141,11 @@ public class ProductosController extends HttpServlet {
 		if ( pId != null ) {
 			
 			int id = Integer.parseInt(pId);
-			pEditar = daoProducto.getById(id);
+			pEditar = dao.getById(id);
 			
 		}
 		
-		request.setAttribute("usuarios", daoUsuario.getAll() );
+		
 		request.setAttribute("producto", pEditar );
 		vistaSeleccionda = VIEW_FORM;
 		
@@ -168,10 +160,6 @@ public class ProductosController extends HttpServlet {
 		pGuardar.setNombre(pNombre);
 		pGuardar.setDescuento( Integer.parseInt(pDescuento));
 		
-		Usuario u = new Usuario();
-		u.setId(Integer.parseInt(pUsuarioId));
-		pGuardar.setUsuario(u);
-				
 		
 		Set<ConstraintViolation<Producto>> validaciones = validator.validate(pGuardar);
 		if( validaciones.size() > 0 ) {			
@@ -182,10 +170,10 @@ public class ProductosController extends HttpServlet {
 				
 					if ( id > 0 ) {  // modificar
 						
-						daoProducto.update(id, pGuardar);		
+						dao.update(id, pGuardar);		
 						
 					}else {            // crear
-						daoProducto.create(pGuardar);
+						dao.create(pGuardar);
 					}
 					
 				}catch (Exception e) {  // validacion a nivel de base datos
@@ -195,10 +183,12 @@ public class ProductosController extends HttpServlet {
 			
 		}	
 		
-		request.setAttribute("usuarios", daoUsuario.getAll() );
+		
 		request.setAttribute("producto", pGuardar);
 		vistaSeleccionda = VIEW_FORM;
-	
+		
+		
+		
 		
 	}
 
@@ -222,7 +212,7 @@ public class ProductosController extends HttpServlet {
 	
 		int id = Integer.parseInt(pId);
 		try {
-			Producto pEliminado = daoProducto.delete(id);
+			Producto pEliminado = dao.delete(id);
 			request.setAttribute("mensajeAlerta", new Alerta(Alerta.TIPO_PRIMARY, "Eliminado " + pEliminado.getNombre() ));
 		} catch (Exception e) {
 			request.setAttribute("mensajeAlerta", new Alerta(Alerta.TIPO_DANGER, "No se puede Eliminar el producto"));
@@ -235,8 +225,7 @@ public class ProductosController extends HttpServlet {
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) {
 		
-		ArrayList<Producto> productos = (ArrayList<Producto>) daoProducto.getAll();
-		request.setAttribute("productos", productos );
+		request.setAttribute("productos", dao.getAll() );
 		vistaSeleccionda = VIEW_TABLA;
 		
 	}

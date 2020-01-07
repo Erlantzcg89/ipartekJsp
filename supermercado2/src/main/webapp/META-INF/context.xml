@@ -9,6 +9,6 @@
 		type="javax.sql.DataSource"
 		url="jdbc:mysql://localhost:3306/supermercado" 
 		username="root"
-		password="" 
+		password="admin" 
 		/>
 </Context>	
