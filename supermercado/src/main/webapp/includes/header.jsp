@@ -31,9 +31,6 @@
 
   </head>
   <body id="top">
-  
-  	
-	<%@ include file="snow.jsp" %>   
 	  
     <nav class="site-header sticky-top py-1">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
@@ -45,11 +42,19 @@
             	<a class="py-2 d-none d-md-inline-block" href="login.jsp">Login</a>
             </c:if>
             
-            <c:if test="${not empty usuarioLogeado }" >
+            <c:if test="${usuarioLogeado.rol.id eq 2 }" >
             	<a class="py-2 d-none d-md-inline-block" href="seguridad/productos?accion=listar">Tabla</a>
-            	<a class="py-2 d-none d-md-inline-block" href="seguridad/productos?accion=formulario">Formulario</a>
-            	<a class="py-2 d-none d-md-inline-block" href="logout">Cerrar Sessión</a>
+            	<a class="py-2 d-none d-md-inline-block" href="seguridad/productos?accion=formulario">Formulario</a>            	
             </c:if>	            
+            
+            <c:if test="${usuarioLogeado.rol.id eq 1 }" >            	
+            	<a class="py-2 d-none d-md-inline-block" href="mipanel/productos?accion=listar">Mis Producto</a>
+            	<a class="py-2 d-none d-md-inline-block" href="mipanel/productos?accion=formulario">Crear Nuevo</a>            	
+            </c:if>
+            
+            <c:if test="${not empty usuarioLogeado }" >
+            	<a class="py-2 d-none d-md-inline-block" href="logout">Cerrar Sessión</a>
+            </c:if>	
            
         </div>
     </nav>

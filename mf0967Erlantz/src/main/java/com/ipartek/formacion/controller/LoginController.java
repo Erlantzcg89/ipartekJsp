@@ -93,14 +93,13 @@ public class LoginController extends HttpServlet {
 			
 			if ( usuario.getRol().getId() == Rol.ROL_ADMIN ) {
 			
-				vista = "seguridad/index.jsp";   // accedemos la BACK-OFFICE
+				vista = "backoffice/index.jsp";   // accedemos al BACK-OFFICE
 				
 			}else {
 				
-				vista = "mipanel/index.jsp";    // accedemos la FRONT-OFFICE
+				vista = "mipanel/index.jsp";    // accedemos al FRONT-OFFICE
 			}
 			
-			//VISTA_MIPANEL
 			
 			mensajeAlerta = new Alerta( Alerta.TIPO_SUCCESS, MSG_BIENVENIDO + ", " + usuario.getNombre());
 			
