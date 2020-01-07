@@ -23,15 +23,15 @@ import com.ipartek.formacion.modelo.pojos.Usuario;
  * Servlet Filter implementation class SeguridadFilter
  */
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE,
-		DispatcherType.ERROR }, urlPatterns = { "/backoffice/*" })
-public class BackofficeFilter implements Filter {
+		DispatcherType.ERROR }, urlPatterns = { "/mipanel/*" })
+public class FrontOfficeFilter implements Filter {
 	
-	private final static Logger LOG = Logger.getLogger(BackofficeFilter.class);
+	private final static Logger LOG = Logger.getLogger(FrontOfficeFilter.class);
 
 	/**
 	 * Default constructor.
 	 */
-	public BackofficeFilter() {
+	public FrontOfficeFilter() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -54,7 +54,7 @@ public class BackofficeFilter implements Filter {
 		HttpSession session = req.getSession();
 		Usuario uLogeado = (Usuario) session.getAttribute("usuarioLogeado");
 		
-		if ( uLogeado != null && uLogeado.getRol().getId() == Rol.ROL_ADMIN ) {
+		if ( uLogeado != null && uLogeado.getRol().getId() == Rol.ROL_USUARIO ) {
 		
 			chain.doFilter(request, response);
 			

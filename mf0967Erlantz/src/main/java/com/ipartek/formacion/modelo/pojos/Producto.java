@@ -1,11 +1,10 @@
 package com.ipartek.formacion.modelo.pojos;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 public class Producto {
 
@@ -26,9 +25,10 @@ public class Producto {
 	
 	private String descripcion;
 	
-	@Min(0)
-	@Max(100)	
+	@Range(min = 0, max= 100)
 	private int descuento;
+	
+	private Usuario usuario;
 	
 	public Producto() {
 		super();
@@ -38,6 +38,7 @@ public class Producto {
 		this.imagen = "https://image.flaticon.com/icons/png/512/372/372627.png";
 		this.descripcion = "";
 		this.descuento = DESCUENTO_MIN;
+		this.usuario = new Usuario();
 	}
 
 	public int getId() {
@@ -92,10 +93,18 @@ public class Producto {
 		return (  (this.precio * ( 100 - this.descuento )) / 100  );
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", imagen=" + imagen
-				+ ", descripcion=" + descripcion + ", descuento=" + descuento + "]";
+				+ ", descripcion=" + descripcion + ", descuento=" + descuento + ", usuario=" + usuario + "]";
 	}
 		
 }

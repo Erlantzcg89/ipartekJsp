@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.ipartek.formacion.modelo.dao.UsuarioDAO;
+import com.ipartek.formacion.modelo.pojos.Rol;
 import com.ipartek.formacion.modelo.pojos.Usuario;
 import com.ipartek.formacion.utilidades.Alerta;
 
@@ -30,6 +31,7 @@ public class LoginController extends HttpServlet {
 	private static UsuarioDAO dao = null;
 	
 	private static final String VISTA_DASHBOARD = "backoffice/index.jsp";
+	private static final String VISTA_MIPANEL = "mipanel/index.jsp";
 	private static final String VISTA_LOGIN = "login.jsp";
 	private static final String MSG_BIENVENIDO = "Bienvenido";
 	private static final String MSG_REPETIR = "Credenciales Incorrectas, por favor prueba de nuevo";
@@ -87,9 +89,18 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("usuarioLogeado", usuario);
-			session.setMaxInactiveInterval(-1); // nunca caduca
+			session.setMaxInactiveInterval(60*3); // 3min
 			
-			vista = VISTA_DASHBOARD;
+			if ( usuario.getRol().getId() == Rol.ROL_ADMIN ) {
+			
+				vista = "seguridad/index.jsp";   // accedemos la BACK-OFFICE
+				
+			}else {
+				
+				vista = "mipanel/index.jsp";    // accedemos la FRONT-OFFICE
+			}
+			
+			//VISTA_MIPANEL
 			
 			mensajeAlerta = new Alerta( Alerta.TIPO_SUCCESS, MSG_BIENVENIDO + ", " + usuario.getNombre());
 			

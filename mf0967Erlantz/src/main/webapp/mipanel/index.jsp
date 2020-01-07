@@ -1,7 +1,7 @@
 <%@ page errorPage="privado/error500.jsp"%>
 
 <%
-	String titulo = "Dashboard";
+	String titulo = "Mi Panel";
 %>
 
 <%@include file="/includes/cabecera.jsp"%>

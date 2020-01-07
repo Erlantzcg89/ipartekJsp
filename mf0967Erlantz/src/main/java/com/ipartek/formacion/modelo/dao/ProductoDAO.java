@@ -11,7 +11,7 @@ import java.util.List;
 import com.ipartek.formacion.modelo.db.ConnectionManager;
 import com.ipartek.formacion.modelo.pojos.Producto;
 
-public class ProductoDAO implements IDAO<Producto> {
+public class ProductoDAO implements IDAO<Producto>, IProductoDAO {
 	
 	private static ProductoDAO INSTANCE;
 		
@@ -158,6 +158,32 @@ public class ProductoDAO implements IDAO<Producto> {
 		}
 
 		return pojo;
+	}
+
+	@Override
+	public List<Producto> getAllByUser(int idUsuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto getByIdUser(int idProducto, int idUsuario) throws ProductoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto updateByUser(int idProducto, int idUsuario, Producto pojo) throws ProductoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Producto deleteByUser(int idProducto, int idUsuario) throws ProductoException {
+
+		//throw new ProductoException("");
+		
+		return null;
 	}
 
 	
