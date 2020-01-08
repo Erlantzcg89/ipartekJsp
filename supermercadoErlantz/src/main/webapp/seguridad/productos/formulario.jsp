@@ -1,10 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ include file="/includes/header.jsp" %>   
-    	
-	<h1>FORMULARIO</h1>
 	
-	<form action="seguridad/productos" method="post" class="mb-4">
+	<form action="seguridad/productos" method="post" class="my-4">
 		
 		<div class="form-group">
 			<label>Nombre:</label>
@@ -28,7 +26,7 @@
 		<input type="hidden" name="id" value="${producto.id}">
 		<input type="hidden" name="accion" value="guardar">
 		
-		<input type="submit" value="${(producto.id>0)?"Modificar":"Crear" }" class="btn btn-block btn-primary">
+		<input type="submit" value="${(producto.id>0)?"Modificar":"Crear" }" class="btn btn-block btn-dark">
 	
 	</form>
 	

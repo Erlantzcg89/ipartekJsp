@@ -1,4 +1,9 @@
 
+main{
+    min-height: 70vh;
+    padding-top: 40px;
+}
+
 nav, footer, .footer-wrapper{
     background-color:#845EC2;
     color: white;
@@ -19,9 +24,6 @@ nav a:hover, footer a:hover, .footer-wrapper a:hover{
 }
 
 
-main{
-    min-height: 70vh;
-}
 
 #btn-top{
     position: fixed;
