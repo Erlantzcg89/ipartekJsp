@@ -2,7 +2,6 @@ package com.ipartek.formacion.supermercado.controller.seguridad;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.ServletConfig;

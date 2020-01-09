@@ -4,12 +4,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Categoria {
+public class Categoria implements Cloneable {
 	
 	private int id;
 	
 	@NotEmpty
-	@Size(min =1, max = 100)
+	@Size(min = 1, max = 100)
 	private String nombre;
 	
 	public Categoria() {
@@ -33,14 +33,17 @@ public class Categoria {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	@Override
+	public Categoria clone() throws CloneNotSupportedException  {
+		
+		Categoria c = (Categoria)super.clone();
+		return c;
+	}
 
 	@Override
 	public String toString() {
-		return "categoria [id=" + id + ", nombre=" + nombre + "]";
+		return "Categoria [id=" + id + ", nombre=" + nombre + "]";
 	}
 	
-	
-	
-	
-
 }

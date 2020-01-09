@@ -2,15 +2,20 @@
 
 <%@ include file="includes/header.jsp"%>
 
-<form action="" class="mb-5">
+<form action="inicio" method="post" class="mb-5">
 
 	<div class="form-group">
-		<label>Seleccionar Categoria:</label> <select name="categoriaId" class="custom-select">
+		<label>Filtrar por Categoria:</label> <select name="categoriaId" class="custom-select">
 			<c:forEach items="${categorias}" var="c">
 				<option value="${c.id}">${c.nombre}</option>
 			</c:forEach>
 		</select>
+		
+		<label>Filtrar por Nombre:</label>
+		<input type="text" name="nombre" value="${producto.nombre}" class="form-control" placeholder="introduce el nombre del producto">
 	</div>
+	
+	<input type="submit" value="Filtrar" class="btn btn-block btn-success">
 
 </form>
 
@@ -21,7 +26,7 @@
 		<div class="col">
 
 			<!-- producto -->
-			<div class="producto">
+			<div class="producto mb-4">
 				<span class="descuento">${p.descuento}%</span> <img
 					src="${p.imagen}" alt="imagen de ${p.nombre}">
 
@@ -37,6 +42,8 @@
 					</p>
 					<p class="text-muted precio-unidad ">${p.nombre}</p>
 					<p class="descripcion text-truncate">${p.descripcion}</p>
+					<p class="descripcion text-truncate">Categoria: ${p.categoria.nombre}</p>
+					<p class="descripcion text-truncate">Usuario: ${p.usuario.nombre}</p>
 				</div>
 
 				<div class="botones">

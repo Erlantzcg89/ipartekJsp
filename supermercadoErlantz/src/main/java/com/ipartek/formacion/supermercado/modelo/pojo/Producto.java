@@ -1,7 +1,5 @@
 package com.ipartek.formacion.supermercado.modelo.pojo;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,6 +30,8 @@ public class Producto {
 	
 	private Usuario usuario;
 	
+	private Categoria categoria;
+	
 	public Producto() {
 		super();
 		this.id = 0;
@@ -41,6 +41,7 @@ public class Producto {
 		this.descripcion = "";
 		this.descuento = DESCUENTO_MIN;
 		this.usuario = new Usuario();
+		this.categoria = new Categoria();
 	}
 
 	public int getId() {
@@ -103,10 +104,21 @@ public class Producto {
 		this.usuario = usuario;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", imagen=" + imagen
-				+ ", descripcion=" + descripcion + ", descuento=" + descuento + ", usuario=" + usuario + "]";
+				+ ", descripcion=" + descripcion + ", descuento=" + descuento + ", usuario=" + usuario + ", categoria="
+				+ categoria + "]";
 	}
+
+
 		
 }
