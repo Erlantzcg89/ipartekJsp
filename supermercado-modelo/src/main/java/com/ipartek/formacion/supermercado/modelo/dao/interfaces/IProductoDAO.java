@@ -1,8 +1,9 @@
-package com.ipartek.formacion.supermercado.modelo.dao;
+package com.ipartek.formacion.supermercado.modelo.dao.interfaces;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import com.ipartek.formacion.supermercado.modelo.dao.ProductoException;
 import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
 
 public interface IProductoDAO extends IDAO<Producto> {

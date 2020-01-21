@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ipartek.formacion</groupId>
-	<artifactId>supermecado</artifactId>
+	<artifactId>supermecado-rest</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-	<name>supermecado</name>
+	<name>supermecado-rest</name>
 
 
 	<!-- variables comunes para todo el POM -->
@@ -48,6 +48,13 @@
 			<artifactId>jstl</artifactId>
 			<version>${javax.servlet.jstl.version}</version>
 		</dependency>
+		
+		<dependency>
+    		<groupId>com.google.code.gson</groupId>
+    		<artifactId>gson</artifactId>
+    		<version>2.8.5</version>
+		</dependency>
+		
 
 		<!-- libreria MySQL -->
 		<dependency>
@@ -128,6 +135,6 @@
 		</plugins>
 
 
-		<finalName>supermecado</finalName>
+		<finalName>supermecado-rest</finalName>
 	</build>
 </project>

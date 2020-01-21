@@ -1,4 +1,4 @@
-package com.ipartek.formacion.supermercado.modelo.dao;
+package com.ipartek.formacion.supermercado.modelo.dao.interfaces;
 
 import com.ipartek.formacion.supermercado.modelo.pojo.Usuario;
 

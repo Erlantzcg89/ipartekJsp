@@ -1,4 +1,4 @@
-package com.ipartek.formacion.supermercado.model;
+package com.ipartek.formacion.supermercado.modelo;
 
 import java.sql.Connection;
 
