@@ -7,15 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 import com.ipartek.formacion.supermercado.modelo.ConnectionManager;
-import com.ipartek.formacion.supermercado.modelo.dao.interfaces.ICategoriaDAO;
 import com.ipartek.formacion.supermercado.modelo.pojo.Categoria;
 
 public class CategoriaDAO implements ICategoriaDAO {
 
-	private final static Logger LOG = Logger.getLogger(CategoriaDAO.class);
+	private final static Logger LOG = LogManager.getLogger(CategoriaDAO.class);
 
 	private static CategoriaDAO INSTANCE;
 
@@ -24,143 +26,182 @@ public class CategoriaDAO implements ICategoriaDAO {
 	}
 
 	public static synchronized CategoriaDAO getInstance() {
+		LOG.debug("Entra en getInstance");
+
 		if (INSTANCE == null) {
 			INSTANCE = new CategoriaDAO();
+			LOG.debug("Crea una nueva Instancia");
 		}
+
 		return INSTANCE;
+	}
+
+	private Categoria mapper(ResultSet rs) throws SQLException {
+		LOG.debug("Entra en el mapper");
+
+		Categoria c = new Categoria();
+
+		c.setId(rs.getInt("id"));
+		c.setNombre(rs.getString("nombre"));
+		c.setImagen(rs.getString("imagen"));
+
+		c = sanitizar(c);
+
+		LOG.debug("Devuelve la categoria mapeada: " + c.toString());
+
+		return c;
+	}
+
+	private Categoria sanitizar(Categoria pojo) {
+		LOG.debug("Entra en sanitizar");
+
+		Categoria resultado = pojo;
+
+		resultado.setNombre(Jsoup.clean(pojo.getNombre(), Whitelist.none()));
+		resultado.setImagen(Jsoup.clean(pojo.getImagen(), Whitelist.none()));
+
+		return resultado;
 	}
 
 	@Override
 	public List<Categoria> getAll() {
 		LOG.trace("recuperar todas las categorias");
-		List<Categoria> registros = new ArrayList<Categoria>();
+		List<Categoria> resultado = new ArrayList<Categoria>();
 
 		try (Connection con = ConnectionManager.getConnection();
-				CallableStatement cs = con.prepareCall("{ CALL pa_categoria_getall() }");) {
+				CallableStatement cs = con.prepareCall( " { CALL pa_categoria_get_all() } ")) {
 
-			LOG.debug(cs);
+			LOG.debug("Ejecuta la query: " + cs.toString());
 
 			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
-					registros.add(mapper(rs));
+					Categoria c = mapper(rs);
+					resultado.add(c);
 				}
+
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			LOG.error(e);
+			e.printStackTrace();
 		}
-
-		return registros;
+		return resultado;
 	}
 
 	@Override
 	public Categoria getById(int id) {
-		LOG.trace("recuperar categoria por id " + id);
-		Categoria registro = new Categoria();
+		LOG.trace("Recuperar una categoria por su id: " + id);
+		Categoria resultado = new Categoria();
 
 		try (Connection con = ConnectionManager.getConnection();
-				CallableStatement cs = con.prepareCall("{ CALL pa_categoria_get_by_id(?) }");) {
-
+				CallableStatement cs = con.prepareCall("{CALL pa_categoria_get_byid(?)}")) {
 			cs.setInt(1, id);
-			LOG.debug(cs);
+
+			LOG.debug("Ejecuta la query: " + cs.toString());
 
 			try (ResultSet rs = cs.executeQuery()) {
 				if (rs.next()) {
-					registro = mapper(rs);
-				} else {
-					registro = null;
+					resultado = mapper(rs);
 				}
 			}
-
-		}catch (Exception e) {
+		} catch (SQLException e) {
 			LOG.error(e);
+			e.printStackTrace();
 		}
-
-		return registro;
+		return resultado;
 	}
 
 	@Override
 	public Categoria delete(int id) throws Exception {
-		LOG.trace("eliminar categoria por id " + id);
+		LOG.debug("Entra en delete");
 
-		// recuperar la categoria antes de eliminar
-		Categoria registro = getById(id);
-		if (registro == null) {
-			throw new Exception("registro no encontrado " + id);
-		}
+		Categoria resultado = null;
 
-		// eliminar
 		try (Connection con = ConnectionManager.getConnection();
-				CallableStatement cs = con.prepareCall("{ CALL pa_categoria_delete(?) }");) {
+				CallableStatement cs = con.prepareCall("{CALL pa_categoria_delete(?)}")) {
 
 			cs.setInt(1, id);
-			LOG.debug(cs);
 
-			cs.executeUpdate();
+			Categoria categoriaBorrar = getById(id);
 
-		} 
+			LOG.debug("Ejecuta la query: " + cs.toString());
 
-		return registro;
+			int affetedRows = cs.executeUpdate();
+			if (affetedRows == 1) {
+				resultado = categoriaBorrar;
+			} else if(affetedRows == 0){
+				LOG.fatal("El delete esta mal, no ha eliminado ninguna categoria");
+			}else {
+				LOG.fatal("El delete esta mal, ha eliminado mas de una categoria");
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+			throw e;
+		}
+
+		return resultado;
 	}
 
 	@Override
 	public Categoria update(int id, Categoria pojo) throws Exception {
-		LOG.trace("modificar categoria por id " + id + " " + pojo );
-		Categoria registro = pojo;
+		LOG.trace("Insertar nueva categoria: " + pojo.toString());
+		Categoria resultado = pojo;
+
 		try (Connection con = ConnectionManager.getConnection();
-				CallableStatement cs = con.prepareCall("{ CALL pa_categoria_update(?,?) }");) {
+				CallableStatement cs = con.prepareCall("{CALL pa_categoria_update(?,?,?)}")) {
 
 			cs.setInt(1, id);
+
 			cs.setString(2, pojo.getNombre());
-			LOG.debug(cs);
+			cs.setString(3, pojo.getImagen());
 
-			if ( cs.executeUpdate() == 1 ) {
-				pojo.setId(id);
-			}else {
-				throw new Exception("No se puede modificar registro " + pojo + " por id " + id);
+			LOG.debug("Ejecuta la query: " + cs.toString());
+
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				resultado = getById(id);
+			} else if (affectedRows == 0) {
+				LOG.fatal("El update esta mal, no ha afectado a ninguna categoria");
+			} else {
+				LOG.fatal("El update esta mal, ha afectado a mas de una categoria");
 			}
-		} 
-
-		return registro;
+		} catch (SQLException e) {
+			LOG.error(e);
+			e.printStackTrace();
+		}
+		return resultado;
 	}
 
 	@Override
 	public Categoria create(Categoria pojo) throws Exception {
-		LOG.trace("insertar nueva categoria " + pojo);
-		Categoria registro = pojo;
+		LOG.trace("Insertar nueva categoria: " + pojo.toString());
+		Categoria resultado = pojo;
 
 		try (Connection con = ConnectionManager.getConnection();
-				CallableStatement cs = con.prepareCall("{ CALL pa_categoria_insert(?,?) }");) {
+				CallableStatement cs = con.prepareCall("{CALL pa_categoria_insert(?,?,?)}")) {
 
-			// parametro de entrada 1º?
 			cs.setString(1, pojo.getNombre());
+			cs.setString(3, pojo.getImagen());
 
-			// registro el paremetro de salida 2º ?
 			cs.registerOutParameter(2, java.sql.Types.INTEGER);
 
-			LOG.debug(cs);
+			LOG.debug("Ejecuta la query: " + cs.toString());
 
-			// executamos el procedimiento almacenado executeUpdate, CUIDADO no es una
-			// SELECT => executeQuery
 			int affectedRows = cs.executeUpdate();
-			LOG.debug("registros creados " + affectedRows);
+			if (affectedRows == 1) {
+				resultado = getById(cs.getInt(2));
+			} else if (affectedRows == 0) {
+				LOG.fatal("El insert esta mal, no se ha creado ninguna categoria");
+			} else {
+				LOG.fatal("El insert esta mal, se ha creado a mas de una categoria");
+			}
 
-			// una vez ejecutado, podemos recuperar el parametro de salida 2º ?
-			pojo.setId(cs.getInt(2));
-
+		} catch (SQLException e) {
+			LOG.error(e);
+			e.printStackTrace();
 		}
-
-		return registro;
-	}
-
-	private Categoria mapper(ResultSet rs) throws SQLException {
-
-		Categoria c = new Categoria();
-		c.setId(rs.getInt("id"));
-		c.setNombre(rs.getString("nombre"));
-
-		return c;
-
+		return resultado;
 	}
 
 }

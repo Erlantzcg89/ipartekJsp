@@ -1,4 +1,4 @@
-package com.ipartek.formacion.supermercado.modelo.dao.interfaces;
+package com.ipartek.formacion.supermercado.modelo.dao;
 
 
 import java.util.List;
