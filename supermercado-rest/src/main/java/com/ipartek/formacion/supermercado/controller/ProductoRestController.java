@@ -95,21 +95,31 @@ public class ProductoRestController extends HttpServlet {
 				
 				LOG.trace("entrando en getById");
 				
-				Producto p = productoDao.getById(Utilidades.obtenerId(pathInfo));
-				
-				//TODO si no existe 404
-				
 				// resonse header
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
-
-				// response body
-				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
-				String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
-				out.print(jsonResponseBody.toString());
-				out.flush(); // termina de escribir datos en response body
 				
-				status = HttpServletResponse.SC_OK;
+				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
+				
+				Producto p = productoDao.getById(Utilidades.obtenerId(pathInfo));
+				
+				if(p != null) {
+					
+					// response body
+					String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
+					out.print(jsonResponseBody.toString());
+					out.flush(); // termina de escribir datos en response body
+					
+					status = HttpServletResponse.SC_OK;
+					
+				}else { // -1
+					//Si no existe 404
+					out.print("<h1>Error 404</h1>");
+					out.flush();
+					
+					status = HttpServletResponse.SC_NOT_FOUND;
+					
+				}
 				
 			}
 			
