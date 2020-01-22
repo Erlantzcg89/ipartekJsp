@@ -1,5 +1,7 @@
 package com.ipartek.formacion.supermercado.utils;
 
+import java.util.regex.Pattern;
+
 public class Utilidades {
 
 	/**
@@ -20,8 +22,21 @@ public class Utilidades {
 	 */
 	public static int obtenerId(String pathInfo) throws Exception{
 		
-		throw new Exception("Sin implementar, primero Test!");
-		//return ; 
+		int resultado;
+		
+		String[] troceado = pathInfo.split(Pattern.quote("/"));
+		
+		if(troceado.length > 2) {
+			
+			// uri mal formada
+			throw new Exception("Uri mal formada");
+			
+		}else {
+			// /8, /8/
+			resultado = Integer.parseInt(troceado[1]);
+		}
+		
+		return resultado;
 	}
 	
 }

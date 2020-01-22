@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import com.google.gson.Gson;
 import com.ipartek.formacion.supermercado.modelo.dao.ProductoDAO;
 import com.ipartek.formacion.supermercado.modelo.pojo.Producto;
+import com.ipartek.formacion.supermercado.utils.Utilidades;
 
 /**
  * Servlet implementation class ProductoRestController
@@ -54,80 +55,6 @@ public class ProductoRestController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		LOG.trace("peticion POST");
-
-		String pathInfo = request.getPathInfo();
-
-		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
-
-
-		try {
-
-			// si el pathInfo esta vacio devolvemos la lista
-			if (pathInfo.equals("/")) {
-				
-				LOG.trace("entrando en getAll");
-				ArrayList<Producto> lista = (ArrayList<Producto>) productoDao.getAll();
-				
-				if(lista.size() <= 0) {
-					// 404
-					status = HttpServletResponse.SC_NOT_FOUND;	
-				}else {
-					// 200
-					status = HttpServletResponse.SC_OK;
-				}
-
-				// resonse header
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
-
-				// response body
-				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
-				String jsonResponseBody = new Gson().toJson(lista); // conversion de Java a Json
-				out.print(jsonResponseBody.toString());
-				out.flush(); // termina de escribir datos en response body
-
-
-
-			}else{
-				
-				LOG.trace("entrando en getById");
-				
-				Producto p = productoDao.getById(Integer.parseInt((pathInfo.replace("/", ""))));
-				
-				// resonse header
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
-
-				// response body
-				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
-				String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
-				out.print(jsonResponseBody.toString());
-				out.flush(); // termina de escribir datos en response body
-				
-				status = HttpServletResponse.SC_OK;
-				
-				
-			}
-			
-			response.setStatus(status);
-
-		} catch (Exception e) {
-
-			LOG.error(e);
-
-		}
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
 
 		LOG.trace("peticion GET");
 
@@ -168,7 +95,9 @@ public class ProductoRestController extends HttpServlet {
 				
 				LOG.trace("entrando en getById");
 				
-				Producto p = productoDao.getById(Integer.parseInt((pathInfo.replace("/", ""))));
+				Producto p = productoDao.getById(Utilidades.obtenerId(pathInfo));
+				
+				//TODO si no existe 404
 				
 				// resonse header
 				response.setContentType("application/json");
@@ -182,7 +111,6 @@ public class ProductoRestController extends HttpServlet {
 				
 				status = HttpServletResponse.SC_OK;
 				
-				
 			}
 			
 			response.setStatus(status);
@@ -192,19 +120,82 @@ public class ProductoRestController extends HttpServlet {
 			LOG.error(e);
 
 		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		LOG.trace("peticion POST");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
+
 		
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPut(req, resp);
+
+		LOG.trace("peticion PUT");
+
+		String pathInfo = req.getPathInfo();
+
+		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
+
+		
 	}
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doDelete(req, resp);
+
+		LOG.trace("peticion DELETE");
+
+		String pathInfo = req.getPathInfo();
+
+		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
+
+
+		try {
+
+			// si el pathInfo esta vacio devolvemos error uri mal formada
+			if (pathInfo.equals("/")) {
+				
+				
+				
+			}else{
+				
+				LOG.trace("entrando en deleteById");
+				
+				Producto p = productoDao.delete(Utilidades.obtenerId(pathInfo));
+				
+				// resonse header
+				resp.setContentType("application/json");
+				resp.setCharacterEncoding("utf-8");
+
+				// response body
+				PrintWriter out = resp.getWriter(); // out se encarga de poder escribir datos en el body
+				String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
+				out.print(jsonResponseBody.toString());
+				out.flush(); // termina de escribir datos en response body
+				
+				status = HttpServletResponse.SC_OK;
+				
+			}
+			
+			resp.setStatus(status);
+
+		} catch (Exception e) {
+
+			LOG.error(e);
+
+		}
+		
 	}
 
 
