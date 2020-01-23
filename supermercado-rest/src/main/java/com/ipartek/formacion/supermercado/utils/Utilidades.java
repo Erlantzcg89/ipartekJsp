@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import com.ipartek.formacion.supermercado.controller.ProductoRestController;
 
 public class Utilidades {
-	
+
 	private final static Logger LOG = LogManager.getLogger(Utilidades.class);
 
 	/**
@@ -42,16 +42,61 @@ public class Utilidades {
 				throw new Exception("Uri mal formada");
 
 			} else {
-				
+
 				try {
-				// /{id}, /{id}/
-				resultado = Integer.parseInt(troceado[1]);
-				
-				}catch (Exception e) {
-					
+					// /{id}, /{id}/
+					resultado = Integer.parseInt(troceado[1]);
+
+				} catch (Exception e) {
+
 					// Integer no válido
 					LOG.error("Integer no válido");
-					
+
+				}
+			}
+
+		}
+
+		return resultado;
+	}
+
+	/**
+	 * obtenemos el numero de palabras de una frase
+	 * 
+	 * @param frase es la variable que almacena el string de palabras
+	 * @return int resultado
+	 * 
+	 *         <br>
+	 *         ejemplos:
+	 *         <ol>
+	 *         <li>""=0</li>
+	 *         <li>null=0</li>
+	 *         <li>"hola ?. ? mundo"=2</li>
+	 *         <ol>
+	 * 
+	 */
+	public static int contarPalabras(String frase) {
+
+		LOG.trace("contarPalabras(" + frase + ")");
+
+		int resultado = 0;
+
+		if (frase != null) {
+
+			boolean word = false;
+			int endOfLine = frase.length() - 1;
+
+			for (int i = 0; i < frase.length(); i++) {
+
+				if (Character.isLetter(frase.charAt(i)) && i != endOfLine) {
+					word = true;
+
+				} else if (!Character.isLetter(frase.charAt(i)) && word) {
+					resultado++;
+					word = false;
+
+				} else if (Character.isLetter(frase.charAt(i)) && i == endOfLine) {
+					resultado++;
 				}
 			}
 

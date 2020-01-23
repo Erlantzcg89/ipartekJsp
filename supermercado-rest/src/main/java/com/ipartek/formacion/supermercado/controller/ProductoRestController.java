@@ -129,6 +129,15 @@ public class ProductoRestController extends HttpServlet {
 		} catch (Exception e) {
 
 			LOG.error(e);
+				
+			// resonse header
+			response.setContentType("application/json");
+			response.setCharacterEncoding("utf-8");
+			
+			PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
+			out.print("<h1>Error 404</h1>");
+			out.flush();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
 		}
 
