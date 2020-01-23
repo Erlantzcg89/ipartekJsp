@@ -37,12 +37,12 @@ public class UtilidadesTest {
 
 	}
 	
-//	@Test
-//	public void contarPalabrasLevel2(){
-//		
-//		assertEquals(2, Utilidades.contarPalabras("hola, mundo"));
-//		assertEquals(2, Utilidades.contarPalabras("hola...? mundo  "));
-//
-//	}
+	@Test
+	public void contarPalabrasLevel2(){
+		
+		assertEquals(2, Utilidades.contarPalabras("hola, mundo"));
+		assertEquals(2, Utilidades.contarPalabras("hola...? mundo  "));
+
+	}
 
 }

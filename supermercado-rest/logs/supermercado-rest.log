@@ -4,3 +4,71 @@
 2020-01-22 12:59:38,456 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
 2020-01-22 13:00:22,411 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
 2020-01-22 13:00:24,291 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:41:16,737 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:41:16,751 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:41:16,752 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:42:19,254 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:42:19,268 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:42:19,268 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:44:00,894 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:44:00,904 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:44:00,904 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:07,810 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:07,825 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:07,825 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:23,021 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:23,031 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:23,031 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:44,779 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:44,805 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:46:44,805 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:49:23,046 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:49:23,056 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:49:23,056 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:49:23,056 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:49:35,584 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:51:38,694 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:51:38,704 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:51:38,704 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:51:38,704 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:51:57,549 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:52:11,287 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:52:14,098 TRACE c.i.f.s.u.Utilidades [main] [Ljava.lang.String;@62163b39
+2020-01-23 10:52:56,121 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(String frase)
+2020-01-23 10:53:20,545 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(   )
+2020-01-23 10:53:45,776 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:53:45,789 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:53:45,790 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:53:45,791 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(null)
+2020-01-23 10:54:02,840 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras()
+2020-01-23 10:54:08,113 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(   )
+2020-01-23 10:54:13,832 TRACE c.i.f.s.u.Utilidades [main] [Ljava.lang.String;@73163d48
+2020-01-23 10:58:39,818 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:58:39,830 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:58:39,831 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 10:58:39,832 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(null)
+2020-01-23 10:58:45,633 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(   )
+2020-01-23 10:59:00,743 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(hola caracola)
+2020-01-23 10:59:02,265 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(hola   mundo)
+2020-01-23 10:59:03,649 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras( hola mundo  )
+2020-01-23 11:01:07,225 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:01:07,238 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:01:07,239 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:01:07,240 TRACE c.i.f.s.u.Utilidades [main] entrando en función estática contarPalabras(null)
+2020-01-23 11:01:22,214 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(null)
+2020-01-23 11:02:05,912 TRACE c.i.f.s.u.Utilidades [main] contarPalabras()
+2020-01-23 11:02:07,944 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(   )
+2020-01-23 11:02:09,393 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola caracola)
+2020-01-23 11:02:11,336 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola   mundo)
+2020-01-23 11:02:12,194 TRACE c.i.f.s.u.Utilidades [main] contarPalabras( hola mundo  )
+2020-01-23 11:41:54,101 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:41:54,112 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:41:54,113 ERROR c.i.f.s.u.Utilidades [main] Integer no válido
+2020-01-23 11:41:54,114 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola, mundo)
+2020-01-23 11:41:57,854 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola...? mundo  )
+2020-01-23 11:41:58,850 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(null)
+2020-01-23 11:41:59,618 TRACE c.i.f.s.u.Utilidades [main] contarPalabras()
+2020-01-23 11:42:00,313 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(   )
+2020-01-23 11:42:01,137 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola caracola)
+2020-01-23 11:42:01,802 TRACE c.i.f.s.u.Utilidades [main] contarPalabras(hola   mundo)
+2020-01-23 11:42:02,626 TRACE c.i.f.s.u.Utilidades [main] contarPalabras( hola mundo  )
