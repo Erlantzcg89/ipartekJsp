@@ -44,9 +44,15 @@ public class ProductoRestController extends HttpServlet {
 
 	}
 
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		// TODO filtro para que todos los controladores respondan con esta cabecera
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
+		
 		super.service(req, resp); // llama a doGet, doPost, doPut, doDelete
 
 	}

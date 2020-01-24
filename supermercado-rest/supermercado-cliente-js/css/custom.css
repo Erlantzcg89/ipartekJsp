@@ -1,0 +1,18 @@
+main {
+    padding: 40px;
+    background-color: black;
+    color: white;
+}
+
+section {
+    padding: 20px 100px;
+    background-color: blueviolet;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-group {
+    margin: 20px 0 0;
+}
