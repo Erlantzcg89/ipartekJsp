@@ -30,6 +30,7 @@ public class ProductoRestController extends HttpServlet {
 	private final static Logger LOG = LogManager.getLogger(ProductoRestController.class);
 	private ProductoDAO productoDao;
 	private int status;
+	private String columna = "";
 
 	public void init(ServletConfig config) throws ServletException {
 
@@ -63,19 +64,18 @@ public class ProductoRestController extends HttpServlet {
 
 		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
 
-
 		try {
 
 			// si el pathInfo esta vacio devolvemos la lista
 			if (pathInfo.equals("/")) {
-				
+
 				LOG.trace("entrando en getAll");
 				ArrayList<Producto> lista = (ArrayList<Producto>) productoDao.getAll();
-				
-				if(lista.size() <= 0) {
+
+				if (lista.size() <= 0) {
 					// 404
-					status = HttpServletResponse.SC_NOT_FOUND;	
-				}else {
+					status = HttpServletResponse.SC_NOT_FOUND;
+				} else {
 					// 200
 					status = HttpServletResponse.SC_OK;
 				}
@@ -90,50 +90,78 @@ public class ProductoRestController extends HttpServlet {
 				out.print(jsonResponseBody.toString());
 				out.flush(); // termina de escribir datos en response body
 
+			} else {
 
-
-			}else{
-				
-				LOG.trace("entrando en getById");
-				
-				// resonse header
-				response.setContentType("application/json");
-				response.setCharacterEncoding("utf-8");
-				
-				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
-				
-				Producto p = productoDao.getById(Utilidades.obtenerId(pathInfo));
-				
-				if(p != null) {
+				if (request.getParameter("_columna") != null) {
 					
+					columna = request.getParameter("_columna");
+					
+					LOG.trace("ordenando por nombre");
+					
+					ArrayList<Producto> lista = (ArrayList<Producto>) productoDao.getAllOrdered(columna);
+
+					if (lista.size() <= 0) {
+						// 404
+						status = HttpServletResponse.SC_NOT_FOUND;
+					} else {
+						// 200
+						status = HttpServletResponse.SC_OK;
+					}
+
+					// resonse header
+					response.setContentType("application/json");
+					response.setCharacterEncoding("utf-8");
+
 					// response body
-					String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
+					PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
+					String jsonResponseBody = new Gson().toJson(lista); // conversion de Java a Json
 					out.print(jsonResponseBody.toString());
 					out.flush(); // termina de escribir datos en response body
 					
-					status = HttpServletResponse.SC_OK;
-					
-				}else { // -1
-					//Si no existe 404
-					out.print("<h1>Error 404</h1>");
-					out.flush();
-					
-					status = HttpServletResponse.SC_NOT_FOUND;
-					
+
+				} else {
+
+					LOG.trace("entrando en getById");
+
+					// resonse header
+					response.setContentType("application/json");
+					response.setCharacterEncoding("utf-8");
+
+					PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
+
+					Producto p = productoDao.getById(Utilidades.obtenerId(pathInfo));
+
+					if (p != null) {
+
+						// response body
+						String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
+						out.print(jsonResponseBody.toString());
+						out.flush(); // termina de escribir datos en response body
+
+						status = HttpServletResponse.SC_OK;
+
+					} else { // -1
+						// Si no existe 404
+						out.print("<h1>Error 404</h1>");
+						out.flush();
+
+						status = HttpServletResponse.SC_NOT_FOUND;
+
+					}
 				}
-				
+
 			}
-			
+
 			response.setStatus(status);
 
 		} catch (Exception e) {
 
 			LOG.error(e);
-				
+
 			// resonse header
 			response.setContentType("application/json");
 			response.setCharacterEncoding("utf-8");
-			
+
 			PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
 			out.print("<h1>Error 404</h1>");
 			out.flush();
@@ -156,15 +184,14 @@ public class ProductoRestController extends HttpServlet {
 
 		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
 
-
 		try {
 
 			// si el pathInfo esta vacio devolvemos la lista
 			if (!pathInfo.equals("/")) {
-				
+
 				// 400
 				LOG.trace("*/* uri mal formulada estado: 400");
-				status = HttpServletResponse.SC_BAD_REQUEST;	
+				status = HttpServletResponse.SC_BAD_REQUEST;
 
 				// resonse header
 				response.setContentType("application/json");
@@ -175,45 +202,43 @@ public class ProductoRestController extends HttpServlet {
 				out.print("*/* uri mal formulada estado: 400");
 				out.flush(); // termina de escribir datos en response body
 
+			} else {
 
-
-			}else{
-				
 				// resonse header
 				response.setContentType("application/json");
 				response.setCharacterEncoding("utf-8");
-				
+
 				PrintWriter out = response.getWriter(); // out se encarga de poder escribir datos en el body
-				
+
 				// rellenar el producto
-				
+
 				// convertir json del request body a Objeto
-				BufferedReader reader = request.getReader();               
+				BufferedReader reader = request.getReader();
 				Gson gson = new Gson();
 				Producto pojo = gson.fromJson(reader, Producto.class);
-				
+
 				Producto p = productoDao.create(pojo);
-				
-				if(p != null) {
-					
+
+				if (p != null) {
+
 					// response body
 					String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
 					out.print(jsonResponseBody.toString());
 					out.flush(); // termina de escribir datos en response body
-					
+
 					status = HttpServletResponse.SC_OK;
-					
-				}else { // -1
-					//Si no existe 404
+
+				} else { // -1
+					// Si no existe 404
 					out.print("<h1>Error 404</h1>");
 					out.flush();
-					
+
 					status = HttpServletResponse.SC_NOT_FOUND;
-					
+
 				}
-				
+
 			}
-			
+
 			response.setStatus(status);
 
 		} catch (Exception e) {
@@ -221,7 +246,7 @@ public class ProductoRestController extends HttpServlet {
 			LOG.error(e);
 
 		}
-		
+
 	}
 
 	@Override
@@ -233,92 +258,11 @@ public class ProductoRestController extends HttpServlet {
 
 		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
 
-
 		try {
 
 			// si el pathInfo esta vacio devolvemos la lista
 			if (pathInfo.equals("/")) {
-				
-				// 400
-				LOG.trace("*/* uri mal formulada estado: 400");
-				status = HttpServletResponse.SC_BAD_REQUEST;	
 
-				// resonse header
-				resp.setContentType("application/json");
-				resp.setCharacterEncoding("utf-8");
-
-				// response body
-				PrintWriter out = resp.getWriter(); // out se encarga de poder escribir datos en el body
-				out.print("*/* uri mal formulada estado: 400");
-				out.flush(); // termina de escribir datos en response body
-
-
-
-			}else{
-				
-				LOG.trace("entrando en PUT by ID");
-				
-				// resonse header
-				resp.setContentType("application/json");
-				resp.setCharacterEncoding("utf-8");
-				
-				PrintWriter out = resp.getWriter(); // out se encarga de poder escribir datos en el body
-				
-				// rellenar el producto
-				
-				// convertir json del request body a Objeto
-				BufferedReader reader = req.getReader();               
-				Gson gson = new Gson();
-				Producto pojo = gson.fromJson(reader, Producto.class);
-				
-				Producto p = productoDao.update(Utilidades.obtenerId(pathInfo), pojo);
-				
-				if(p != null) {
-					
-					// response body
-					String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
-					out.print(jsonResponseBody.toString());
-					out.flush(); // termina de escribir datos en response body
-					
-					status = HttpServletResponse.SC_OK;
-					
-				}else { // -1
-					//Si no existe 404
-					out.print("<h1>Error 404</h1>");
-					out.flush();
-					
-					status = HttpServletResponse.SC_NOT_FOUND;
-					
-				}
-				
-			}
-			
-			resp.setStatus(status);
-
-		} catch (Exception e) {
-
-			LOG.error(e);
-
-		}
-
-		
-	}
-
-	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		LOG.trace("peticion DELETE");
-
-		String pathInfo = req.getPathInfo();
-
-		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
-
-
-		try {
-
-				// si el pathInfo esta vacio devolvemos error uri mal formada
-				if (pathInfo.equals("/")) {
-				
 				// 400
 				LOG.trace("*/* uri mal formulada estado: 400");
 				status = HttpServletResponse.SC_BAD_REQUEST;
@@ -332,14 +276,88 @@ public class ProductoRestController extends HttpServlet {
 				out.print("*/* uri mal formulada estado: 400");
 				out.flush(); // termina de escribir datos en response body
 
+			} else {
 
+				LOG.trace("entrando en PUT by ID");
 
-			}else{
-				
+				// resonse header
+				resp.setContentType("application/json");
+				resp.setCharacterEncoding("utf-8");
+
+				PrintWriter out = resp.getWriter(); // out se encarga de poder escribir datos en el body
+
+				// rellenar el producto
+
+				// convertir json del request body a Objeto
+				BufferedReader reader = req.getReader();
+				Gson gson = new Gson();
+				Producto pojo = gson.fromJson(reader, Producto.class);
+
+				Producto p = productoDao.update(Utilidades.obtenerId(pathInfo), pojo);
+
+				if (p != null) {
+
+					// response body
+					String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
+					out.print(jsonResponseBody.toString());
+					out.flush(); // termina de escribir datos en response body
+
+					status = HttpServletResponse.SC_OK;
+
+				} else { // -1
+					// Si no existe 404
+					out.print("<h1>Error 404</h1>");
+					out.flush();
+
+					status = HttpServletResponse.SC_NOT_FOUND;
+
+				}
+
+			}
+
+			resp.setStatus(status);
+
+		} catch (Exception e) {
+
+			LOG.error(e);
+
+		}
+
+	}
+
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		LOG.trace("peticion DELETE");
+
+		String pathInfo = req.getPathInfo();
+
+		LOG.debug("mirar pathInfo:*" + pathInfo + "* para saber si es listado o detalle");
+
+		try {
+
+			// si el pathInfo esta vacio devolvemos error uri mal formada
+			if (pathInfo.equals("/")) {
+
+				// 400
+				LOG.trace("*/* uri mal formulada estado: 400");
+				status = HttpServletResponse.SC_BAD_REQUEST;
+
+				// resonse header
+				resp.setContentType("application/json");
+				resp.setCharacterEncoding("utf-8");
+
+				// response body
+				PrintWriter out = resp.getWriter(); // out se encarga de poder escribir datos en el body
+				out.print("*/* uri mal formulada estado: 400");
+				out.flush(); // termina de escribir datos en response body
+
+			} else {
+
 				LOG.trace("entrando en deleteById");
-				
+
 				Producto p = productoDao.delete(Utilidades.obtenerId(pathInfo));
-				
+
 				// resonse header
 				resp.setContentType("application/json");
 				resp.setCharacterEncoding("utf-8");
@@ -349,11 +367,11 @@ public class ProductoRestController extends HttpServlet {
 				String jsonResponseBody = new Gson().toJson(p); // conversion de Java a Json
 				out.print(jsonResponseBody.toString());
 				out.flush(); // termina de escribir datos en response body
-				
+
 				status = HttpServletResponse.SC_OK;
-				
+
 			}
-			
+
 			resp.setStatus(status);
 
 		} catch (Exception e) {
@@ -361,8 +379,7 @@ public class ProductoRestController extends HttpServlet {
 			LOG.error(e);
 
 		}
-		
-	}
 
+	}
 
 }

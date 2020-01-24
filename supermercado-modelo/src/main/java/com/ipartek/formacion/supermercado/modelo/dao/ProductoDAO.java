@@ -316,6 +316,33 @@ public class ProductoDAO implements IProductoDAO {
 		}
 		return resultado;
 	}
+	
+	public List<Producto> getAllOrdered(String nombre) {
+
+		LOG.debug("Entra en producto getAllOrdered: " + nombre);
+
+		ArrayList<Producto> resultado = new ArrayList<Producto>();
+
+		try (Connection con = ConnectionManager.getConnection();
+				CallableStatement cs = con.prepareCall( " { CALL pa_producto_get_all_ordered(?) } ")) {
+			cs.setString(1, nombre);
+
+			LOG.debug("Ejecuta la query: " + cs.toString());
+
+			try (ResultSet rs = cs.executeQuery()) {
+				while (rs.next()) {
+					Producto p = mapper(rs);
+					resultado.add(p);
+				}
+
+			}
+
+		} catch (SQLException e) {
+			LOG.error(e);
+			e.printStackTrace();
+		}
+		return resultado;
+	}
 
 	public List<Producto> getAllByName(String nombre) {
 		LOG.trace("Recuperar todos los productos por filtro de nombre: " + nombre);
