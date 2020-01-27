@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cliente V Js</title>
+    <title>Cliente Vanilla Js</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://picsum.photos/id/1009/50/50" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <!-- Custom -->
     <link rel="stylesheet" href="css/custom.css">
 </head>
 
@@ -14,24 +21,49 @@
 
     <main>
         <h1>Cliente en Vanilla Javascript</h1>
+        <p class="text-center">Endpoint <b id="endpoint"></b></p>
 
         <section>
 
-            <p>Escribe un id del producto deseado, vacio devuelve todos</p>
-            <div class="form-group">
-                <input type="text" id="id_producto" placeholder="id">
-                <button id="boton">Consultar</button>
+            <div class="row">
+                <div class="section-container col-sm-6">
+                    <p>Escribe un id del producto deseado, vacio devuelve todos</p>
+                    <div class="form-group">
+                        <input type="text" id="id_producto" placeholder="id">
+                        <button id="boton">Consultar</button>
+                    </div>
+
+                    <p>Resultado:</p>
+
+                    <div class="form-group">
+                        <textarea id="resultado" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="section-container col-sm-6 text-dark">
+                    <div class="card" style="width: 18rem;">
+                        <img id="imagenCard" src="https://picsum.photos/300/300" class="card-img-top"
+                            alt="imagen producto">
+                        <div class="card-body">
+                            <h5 class="card-title" id="tituloCard">nombre</h5>
+                            <p class="card-text" id="descripcionCard">descripción</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <p>Resultado:</p>
-
-            <div class="form-group">
-                <textarea id="resultado" cols="60" rows="20"></textarea>
-            </div>
-
         </section>
     </main>
 
+    <!-- JQuery 3.4.1 & Popper -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap 4.4.1 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <script src="js/main.js"></script>
 </body>
 

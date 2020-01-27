@@ -5,7 +5,7 @@ main {
 }
 
 section {
-    padding: 20px 100px;
+    padding: 20px;
     background-color: blueviolet;
 }
 
@@ -15,4 +15,8 @@ h1 {
 
 .form-group {
     margin: 20px 0 0;
+}
+
+.section-container {
+    padding: 80px 40px;
 }

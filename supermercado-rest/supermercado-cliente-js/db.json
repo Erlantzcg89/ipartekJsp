@@ -1,28 +1,27 @@
 {
-  "productos":[
-    {
+  "productos": [{
       "id": 1,
-      "nombre": "cafe"
+      "nombre": "cafe",
+      "descripcion": "cafe colombiano de excelente calidad y grano seco",
+      "imagen": "https://www.hola.com/imagenes/cocina/recetas/20191001150255/recetas-para-celebrar-dia-internacional-cafe/0-724-583/portada-cafe-m.jpg"
     },
     {
       "id": 2,
-      "nombre": "leche"
+      "nombre": "leche",
+      "descripcion": "leche semidesnatada marca LIDL 1 litro",
+      "imagen": "https://www.supermasymas.com/blog/wp-content/uploads/2019/09/hora-recomendable-de-tomar-leche-1200x801.jpg"
     }
   ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
+  "posts": [{
+    "id": 1,
+    "title": "json-server",
+    "author": "typicode"
+  }],
+  "comments": [{
+    "id": 1,
+    "body": "some comment",
+    "postId": 1
+  }],
   "profile": {
     "name": "typicode"
   }
