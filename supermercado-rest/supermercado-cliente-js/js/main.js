@@ -6,24 +6,26 @@ console.log('empiza script');
 const ENDPOINT = 'http://localhost:8080/supermecado-rest/productos/';
 document.getElementById('endpoint').innerHTML = ENDPOINT;
 
-//selecionar elementos por id
-let inputEL = document.getElementById('id_producto');
-let botonEL = document.getElementById('boton');
-let resultadoEL = document.getElementById('resultado');
-let imagenCardEL = document.getElementById('imagenCard');
-let tituloCardEL = document.getElementById('tituloCard');
-let descripcionCardEL = document.getElementById('descripcionCard');
-let listaEL = document.getElementById('listaProductos');
+//selecionar elementos EL por id
+let inputEL = document.getElementById('id_producto'); // input box id
+let botonEL = document.getElementById('boton'); // boton buscar
+let resultadoEL = document.getElementById('resultado'); // text area resultado
+let imagenCardEL = document.getElementById('imagenCard'); // imagen tarjeta
+let tituloCardEL = document.getElementById('tituloCard'); // titulo tarjeta
+let descripcionCardEL = document.getElementById('descripcionCard'); // descripcion tarjeta
+let listaEL = document.getElementById('listaProductos'); // ul lista de productos
 
+// al cargar todo llama a cargarProductos
 window.onload = function () {
     console.trace('DOM Ready, hemos esperado a que carge todo el HTML, CSS y JS !!!!');
     cargarProductos();
 };
 
-
+// carga los productos por ajax
 function cargarProductos() {
     console.log('cargarProductos');
 
+    // new xhr, .onreadystatechange(), .open(), .send()
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -33,7 +35,6 @@ function cargarProductos() {
             for (let p of productos) {
                 listaEL.innerHTML += `<li class="list-group-item">id: ${p.id}, ${p.nombre}</li>`;
             }
-
         }
     }
     xhr.open('Get', `${ENDPOINT}`);
