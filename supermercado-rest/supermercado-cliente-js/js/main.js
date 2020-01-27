@@ -13,6 +13,36 @@ let resultadoEL = document.getElementById('resultado');
 let imagenCardEL = document.getElementById('imagenCard');
 let tituloCardEL = document.getElementById('tituloCard');
 let descripcionCardEL = document.getElementById('descripcionCard');
+let listaEL = document.getElementById('listaProductos');
+
+window.onload = function () {
+    console.trace('DOM Ready, hemos esperado a que carge todo el HTML, CSS y JS !!!!');
+    cargarProductos();
+};
+
+
+function cargarProductos() {
+    console.log('cargarProductos');
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let productos = JSON.parse(xhr.responseText);
+            console.debug("producto en json %o", productos);
+            listaEL.innerHTML = ""; // limpiar lista
+            for (let p of productos) {
+                listaEL.innerHTML += `<li class="list-group-item">id: ${p.id}, ${p.nombre}</li>`;
+            }
+
+        }
+    }
+    xhr.open('Get', `${ENDPOINT}`);
+    xhr.send();
+    console.debug(`GET ${ENDPOINT}`);
+
+
+
+}
 
 
 // registrar evento click para el boton
