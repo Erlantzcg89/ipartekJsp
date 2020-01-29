@@ -1,7 +1,7 @@
 package com.ipartek.formacion.model;
 
 
-import java.util.List;
+import java.util.HashMap;
 
 
 public interface IDAO<P> {
@@ -11,7 +11,7 @@ public interface IDAO<P> {
 	 * Obtiene todos los datos
 	 * @return lista de pojos
 	 */
-	List<P> getAll();
+	HashMap<Integer, P> getAll();
 	
 	/**
 	 * recupera un pojo por su identificador
