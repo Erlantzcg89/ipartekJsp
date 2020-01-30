@@ -84,6 +84,7 @@ public class PokemonController extends HttpServlet {
 		String pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("Parámetro");
 
 		try {
 			if (pathInfo == null) {
@@ -188,8 +189,17 @@ public class PokemonController extends HttpServlet {
 
 					} // pokemon por id no encontrado
 
-				} // id -1 (incorrecta)
+				} else {
 
+					LOG.trace("recurso no encontrado");
+
+					try (PrintWriter out = response.getWriter()) {
+						out.print("<h1>No se encuentra el recurso.</h1>");
+						out.flush();
+
+						response.setStatus(404);
+					}
+				} // id -1 (no es una id válida)
 			} // buscar por id
 
 		} catch (Exception e) {
