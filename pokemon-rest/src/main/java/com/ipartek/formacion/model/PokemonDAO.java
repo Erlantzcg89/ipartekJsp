@@ -21,6 +21,8 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	private final static Logger LOG = LogManager.getLogger(PokemonDAO.class);
 	private static PokemonDAO INSTANCE;
 
+	String filtroNombre = "AND p.nombre LIKE CONCAT('%', ?, '%')";
+
 	private PokemonDAO() {
 		super();
 	}
@@ -36,7 +38,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	public List<Pokemon> getAll() {
 
 		LOG.debug("Entra en getAll");
-		
+
 		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id order by p.id desc limit 500;";
 		HashMap<Integer, Pokemon> mapPokemons = new HashMap<Integer, Pokemon>();
 
@@ -50,9 +52,9 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 				if (!mapPokemons.containsKey(rs.getInt("id_pokemon"))) {
 
-					mapPokemons.put(rs.getInt("id_pokemon"), mapper(rs));
+					mapPokemons.put(rs.getInt("id_pokemon"), mapperPokemon(rs));
 
-				}else {
+				} else {
 
 					mapPokemons.get(rs.getInt("id_pokemon")).getHabilidades().add(mapperHabilidad(rs));
 
@@ -63,9 +65,50 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		
+
 		Collection<Pokemon> coleccionPokemons = mapPokemons.values();
-		
+
+		ArrayList<Pokemon> resultado = new ArrayList<Pokemon>(coleccionPokemons);
+
+		return resultado;
+	}
+
+	public List<Pokemon> getAllNombre(String nombre) {
+
+		LOG.debug("Entra en getAllNombre");
+
+		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id AND p.nombre LIKE CONCAT('%', ?, '%') order by p.id desc limit 500;";
+		HashMap<Integer, Pokemon> mapPokemons = new HashMap<Integer, Pokemon>();
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);) {
+
+			pst.setString(1, nombre);
+
+			LOG.trace(pst);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+
+					if (!mapPokemons.containsKey(rs.getInt("id_pokemon"))) {
+
+						mapPokemons.put(rs.getInt("id_pokemon"), mapperPokemon(rs));
+
+					} else {
+
+						mapPokemons.get(rs.getInt("id_pokemon")).getHabilidades().add(mapperHabilidad(rs));
+
+					}
+
+				}
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+
+		Collection<Pokemon> coleccionPokemons = mapPokemons.values();
+
 		ArrayList<Pokemon> resultado = new ArrayList<Pokemon>(coleccionPokemons);
 
 		return resultado;
@@ -73,42 +116,50 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 	@Override
 	public Pokemon getById(int id) {
-		
+
 		LOG.debug("Entra en getbyId");
 
-		// TODO query
-		String sql = "";
-		Pokemon resul = new Pokemon();
+		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id and p.id= ? order by p.id desc limit 500;";
+		;
+		Pokemon resul = null;
 
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
 			pst.setInt(1, id);
 
 			LOG.trace(pst);
 
 			try (ResultSet rs = pst.executeQuery()) {
-				if (rs.next()) {
-					resul = mapper(rs);
+				while (rs.next()) {
+
+					if (resul == null) {
+
+						resul = mapperPokemon(rs);
+
+					} else {
+
+						resul.getHabilidades().add(mapperHabilidad(rs));
+
+					}
+
 				}
 			}
 		} catch (Exception e) {
 			LOG.error(e);
 		}
 		return resul;
-		
+
 	}
 
 	@Override
 	public Pokemon delete(int id) throws Exception {
-		
+
 		LOG.debug("Entra en deleteFinal");
-		
+
 		String sql = "DELETE FROM pokemons WHERE id = ?;";
 		Pokemon resultado = null;
 
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);) {
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
 
 			pst.setInt(1, id);
 
@@ -129,20 +180,19 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		}
 
 		return resultado;
-		
+
 	}
 
 	@Override
 	public Pokemon update(int id, Pokemon pojo) throws Exception {
-		
+
 		LOG.debug("Entra en update");
-		
+
 		// TODO query
 		String sql = "UPDATE pokemons SET nombre= ?, imagen=?, precio=?, descuento=?, descripcion=?, fecha_modificacion=CURRENT_TIMESTAMP(), id_usuario=?, id_categoria=?, validado=? WHERE id = ?;";
 		Pokemon resultado = null;
 
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql)) {
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
 			pst.setString(1, pojo.getNombre());
 //			pst.setString(2, pojo.ge());
@@ -164,14 +214,14 @@ public class PokemonDAO implements IDAO<Pokemon> {
 			}
 		}
 		return resultado;
-		
+
 	}
 
 	@Override
 	public Pokemon create(Pokemon pojo) throws Exception {
-		
+
 		LOG.debug("Entra en create");
-		
+
 		// TODO query
 		String sql = "INSERT INTO producto (id, nombre, imagen, precio, descuento, descripcion, fecha_creacion, id_usuario, id_categoria) VALUES ( ? , ?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), ?,?);";
 
@@ -201,17 +251,17 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		}
 
 		return pojo;
-		
+
 	}
 
 	/**
-	 * Utilidad para mapear un ResultSet a un Pokemon
+	 * Utilidad para mapear un Pokemon
 	 *
-	 * @param rs
+	 * @param rs ResulSet
 	 * @return Pokemon
 	 * @throws SQLException
 	 */
-	private Pokemon mapper(ResultSet rs) throws SQLException {
+	private Pokemon mapperPokemon(ResultSet rs) throws SQLException {
 
 		Pokemon p = new Pokemon();
 
@@ -221,11 +271,11 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 		return p;
 	}
-	
+
 	/**
-	 * Utilidad para mapear un ResultSet a una Habilidad
+	 * Utilidad para mapear una Habilidad
 	 *
-	 * @param rs
+	 * @param rs ResulSet
 	 * @return Habilidad
 	 * @throws SQLException
 	 */
