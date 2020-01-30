@@ -1,18 +1,19 @@
 package com.ipartek.formacion.model.pojo;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pokemon {
 	
 	private int id;
 	private String nombre;
-	HashMap <Integer, Habilidad> habilidades;
+	List <Habilidad> habilidades;
 
 	public Pokemon() {
 		super();
 		this.id = 0;
 		this.nombre = "";
-		this.habilidades = new HashMap <Integer, Habilidad> ();
+		this.habilidades = new ArrayList <Habilidad> ();
 	}
 
 	public int getId() {
@@ -31,11 +32,11 @@ public class Pokemon {
 		this.nombre = nombre;
 	}
 
-	public HashMap<Integer, Habilidad> getHabilidades() {
+	public List<Habilidad> getHabilidades() {
 		return habilidades;
 	}
 
-	public void setHabilidades(HashMap<Integer, Habilidad> habilidades) {
+	public void setHabilidades(List<Habilidad> habilidades) {
 		this.habilidades = habilidades;
 	}
 
@@ -43,5 +44,7 @@ public class Pokemon {
 	public String toString() {
 		return "Pokemon [id=" + id + ", nombre=" + nombre + ", habilidades=" + habilidades + "]";
 	}
+
+
 	
 }

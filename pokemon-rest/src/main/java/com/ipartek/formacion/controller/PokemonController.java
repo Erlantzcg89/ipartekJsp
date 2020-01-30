@@ -2,7 +2,7 @@ package com.ipartek.formacion.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -81,7 +81,7 @@ public class PokemonController extends HttpServlet {
 		
 		LOG.trace("entrando en doGet");
 
-		HashMap <Integer, Pokemon> pokemons =  dao.getAll();
+		ArrayList <Pokemon> pokemons =  (ArrayList<Pokemon>) dao.getAll();
 
 		try (PrintWriter out = response.getWriter()) {
 

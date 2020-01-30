@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,12 +33,12 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	}
 
 	@Override
-	public HashMap<Integer, Pokemon> getAll() {
+	public List<Pokemon> getAll() {
 
 		LOG.debug("Entra en getAll");
 		
 		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id order by p.id desc limit 500;";
-		HashMap<Integer, Pokemon> registros = new HashMap<Integer, Pokemon>();
+		HashMap<Integer, Pokemon> mapPokemons = new HashMap<Integer, Pokemon>();
 
 		try (Connection con = ConnectionManager.getConnection();
 				PreparedStatement pst = con.prepareStatement(sql);
@@ -46,14 +48,13 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 			while (rs.next()) {
 
-				if (!registros.containsKey(rs.getInt("id_pokemon"))) {
+				if (!mapPokemons.containsKey(rs.getInt("id_pokemon"))) {
 
-					registros.put(rs.getInt("id_pokemon"), mapper(rs));
+					mapPokemons.put(rs.getInt("id_pokemon"), mapper(rs));
 
-				}else if (!registros.get(rs.getInt("id_pokemon")).getHabilidades()
-						.containsKey(rs.getInt("id_habilidad"))) {
+				}else {
 
-					registros.get(rs.getInt("id_pokemon")).getHabilidades().put(rs.getInt("id_habilidad"), mapperHabilidad(rs));
+					mapPokemons.get(rs.getInt("id_pokemon")).getHabilidades().add(mapperHabilidad(rs));
 
 				}
 
@@ -62,8 +63,12 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
+		
+		Collection<Pokemon> coleccionPokemons = mapPokemons.values();
+		
+		ArrayList<Pokemon> resultado = new ArrayList<Pokemon>(coleccionPokemons);
 
-		return registros;
+		return resultado;
 	}
 
 	@Override
@@ -212,13 +217,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 		p.setId(rs.getInt("id_pokemon"));
 		p.setNombre(rs.getString("nombre_pokemon"));
-
-		if (!p.getHabilidades().containsKey(rs.getInt("id_habilidad"))) {
-			Habilidad h = new Habilidad();
-			h.setId(rs.getInt("id_habilidad"));
-			h.setNombre(rs.getString("nombre_habilidad"));
-			p.getHabilidades().put(h.getId(), h);
-		}
+		p.getHabilidades().add(mapperHabilidad(rs));
 
 		return p;
 	}
