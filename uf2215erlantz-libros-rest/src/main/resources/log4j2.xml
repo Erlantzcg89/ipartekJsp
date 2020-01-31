@@ -3,7 +3,7 @@
         <Console name="LogToConsole" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <File fileName="logs/examen-rest.log" name="LogToFile">
+        <File fileName="logs/uf2215erlantz-libros-rest.log" name="LogToFile">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
             </PatternLayout>

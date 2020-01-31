@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="utf-8">
-<title>Documentación</title>
+<title>Documentación uf2215erlantz-libros-rest</title>
 <base href="/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -23,9 +23,10 @@
 
 	<header>
 		<h1 class="text-center mt-3">Documentación</h1>
+		<p class="text-center  mb-3">uf2215erlantz-libros-rest</p>
 		<p class="text-center  mb-3">&copy; Erlantz Caballero 2020</p>
 		<p class="text-center mb-4">
-			Endpoint: <b>${pageContext.request.contextPath}/api/examen/</b>
+			Endpoint: <b>${pageContext.request.contextPath}/api/libros/</b>
 		</p>
 	</header>
 
@@ -34,21 +35,18 @@
 		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">
 				GET <a class="" target="_blank"
-					href="${pageContext.request.contextPath}/api/pokemon/">/api/examen/</a><br>
+					href="${pageContext.request.contextPath}/api/pokemon/">/api/libros/</a><br>
 				Recurso: Listar<br>Códigos de estado: <span
 					class="text-success">200 éxito</span> | <span class="text-success">204
 					listado vacio</span>
 			</div>
 		</div>
-
-		<div class="alert alert-info bg-info" role="alert">
-			<div class="alert alert-info mt-4" role="alert">
-				GET <a class="" target="_blank"
-					href="${pageContext.request.contextPath}/api/pokemon/4">/api/examen/{id}</a><br>
-				Recurso: Detalle<br>Códigos de estado: <span
-					class="text-success">200 éxito</span> | <span class="text-danger">404
-					recurso no encontrado</span>
-			</div>
+		
+		<div>
+			<h3>Parámetros disponibles para GET: listar</h3>
+			<ul>
+				<li><b>nombre</b>: Filtra los libros por su nombre</li>
+			</ul>
 		</div>
 
 	</main>
