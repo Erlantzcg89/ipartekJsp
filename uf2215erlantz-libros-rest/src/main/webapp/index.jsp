@@ -48,16 +48,41 @@
 				<li><b>nombre</b>: Filtra los libros por su nombre. Ejemplo:
 					api/libro/<b>?nombre=juego muestra el libro "Juego de tronos"</b></li>
 			</ul>
+			<p>A continuación se muestran cuatro capturas del comportamiento
+				del servicio con la herramienta Postman</p>
 		</div>
+
+		<p>El GET para el recurso libro ofrece un listado de los libros
+			disponibles en nuestra base de datos, y el parámetro nombre permite
+			filtrar los libros por su nombre propio.</p>
 
 		<div class="my-4">
 			<h3 class="mb-3">Get: listado en postman</h3>
-			<img src="images/getAllPostman.PNG" alt="get all">
+			<img src="images/getAllPostman.PNG" alt="get listado">
 		</div>
 
 		<div class="my-4">
-			<h3 class="mb-3">Get: listado  con filtro de nombre en postman</h3>
-			<img src="images/getAllNombrePostman.PNG" alt="get all">
+			<h3 class="mb-3">Get: listado con filtro de nombre en postman</h3>
+			<img src="images/getAllNombrePostman.PNG"
+				alt="get listado con filtro">
+		</div>
+
+		<p>Cuando la petición al recurso libro devuelve una lista vacia,
+			ya sea porque la base de datos esté vacia o porque la busqueda por el
+			parámetro nombre ha devuelto una lista vacía, el codigo devuelto será
+			un 204.</p>
+
+		<div class="my-4">
+			<h3 class="mb-3">Recurso (listado) vacio en postman</h3>
+			<img src="images/204.PNG" alt="204">
+		</div>
+
+		<p>Cuando la dirección del recurso esté mal escrita la api
+			devolverá un estado 404, recurso no encontrado.</p>
+
+		<div class="my-4">
+			<h3 class="mb-3">Recurso no encontrado en postman</h3>
+			<img src="images/404.PNG" alt="404">
 		</div>
 
 	</main>

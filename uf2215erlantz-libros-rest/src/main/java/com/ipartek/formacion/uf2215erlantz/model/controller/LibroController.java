@@ -93,7 +93,7 @@ public class LibroController extends HttpServlet {
 						out.flush();
 					}
 
-				} else { // lista vacia
+				} else { // lista con filtro por nombre vacia
 
 					LOG.trace("No content");
 
@@ -122,14 +122,14 @@ public class LibroController extends HttpServlet {
 						out.flush();
 					}
 
-				} else { // listado completo vacio
+				} else { // listado vacio
 
-					LOG.trace("Recurso no encontrado");
+					LOG.trace("Listado vacio");
 
 					try (PrintWriter out = response.getWriter()) {
 						
-						response.setStatus(404);
-						out.print("Recurso no encontrado");
+						response.setStatus(204);
+						out.print("Listado vacio");
 						out.flush();
 					}
 
