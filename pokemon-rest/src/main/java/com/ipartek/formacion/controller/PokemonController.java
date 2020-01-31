@@ -92,13 +92,13 @@ public class PokemonController extends HttpServlet {
 				LOG.trace("recurso no encontrado");
 
 				try (PrintWriter out = response.getWriter()) {
-					out.print("<h1>No se encuentra el recurso.</h1>");
+					out.print("Recurso no encontrado");
 					out.flush();
 
 					response.setStatus(404);
 				}
 
-			} else if (!nombre.equals("")) {
+			} else if (!nombre.equals("")) {  // ?nombre=
 
 				LOG.trace("entrando en getAllNombre()");
 
@@ -119,7 +119,7 @@ public class PokemonController extends HttpServlet {
 					LOG.trace("No content");
 
 					try (PrintWriter out = response.getWriter()) {
-						out.print("<h1>No content.</h1>");
+						out.print("Lista Vacia");
 						out.flush();
 
 						response.setStatus(204);
@@ -148,7 +148,7 @@ public class PokemonController extends HttpServlet {
 					LOG.trace("No content");
 
 					try (PrintWriter out = response.getWriter()) {
-						out.print("<h1>No content.</h1>");
+						out.print("Lista Vacia");
 						out.flush();
 
 						response.setStatus(204);
@@ -181,7 +181,7 @@ public class PokemonController extends HttpServlet {
 						LOG.trace("recurso no encontrado");
 
 						try (PrintWriter out = response.getWriter()) {
-							out.print("<h1>No se encuentra el recurso.</h1>");
+							out.print("Recurso no encontrado");
 							out.flush();
 
 							response.setStatus(404);
@@ -194,7 +194,7 @@ public class PokemonController extends HttpServlet {
 					LOG.trace("recurso no encontrado");
 
 					try (PrintWriter out = response.getWriter()) {
-						out.print("<h1>No se encuentra el recurso.</h1>");
+						out.print("Recurso no encontrado");
 						out.flush();
 
 						response.setStatus(404);

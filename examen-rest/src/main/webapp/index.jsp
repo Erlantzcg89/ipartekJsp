@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html lang="en">
+<html lang="es">
 
 <head>
 <meta charset="utf-8">
@@ -25,7 +25,7 @@
 		<h1 class="text-center mt-3">Documentación</h1>
 		<p class="text-center  mb-3">&copy; Erlantz Caballero 2020</p>
 		<p class="text-center mb-4">
-			Endpoint: <b>${pageContext.request.contextPath}/api/pokemon/</b>
+			Endpoint: <b>${pageContext.request.contextPath}/api/examen/</b>
 		</p>
 	</header>
 
@@ -34,7 +34,7 @@
 		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">
 				GET <a class="" target="_blank"
-					href="${pageContext.request.contextPath}/api/pokemon/">/api/pokemon/</a><br>
+					href="${pageContext.request.contextPath}/api/pokemon/">/api/examen/</a><br>
 				Recurso: Listar<br>Códigos de estado: <span
 					class="text-success">200 éxito</span> | <span class="text-success">204
 					listado vacio</span>
@@ -44,40 +44,10 @@
 		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">
 				GET <a class="" target="_blank"
-					href="${pageContext.request.contextPath}/api/pokemon/4">/api/pokemon/{id}</a><br>
+					href="${pageContext.request.contextPath}/api/pokemon/4">/api/examen/{id}</a><br>
 				Recurso: Detalle<br>Códigos de estado: <span
 					class="text-success">200 éxito</span> | <span class="text-danger">404
 					recurso no encontrado</span>
-			</div>
-		</div>
-
-		<div class="alert alert-danger bg-danger" role="alert">
-			<div class="alert alert-danger mt-4" role="alert">
-				DELETE <a class="" href="pokemon-rest">/api/pokemon/{id}</a><br>
-				Recurso: Eliminar<br>Códigos de estado: <span
-					class="text-success">200 éxito</span> | <span class="text-danger">404
-					recurso no encontrado</span>
-			</div>
-		</div>
-
-		<div class="alert alert-success bg-success" role="alert">
-			<div class="alert alert-success mt-4" role="alert">
-				POST <a class="" href="pokemon-rest">/api/pokemon/{id}</a><br>
-				Recurso: Insertar<br>Códigos de estado: <span
-					class="text-success">201 creado con éxito</span> | <span
-					class="text-danger">400 conflicto (parámetros incorrectos)</span>,
-				<span class="text-danger">409 conflicto (unique key)</span>
-			</div>
-		</div>
-
-		<div class="alert alert-warning bg-warning" role="alert">
-			<div class="alert alert-warning mt-4" role="alert">
-				PUT <a class="" href="pokemon-rest">/api/pokemon/{id}</a><br>
-				Recurso: Update<br>Códigos de estado: <span
-					class="text-success">200 éxito</span> | <span class="text-danger">400
-					conflicto (parámetros incorrectos)</span>, <span class="text-danger">404 recurso
-				no encontrado</span>, <span class="text-danger">409
-					conflicto (unique key)</span>
 			</div>
 		</div>
 
