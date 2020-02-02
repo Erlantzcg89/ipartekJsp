@@ -92,26 +92,120 @@ public class LibroDAO implements IDAO<Libro>{
 
 	@Override
 	public Libro getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		LOG.debug("Entra en getbyId");
+		
+		String sql = "SELECT l.id 'id_libro', l.nombre 'nombre_libro', a.id 'id_autor', a.nombre 'nombre_autor' FROM libros l, autores a WHERE l.id_autor=a.id AND l.id= ? order by l.id desc limit 500;";
+		Libro resultado = null;
+		
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);
+				) {
+			
+			pst.setInt(1, id);
+			
+			try(ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					
+					resultado = mapper(rs);
+
+				}
+			}
+
+		}catch (Exception e) {
+			LOG.error(e);
+		}
+
+		return resultado;
 	}
 
 	@Override
 	public Libro delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		LOG.debug("Entra en delete");
+
+		String sql= "DELETE FROM libros WHERE id = ?;";
+		
+		Libro resultado = getById(id);
+
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			
+			pst.setInt(1, id);
+
+			int affectedRows = pst.executeUpdate();
+
+			if(affectedRows == 1) {
+				LOG.info("Libro borrado");
+			} else {
+				LOG.error("Error, se han borrado más de un elemnto");
+				resultado = null;
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return resultado;
 	}
 
 	@Override
 	public Libro update(int id, Libro pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		LOG.debug("Entra en update");
+
+		String sql = "UPDATE libros SET nombre = ? WHERE id = ?";
+		
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			
+			pst.setString(1, pojo.getNombre());
+			pst.setInt(2, id);
+			
+			int affectedRows = pst.executeUpdate();
+			
+			if(affectedRows == 1) {
+				LOG.trace("Update realizado");
+			} else {
+				LOG.error("Error se han actualizado más de una fila");
+			}
+		} catch (Exception e) {
+			LOG.error(e);
+			throw e;
+		}
+		
+		return pojo;
+
 	}
 
 	@Override
 	public Libro create(Libro pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		LOG.debug("Entra en create");
+
+		String sql = "INSERT INTO libros (nombre) VALUES (?);";
+		
+		Libro resultado = null;
+		
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS )
+				){
+			
+			pst.setString(1, pojo.getNombre());
+			
+			int affectedRows = pst.executeUpdate();
+			
+			if(affectedRows == 1) {
+				ResultSet rs = pst.getGeneratedKeys();
+
+				resultado = pojo;
+				rs.next();
+				resultado.setId(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return resultado;
 	}
 	
 	/**

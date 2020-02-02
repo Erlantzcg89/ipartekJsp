@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import com.ipartek.formacion.uf2215erlantz.model.LibroDAO;
 import com.ipartek.formacion.uf2215erlantz.model.pojo.Libro;
+import com.ipartek.formacion.uf2215erlantz.utilidades.Utilidades;
 
 /**
  * Servlet implementation class LibroController
@@ -55,7 +56,7 @@ public class LibroController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		LOG.trace("entrando en el GET");
+		LOG.trace("entrando en GET");
 
 		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
 
@@ -153,5 +154,49 @@ public class LibroController extends HttpServlet {
 		}
 		
 	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		LOG.trace("entrando en deDelete");
+
+		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("Parámetro nombre: *" + nombre + "*");
+		
+		int id = -1;
+		
+		try {
+			id = Utilidades.obtenerId(request.getPathInfo());
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		if(id >= 0) {
+			Libro libro = null;
+			try {
+				libro = dao.delete(id);
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+
+			if(libro == null) {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			} else {
+				response.setStatus(HttpServletResponse.SC_OK);
+				try (PrintWriter out = response.getWriter()) {
+
+					Gson json = new Gson();
+					out.print(json.toJson(libro));
+					out.flush();
+
+				}
+			}
+		}
+	}
+	
+	
 
 }
