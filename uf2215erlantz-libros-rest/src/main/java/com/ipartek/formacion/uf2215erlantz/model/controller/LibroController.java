@@ -1,5 +1,6 @@
 package com.ipartek.formacion.uf2215erlantz.model.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.ipartek.formacion.uf2215erlantz.model.LibroDAO;
 import com.ipartek.formacion.uf2215erlantz.model.pojo.Libro;
 import com.ipartek.formacion.uf2215erlantz.utilidades.Utilidades;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 /**
  * Servlet implementation class LibroController
@@ -138,16 +140,27 @@ public class LibroController extends HttpServlet {
 
 			} else {
 
-					LOG.trace("recurso no encontrado");
+				LOG.trace("entrando en getById");
 
-					try (PrintWriter out = response.getWriter()) {
-						
-						response.setStatus(404);
-						out.print("Recurso no encontrado");
-						out.flush();
-					}
-	
-			} // recurso no encontrado
+				PrintWriter out = response.getWriter();
+
+				Libro l = dao.getById(Utilidades.obtenerId(pathInfo));
+
+				if (l != null) {
+
+					String jsonResponseBody = new Gson().toJson(l); 
+					response.setStatus(200);
+					out.print(jsonResponseBody.toString());
+					out.flush();
+
+				} else { // -1
+					
+					response.setStatus(404);
+					out.print("<h1>Error 404</h1>");
+					out.flush();
+
+				}
+			} // getById
 
 		} catch (Exception e) {
 			LOG.error(e);
@@ -155,17 +168,101 @@ public class LibroController extends HttpServlet {
 		
 	}
 	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		LOG.trace("entrando en doPost");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+
+		
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Libro libro = null;
+		libro = gson.fromJson(reader, Libro.class);
+		int status = 0;
+
+		try {
+			libro = dao.create(libro);
+			status = HttpServletResponse.SC_NO_CONTENT;
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			LOG.error("libro duplicado");
+			status = HttpServletResponse.SC_CONFLICT;
+		}
+		catch (Exception e) {
+			LOG.error(e);
+			status = HttpServletResponse.SC_BAD_REQUEST;
+			e.printStackTrace();
+		}
+
+		if(status >= 200 && status < 300) {
+		
+			try (PrintWriter out = response.getWriter()) {
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			Gson json = new Gson();
+			out.print(json.toJson(libro));
+			out.flush();
+
+		}
+		} else {
+			response.setStatus(status);
+		}
+
+	}
+
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		LOG.trace("entrando en deDelete");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+		
+		
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Libro libro = null;
+		libro = gson.fromJson(reader, Libro.class);
+		int status = 0;
+
+		try {
+			int id = Utilidades.obtenerId(request.getPathInfo());
+			libro = dao.update(id, libro);
+			status = HttpServletResponse.SC_OK;
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			LOG.error("libro duplicado");
+			status = HttpServletResponse.SC_CONFLICT;
+		}
+		catch (Exception e) {
+			LOG.error(e);
+			status = HttpServletResponse.SC_BAD_REQUEST;
+		}
+
+		if(status >= 200 && status < 300) {
+			try (PrintWriter out = response.getWriter()) {
+				response.setStatus(status);
+				Gson json = new Gson();
+				out.print(json.toJson(libro));
+				out.flush();
+
+			}
+		} else {
+			response.setStatus(status);
+		}
+	}
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en deDelete");
 
-		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
-
 		String pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
-		LOG.debug("Parámetro nombre: *" + nombre + "*");
+
 		
 		int id = -1;
 		
