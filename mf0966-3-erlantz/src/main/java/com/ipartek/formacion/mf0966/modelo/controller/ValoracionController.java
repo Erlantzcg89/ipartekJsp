@@ -199,7 +199,7 @@ public class ValoracionController extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		LOG.trace("entrando en doPost");
+		LOG.trace("entrando en doPut");
 		String pathInfo = request.getPathInfo();
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 

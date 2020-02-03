@@ -125,6 +125,7 @@ public class ValoracionDAO implements IDAO<Valoracion> {
 			pst.setString(2, pojo.getComentario());
 			pst.setInt(3, pojo.getIdUsuario());
 			pst.setInt(4, pojo.getIdCurso());
+			pst.setInt(5, id);
 			
 			int affectedRows = pst.executeUpdate();
 			if(affectedRows == 1) {
@@ -135,6 +136,7 @@ public class ValoracionDAO implements IDAO<Valoracion> {
 				resul.setId(rs.getInt(1));
 			}
 		} catch (Exception e) {
+			
 			throw e;
 		}
 		
