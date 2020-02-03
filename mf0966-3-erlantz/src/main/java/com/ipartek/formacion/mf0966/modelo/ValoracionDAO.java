@@ -87,14 +87,35 @@ public class ValoracionDAO implements IDAO<Valoracion> {
 
 	@Override
 	public Valoracion delete(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "DELETE FROM valoraciones WHERE id = ?;";
+		
+		Valoracion resul = getById(id);
+
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			
+			pst.setInt(1, id);
+
+			int affectedRows = pst.executeUpdate();
+
+			if(affectedRows == 1) {
+				LOG.info("Valoracion borrado");
+			} else {
+				LOG.info("pon un where en el delete");
+				resul = null;
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return resul;
 	}
 
 	@Override
 	public Valoracion update(int id, Valoracion pojo) throws Exception {
 
-		String sql = "INSERT INTO valoraciones(nota, comentario, id_usuario, id_curso) VALUES (?, ?, ?, ?);";
+		String sql = "update valoraciones set nota = ?, comentario = ?, id_usuario = ?, id_curso = ? where id = ?;";
 		
 		Valoracion resul = null;
 		try(Connection con = ConnectionManager.getConnection();

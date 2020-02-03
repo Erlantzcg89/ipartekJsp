@@ -120,7 +120,7 @@ public class ValoracionController extends HttpServlet {
 				} else { // -1
 
 					response.setStatus(404);
-					out.print("<h1>Error 404</h1>");
+					out.print("Recurso no encontrado");
 					out.flush();
 
 				}
@@ -134,12 +134,11 @@ public class ValoracionController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		LOG.trace("entrando en doPost");
 		String pathInfo = request.getPathInfo();
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 
-		
 		BufferedReader reader = request.getReader();
 		Gson gson = new Gson();
 		Valoracion v = null;
@@ -158,9 +157,9 @@ public class ValoracionController extends HttpServlet {
 			}
 
 		} else if (pathInfo.equals("/")) {
-		
+
 			try {
-				
+
 				v = dao.create(v);
 
 				try (PrintWriter out = response.getWriter()) {
@@ -169,29 +168,29 @@ public class ValoracionController extends HttpServlet {
 					out.print(json.toJson(v));
 					out.flush();
 				}
-				
-			}catch (Exception e) {
-			
+
+			} catch (Exception e) {
+
 				LOG.error(e);
-			
+
 				try (PrintWriter out = response.getWriter()) {
-				
-						response.setStatus(400);
-						out.print("Parametros mal introducidos");
-						out.flush();
+
+					response.setStatus(400);
+					out.print("Parametros mal introducidos");
+					out.flush();
 				}
 			}
-			
-		}else {
+
+		} else {
 
 			LOG.trace("404");
 
 			try (PrintWriter out = response.getWriter()) {
-				
+
 				response.setStatus(404);
 				out.print("Recurso no encontrado");
 				out.flush();
-		}
+			}
 
 		} // 404
 
@@ -199,53 +198,103 @@ public class ValoracionController extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		LOG.trace("entrando en deDelete");
 
+		LOG.trace("entrando en doPost");
 		String pathInfo = request.getPathInfo();
-
 		LOG.debug("PathInfo:*" + pathInfo + "*");
-		
-		
+
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Valoracion v = null;
+		v = gson.fromJson(reader, Valoracion.class);
+
+		try {
+			if (pathInfo == null || pathInfo.equals("/")) { // recurso mal llamado
+
+				LOG.trace("recurso no encontrado");
+
+				try (PrintWriter out = response.getWriter()) {
+
+					response.setStatus(404);
+					out.print("Recurso no encontrado");
+					out.flush();
+				}
+
+			} else {
+
+				v = dao.update(Utilidades.obtenerId(pathInfo), v);
+
+				if (v != null) {
+
+					try (PrintWriter out = response.getWriter()) {
+						String jsonResponseBody = new Gson().toJson(v);
+						response.setStatus(200);
+						out.print(jsonResponseBody.toString());
+						out.flush();
+					}
+
+				} else {
+
+					try (PrintWriter out = response.getWriter()) {
+						response.setStatus(404);
+						out.print("Recurso no encontrado");
+						out.flush();
+					}
+				}
+
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
 
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		LOG.trace("entrando en deDelete");
-
+		LOG.trace("entrando en GET");
 		String pathInfo = request.getPathInfo();
-
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 
-		int id = -1;
-
 		try {
-			id = Utilidades.obtenerId(request.getPathInfo());
-		} catch (Exception e) {
-			LOG.error(e);
-		}
-		if (id >= 0) {
-			Valoracion valoracion = null;
-			try {
-				valoracion = dao.delete(id);
-			} catch (Exception e) {
-				LOG.error(e);
-			}
+			if (pathInfo == null || pathInfo.equals("/")) { // recurso mal llamado
 
-			if (valoracion == null) {
-				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			} else {
-				response.setStatus(HttpServletResponse.SC_OK);
+				LOG.trace("recurso no encontrado");
+
 				try (PrintWriter out = response.getWriter()) {
 
-					Gson json = new Gson();
-					out.print(json.toJson(valoracion));
+					response.setStatus(404);
+					out.print("Recurso no encontrado");
+					out.flush();
+				}
+
+			} else {
+
+				LOG.trace("entrando en delete");
+
+				PrintWriter out = response.getWriter();
+
+				Valoracion v = dao.delete(Utilidades.obtenerId(pathInfo));
+
+				if (v != null) {
+
+					String jsonResponseBody = new Gson().toJson(v);
+					response.setStatus(200);
+					out.print(jsonResponseBody.toString());
+					out.flush();
+
+				} else { // -1
+
+					response.setStatus(404);
+					out.print("Recurso no encontrado");
 					out.flush();
 
 				}
-			}
+			} // delete by id
+
+		} catch (Exception e) {
+			LOG.error(e);
 		}
 	}
 

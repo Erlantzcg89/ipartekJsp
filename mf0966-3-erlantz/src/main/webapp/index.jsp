@@ -107,53 +107,6 @@
 
 			</section>
 
-			<section class="mt-4 p-4 border rounded bg-dark">
-
-				<h2 class="text-center text-white">Ejemplos del comportamiento
-					del servicio con la herramienta Postman</h2>
-
-				<article class="p-4 m-4 border rounded bg-white">
-					<div class="my-4">
-						<h6 class="mb-3 ml-4">Get: listado en postman</h6>
-						<img src="images/getAllPostman.PNG" alt="get listado">
-					</div>
-				</article>
-
-				<article class="p-4 m-4 border rounded bg-white">
-					<div class="my-4">
-						<h6 class="mb-3 ml-4">
-							Get: listado con filtro de nombre en postman. <small
-								class="text-muted">Cuando la petición al recurso libro
-								devuelve una lista vacia, ya sea porque la base de datos esté
-								vacia o porque la busqueda por el parámetro nombre ha devuelto
-								una lista vacía, el codigo devuelto será un 204</small>
-						</h6>
-
-						<img src="images/getAllNombrePostman.PNG"
-							alt="get listado con filtro">
-					</div>
-				</article>
-
-				<article class="p-4 m-4 border rounded bg-white">
-					<div class="my-4">
-						<h6 class="mb-3 ml-4">Recurso (listado) vacio en postman</h6>
-						<img src="images/204.PNG" alt="204">
-					</div>
-				</article>
-
-				<article class="p-4 m-4 border rounded bg-white">
-					<div class="my-4">
-						<h6 class="mb-3 ml-4">
-							Recurso no encontrado en postman. <small class="text-muted">Cuando
-								la dirección del recurso esté mal escrita la api devolverá un
-								estado 404, recurso no encontrado</small>
-						</h6>
-						<img src="images/404.PNG" alt="404">
-					</div>
-				</article>
-
-			</section>
-
 		</main>
 
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
