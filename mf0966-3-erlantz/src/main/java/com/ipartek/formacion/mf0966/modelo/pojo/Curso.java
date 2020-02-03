@@ -1,5 +1,8 @@
 package com.ipartek.formacion.mf0966.modelo.pojo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
 	
 	private int id;
@@ -8,6 +11,7 @@ public class Curso {
 	private String ffin;
 	private int horas;
 	private int idProfesor;
+	List <Valoracion> valoraciones;
 	
 	public Curso() {
 		super();
@@ -17,6 +21,7 @@ public class Curso {
 		this.ffin = "";
 		this.horas = 0;
 		this.idProfesor = 0;
+		this.valoraciones = new ArrayList <Valoracion> ();
 	}
 
 	public int getId() {
@@ -67,12 +72,19 @@ public class Curso {
 		this.idProfesor = idProfesor;
 	}
 
+	public List<Valoracion> getValoraciones() {
+		return valoraciones;
+	}
+
+	public void setValoraciones(List<Valoracion> valoraciones) {
+		this.valoraciones = valoraciones;
+	}
+
 	@Override
 	public String toString() {
 		return "Curso [id=" + id + ", nombre=" + nombre + ", finicio=" + finicio + ", ffin=" + ffin + ", horas=" + horas
-				+ ", idProfesor=" + idProfesor + "]";
+				+ ", idProfesor=" + idProfesor + ", valoraciones=" + valoraciones + "]";
 	}
-	
-	
+
 
 }
