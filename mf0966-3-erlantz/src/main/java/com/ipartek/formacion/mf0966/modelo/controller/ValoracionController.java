@@ -24,24 +24,25 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 @WebServlet("/api/valoracion/*")
 public class ValoracionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private final static Logger LOG = LogManager.getLogger(ValoracionController.class);
 	ValoracionDAO dao;
 
 	public void init(ServletConfig config) throws ServletException {
-		
+
 		super.init(config);
 		dao = ValoracionDAO.getInstance();
-		
+
 	}
 
 	public void destroy() {
 
 		dao = null;
-		
+
 	}
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		LOG.trace("entrando en service");
 
@@ -49,10 +50,11 @@ public class ValoracionController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 
 		super.service(request, response);
-		
+
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		LOG.trace("entrando en GET");
 		String pathInfo = request.getPathInfo();
@@ -64,7 +66,7 @@ public class ValoracionController extends HttpServlet {
 				LOG.trace("recurso no encontrado");
 
 				try (PrintWriter out = response.getWriter()) {
-					
+
 					response.setStatus(404);
 					out.print("Recurso no encontrado");
 					out.flush();
@@ -81,7 +83,7 @@ public class ValoracionController extends HttpServlet {
 
 					try (PrintWriter out = response.getWriter()) {
 						Gson json = new Gson();
-						
+
 						response.setStatus(200);
 						out.print(json.toJson(valoraciones));
 						out.flush();
@@ -92,7 +94,7 @@ public class ValoracionController extends HttpServlet {
 					LOG.trace("Listado vacio");
 
 					try (PrintWriter out = response.getWriter()) {
-						
+
 						response.setStatus(204);
 						out.print("Listado vacio");
 						out.flush();
@@ -110,13 +112,13 @@ public class ValoracionController extends HttpServlet {
 
 				if (v != null) {
 
-					String jsonResponseBody = new Gson().toJson(v); 
+					String jsonResponseBody = new Gson().toJson(v);
 					response.setStatus(200);
 					out.print(jsonResponseBody.toString());
 					out.flush();
 
 				} else { // -1
-					
+
 					response.setStatus(404);
 					out.print("<h1>Error 404</h1>");
 					out.flush();
@@ -127,9 +129,9 @@ public class ValoracionController extends HttpServlet {
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		
+
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -140,35 +142,58 @@ public class ValoracionController extends HttpServlet {
 		
 		BufferedReader reader = request.getReader();
 		Gson gson = new Gson();
-		Valoracion libro = null;
-		libro = gson.fromJson(reader, Valoracion.class);
-		int status = 0;
+		Valoracion v = null;
+		v = gson.fromJson(reader, Valoracion.class);
 
-		try {
-			libro = dao.create(libro);
-			status = HttpServletResponse.SC_NO_CONTENT;
-		}catch(MySQLIntegrityConstraintViolationException e) {
-			LOG.error("libro duplicado");
-			status = HttpServletResponse.SC_CONFLICT;
-		}
-		catch (Exception e) {
-			LOG.error(e);
-			status = HttpServletResponse.SC_BAD_REQUEST;
-			e.printStackTrace();
-		}
+		if (pathInfo == null) { // recurso mal llamado
 
-		if(status >= 200 && status < 300) {
-		
+			LOG.trace("recurso no encontrado");
+
 			try (PrintWriter out = response.getWriter()) {
-			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-			Gson json = new Gson();
-			out.print(json.toJson(libro));
-			out.flush();
 
+				response.setStatus(404);
+				out.print("Recurso no encontrado");
+				out.flush();
+
+			}
+
+		} else if (pathInfo.equals("/")) {
+		
+			try {
+				
+				v = dao.create(v);
+
+				try (PrintWriter out = response.getWriter()) {
+					response.setStatus(200);
+					Gson json = new Gson();
+					out.print(json.toJson(v));
+					out.flush();
+				}
+				
+			}catch (Exception e) {
+			
+				LOG.error(e);
+			
+				try (PrintWriter out = response.getWriter()) {
+				
+						response.setStatus(400);
+						out.print("Parametros mal introducidos");
+						out.flush();
+				}
+			}
+			
+		}else {
+
+			LOG.trace("404");
+
+			try (PrintWriter out = response.getWriter()) {
+				
+				response.setStatus(404);
+				out.print("Recurso no encontrado");
+				out.flush();
 		}
-		} else {
-			response.setStatus(status);
-		}
+
+		} // 404
 
 	}
 
@@ -182,56 +207,26 @@ public class ValoracionController extends HttpServlet {
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 		
 		
-		BufferedReader reader = request.getReader();
-		Gson gson = new Gson();
-		Valoracion libro = null;
-		libro = gson.fromJson(reader, Valoracion.class);
-		int status = 0;
 
-		try {
-			int id = Utilidades.obtenerId(request.getPathInfo());
-			libro = dao.update(id, libro);
-			status = HttpServletResponse.SC_OK;
-		}catch(MySQLIntegrityConstraintViolationException e) {
-			LOG.error("libro duplicado");
-			status = HttpServletResponse.SC_CONFLICT;
-		}
-		catch (Exception e) {
-			LOG.error(e);
-			status = HttpServletResponse.SC_BAD_REQUEST;
-		}
-
-		if(status >= 200 && status < 300) {
-			try (PrintWriter out = response.getWriter()) {
-				response.setStatus(status);
-				Gson json = new Gson();
-				out.print(json.toJson(libro));
-				out.flush();
-
-			}
-		} else {
-			response.setStatus(status);
-		}
 	}
-	
+
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		LOG.trace("entrando en deDelete");
 
 		String pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 
-		
 		int id = -1;
-		
+
 		try {
 			id = Utilidades.obtenerId(request.getPathInfo());
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-		if(id >= 0) {
+		if (id >= 0) {
 			Valoracion valoracion = null;
 			try {
 				valoracion = dao.delete(id);
@@ -239,7 +234,7 @@ public class ValoracionController extends HttpServlet {
 				LOG.error(e);
 			}
 
-			if(valoracion == null) {
+			if (valoracion == null) {
 				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			} else {
 				response.setStatus(HttpServletResponse.SC_OK);

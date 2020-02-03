@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 import com.ipartek.formacion.mf0966.modelo.pojo.Curso;
 import com.ipartek.formacion.mf0966.modelo.pojo.Valoracion;
 
-public class ValoracionDAO implements IDAO<Valoracion>{
-	
+public class ValoracionDAO implements IDAO<Valoracion> {
+
 	private final static Logger LOG = LogManager.getLogger(ValoracionDAO.class);
 	private static ValoracionDAO INSTANCE;
 
@@ -33,7 +34,7 @@ public class ValoracionDAO implements IDAO<Valoracion>{
 	public List<Valoracion> getAll() {
 
 		LOG.debug("Entra en getAll");
-		
+
 		ArrayList<Valoracion> resultado = new ArrayList<Valoracion>();
 
 		String sql = "SELECT v.id 'id_valoracion', v.comentario 'comentario', v.nota 'nota', v.id_usuario 'id_usuario', v.id_curso 'id_curso' FROM valoraciones v ORDER BY v.id asc LIMIT 500;";
@@ -59,27 +60,25 @@ public class ValoracionDAO implements IDAO<Valoracion>{
 
 	@Override
 	public Valoracion getById(int id) {
-		
+
 		LOG.debug("Entra en getbyId");
-		
+
 		String sql = "SELECT v.id 'id_valoracion', v.comentario 'comentario', v.nota 'nota', v.id_usuario 'id_usuario', v.id_curso 'id_curso' FROM valoraciones v WHERE v.id = ? ORDER BY v.id asc LIMIT 500;";
 		Valoracion resultado = null;
-		
-		try(Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql);
-				) {
-			
+
+		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
+
 			pst.setInt(1, id);
-			
-			try(ResultSet rs = pst.executeQuery()) {
+
+			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					
+
 					resultado = mapper(rs);
 
 				}
 			}
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			LOG.error(e);
 		}
 
@@ -94,16 +93,63 @@ public class ValoracionDAO implements IDAO<Valoracion>{
 
 	@Override
 	public Valoracion update(int id, Valoracion pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		String sql = "INSERT INTO valoraciones(nota, comentario, id_usuario, id_curso) VALUES (?, ?, ?, ?);";
+		
+		Valoracion resul = null;
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS )
+				){
+			pst.setInt(1, pojo.getNota());
+			pst.setString(2, pojo.getComentario());
+			pst.setInt(3, pojo.getIdUsuario());
+			pst.setInt(4, pojo.getIdCurso());
+			
+			int affectedRows = pst.executeUpdate();
+			if(affectedRows == 1) {
+				ResultSet rs = pst.getGeneratedKeys();
+
+				resul = pojo;
+				rs.next();
+				resul.setId(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return resul;
+
 	}
 
 	@Override
 	public Valoracion create(Valoracion pojo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "INSERT INTO valoraciones(nota, comentario, id_usuario, id_curso) VALUES (?, ?, ?, ?);";
+		
+		Valoracion resul = null;
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS )
+				){
+			pst.setInt(1, pojo.getNota());
+			pst.setString(2, pojo.getComentario());
+			pst.setInt(3, pojo.getIdUsuario());
+			pst.setInt(4, pojo.getIdCurso());
+			
+			int affectedRows = pst.executeUpdate();
+			if(affectedRows == 1) {
+				ResultSet rs = pst.getGeneratedKeys();
+
+				resul = pojo;
+				rs.next();
+				resul.setId(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		
+		return resul;
 	}
-	
+
 	/**
 	 * Utilidad para mapear un ResultSet a un Curso
 	 *
