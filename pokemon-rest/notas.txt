@@ -1,0 +1,4 @@
+dao getAll pokemons
+	left join para que salgan pokemons sin habilidades
+
+nombre pokemon min 1 max 50

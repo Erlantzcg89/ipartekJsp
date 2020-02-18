@@ -1,5 +1,6 @@
 package com.ipartek.formacion.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 import com.ipartek.formacion.model.PokemonDAO;
 import com.ipartek.formacion.model.pojo.Pokemon;
 import com.ipartek.formacion.model.utilidades.Utilidades;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 @WebServlet("/api/pokemon/*")
 public class PokemonController extends HttpServlet {
@@ -208,29 +210,130 @@ public class PokemonController extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		LOG.trace("entrando en doPost");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+
+		
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Pokemon pokemon = null;
+		pokemon = gson.fromJson(reader, Pokemon.class);
+		int status = 0;
+
+		try {
+			pokemon = dao.create(pokemon);
+			status = HttpServletResponse.SC_NO_CONTENT;
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			LOG.error("libro duplicado");
+			status = HttpServletResponse.SC_CONFLICT;
+		}
+		catch (Exception e) {
+			LOG.error(e);
+			status = HttpServletResponse.SC_BAD_REQUEST;
+			e.printStackTrace();
+		}
+
+		if(status >= 200 && status < 300) {
+		
+			try (PrintWriter out = response.getWriter()) {
+			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+			Gson json = new Gson();
+			out.print(json.toJson(pokemon));
+			out.flush();
+
+		}
+		} else {
+			response.setStatus(status);
+		}
+
 	}
 
-	/**
-	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
-	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+		
+		LOG.trace("entrando en deDelete");
 
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+		
+		
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		Pokemon pokemon = null;
+		pokemon = gson.fromJson(reader, Pokemon.class);
+		int status = 0;
+
+		try {
+			int id = Utilidades.obtenerId(request.getPathInfo());
+			pokemon = dao.update(id, pokemon);
+			status = HttpServletResponse.SC_OK;
+		}catch(MySQLIntegrityConstraintViolationException e) {
+			LOG.error("libro duplicado");
+			status = HttpServletResponse.SC_CONFLICT;
+		}
+		catch (Exception e) {
+			LOG.error(e);
+			status = HttpServletResponse.SC_BAD_REQUEST;
+		}
+
+		if(status >= 200 && status < 300) {
+			try (PrintWriter out = response.getWriter()) {
+				response.setStatus(status);
+				Gson json = new Gson();
+				out.print(json.toJson(pokemon));
+				out.flush();
+
+			}
+		} else {
+			response.setStatus(status);
+		}
+	}
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		LOG.trace("entrando en deDelete");
+
+		String pathInfo = request.getPathInfo();
+
+		LOG.debug("PathInfo:*" + pathInfo + "*");
+
+		
+		int id = -1;
+		
+		try {
+			id = Utilidades.obtenerId(request.getPathInfo());
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		if(id >= 0) {
+			Pokemon pokemon = null;
+			try {
+				pokemon = dao.delete(id);
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+
+			if(pokemon == null) {
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			} else {
+				response.setStatus(HttpServletResponse.SC_OK);
+				try (PrintWriter out = response.getWriter()) {
+
+					Gson json = new Gson();
+					out.print(json.toJson(pokemon));
+					out.flush();
+
+				}
+			}
+		}
 	}
 
 }

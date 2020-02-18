@@ -39,7 +39,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 		LOG.debug("Entra en getAll");
 
-		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id order by p.id desc limit 500;";
+		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' FROM (pokemons_habilidades ph INNER JOIN habilidades h ON ph.id_habilidad=h.id) RIGHT JOIN pokemons p ON ph.id_pokemon=p.id order by p.id desc limit 500;";
 		HashMap<Integer, Pokemon> mapPokemons = new HashMap<Integer, Pokemon>();
 
 		try (Connection con = ConnectionManager.getConnection();
@@ -77,7 +77,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 		LOG.debug("Entra en getAllNombre");
 
-		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id AND p.nombre LIKE CONCAT('%', ?, '%') order by p.id desc limit 500;";
+		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' FROM (pokemons_habilidades ph INNER JOIN habilidades h ON ph.id_habilidad=h.id) RIGHT JOIN pokemons p ON ph.id_pokemon=p.id where p.nombre LIKE CONCAT('%', ?, '%') order by p.id desc limit 500;";
 		HashMap<Integer, Pokemon> mapPokemons = new HashMap<Integer, Pokemon>();
 
 		try (Connection con = ConnectionManager.getConnection();
@@ -119,7 +119,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 		LOG.debug("Entra en getbyId");
 
-		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' from pokemons p, habilidades h, pokemons_habilidades ph WHERE ph.id_pokemon=p.id AND ph.id_habilidad=h.id and p.id= ? order by p.id desc limit 500;";
+		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' FROM (pokemons_habilidades ph INNER JOIN habilidades h ON ph.id_habilidad=h.id) RIGHT JOIN pokemons p ON ph.id_pokemon=p.id where p.id= ? order by p.id desc limit 500;";
 		;
 		Pokemon resul = null;
 
@@ -153,105 +153,91 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 	@Override
 	public Pokemon delete(int id) throws Exception {
+		
+		LOG.debug("Entra en delete");
 
-		LOG.debug("Entra en deleteFinal");
+		String sql= "DELETE FROM pokemons WHERE id = ?;";
+		
+		Pokemon resultado = getById(id);
 
-		String sql = "DELETE FROM pokemons WHERE id = ?;";
-		Pokemon resultado = null;
-
-		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql);) {
-
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			
 			pst.setInt(1, id);
 
-			Pokemon productoBorrar = getById(id);
+			int affectedRows = pst.executeUpdate();
 
-			LOG.debug("Ejecuta la query: " + pst.toString());
-
-			int affetedRows = pst.executeUpdate();
-			if (affetedRows == 1) {
-				resultado = productoBorrar;
+			if(affectedRows == 1) {
+				LOG.info("Elemento borrado");
 			} else {
-				LOG.error("Delete incorrecto, ha afectado a mas de un producto");
+				LOG.error("Error, se han borrado más de un elemnto");
+				resultado = null;
 			}
 
 		} catch (Exception e) {
 			LOG.error(e);
-			throw e;
 		}
-
 		return resultado;
-
 	}
 
 	@Override
 	public Pokemon update(int id, Pokemon pojo) throws Exception {
-
+		
 		LOG.debug("Entra en update");
 
-		// TODO query
-		String sql = "UPDATE pokemons SET nombre= ?, imagen=?, precio=?, descuento=?, descripcion=?, fecha_modificacion=CURRENT_TIMESTAMP(), id_usuario=?, id_categoria=?, validado=? WHERE id = ?;";
-		Pokemon resultado = null;
-
-		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
-
+		String sql = "UPDATE pokemons SET nombre = ? WHERE id = ?";
+		
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql)) {
+			
 			pst.setString(1, pojo.getNombre());
-//			pst.setString(2, pojo.ge());
-//			pst.setFloat(3, pojo.getPrecio());
-//			pst.setInt(4, pojo.getDescuento());
-//			pst.setString(5, pojo.getDescripcion());
-//			pst.setInt(6, pojo.getUsuario().getId());
-//			pst.setInt(7, pojo.getCategoria().getId());
-//			pst.setInt(8, pojo.getValidado());
-//			pst.setInt(9, id);
-
-			LOG.debug(pst);
-
+			pst.setInt(2, id);
+			
 			int affectedRows = pst.executeUpdate();
-			if (affectedRows == 1) {
-				resultado = getById(id);
+			
+			if(affectedRows == 1) {
+				LOG.trace("Update realizado");
 			} else {
-				LOG.fatal("El update esta mal, ha afectado a mas de un producto");
+				LOG.error("Error se han actualizado más de una fila");
 			}
+		} catch (Exception e) {
+			LOG.error(e);
+			throw e;
 		}
-		return resultado;
+		
+		return pojo;
 
 	}
 
 	@Override
 	public Pokemon create(Pokemon pojo) throws Exception {
-
+		
 		LOG.debug("Entra en create");
 
-		// TODO query
-		String sql = "INSERT INTO producto (id, nombre, imagen, precio, descuento, descripcion, fecha_creacion, id_usuario, id_categoria) VALUES ( ? , ?, ?, ?, ?, ?, CURRENT_TIMESTAMP(), ?,?);";
-
-		try (Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-			pst.setInt(1, pojo.getId());
-			pst.setString(2, pojo.getNombre());
-//			pst.setString(3, pojo.getImagen());
-//			pst.setFloat(4, pojo.getPrecio());
-//			pst.setInt(5, pojo.getDescuento());
-//			pst.setString(6, pojo.getDescripcion());
-//			pst.setInt(7, pojo.getUsuario().getId());
-//			pst.setInt(8, pojo.getCategoria().getId());
-
-			LOG.debug("Ejecuta la query: " + pst.toString());
-
+		String sql = "INSERT INTO pokemons (nombre) VALUES (?);";
+		
+		Pokemon resultado = null;
+		
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS )
+				){
+			
+			pst.setString(1, pojo.getNombre());
+			
 			int affectedRows = pst.executeUpdate();
-			if (affectedRows == 1) {
-				// conseguimos el ID que acabamos de crear
+			
+			if(affectedRows == 1) {
 				ResultSet rs = pst.getGeneratedKeys();
-				if (rs.next()) {
-					pojo.setId(rs.getInt(1));
-				}
+
+				resultado = pojo;
+				rs.next();
+				resultado.setId(rs.getInt(1));
 			}
-
+		} catch (Exception e) {
+			throw e;
 		}
-
-		return pojo;
-
+		
+		return resultado;
 	}
 
 	/**
