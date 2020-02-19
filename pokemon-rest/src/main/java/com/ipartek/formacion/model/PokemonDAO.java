@@ -208,36 +208,54 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		return pojo;
 
 	}
+	
 
 	@Override
 	public Pokemon create(Pokemon pojo) throws Exception {
 		
 		LOG.debug("Entra en create");
 
-		String sql = "INSERT INTO pokemons (nombre) VALUES (?);";
+		String sqlPokemon = "INSERT INTO pokemons (nombre) VALUES (?);";
+		String sqlHabilidad = "INSERT INTO pokemons_habilidades (id_pokemon, id_habilidad) VALUES (?,?);";
 		
-		Pokemon resultado = null;
-		
-		try(Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS )
-				){
-			
-			pst.setString(1, pojo.getNombre());
-			
-			int affectedRows = pst.executeUpdate();
-			
-			if(affectedRows == 1) {
-				ResultSet rs = pst.getGeneratedKeys();
+	    Pokemon resul = null;
+	    Connection con = null;
+	    try{
+	        con = ConnectionManager.getConnection();
+	        con.setAutoCommit(false);
+	        PreparedStatement pstPokemon = con.prepareStatement(sqlPokemon, Statement.RETURN_GENERATED_KEYS );
+	        pstPokemon.setString(1, pojo.getNombre());
+	        int affectedRows = pstPokemon.executeUpdate();
+	        if(affectedRows == 1) {
+	            ResultSet rs = pstPokemon.getGeneratedKeys();
 
-				resultado = pojo;
-				rs.next();
-				resultado.setId(rs.getInt(1));
-			}
-		} catch (Exception e) {
-			throw e;
-		}
-		
-		return resultado;
+	            resul = pojo;
+	            rs.next();
+	            // id generada
+	            resul.setId(rs.getInt(1));
+	            
+	        	ArrayList<Habilidad> habilidades = (ArrayList<Habilidad>) pojo.getHabilidades();
+	        	for(Habilidad h : habilidades){
+	        
+	        		PreparedStatement pstHabilidad = con.prepareStatement(sqlHabilidad);
+	        		
+	        		pstHabilidad.setInt(1, resul.getId());
+	        		pstHabilidad.setInt(2, h.getId());
+	        		pstHabilidad.executeUpdate();
+	        
+	        	}
+	            
+	            con.commit();
+	        }
+	    } catch (Exception e) {
+	        con.rollback();
+	        throw e;
+	    } finally {
+	        if(con != null) {
+	            con.close();
+	        }
+	    }
+	    return resul;
 	}
 
 	/**

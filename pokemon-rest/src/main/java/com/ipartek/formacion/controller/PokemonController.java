@@ -228,7 +228,7 @@ public class PokemonController extends HttpServlet {
 
 		try {
 			pokemon = dao.create(pokemon);
-			status = HttpServletResponse.SC_NO_CONTENT;
+			status = HttpServletResponse.SC_CREATED;
 		}catch(MySQLIntegrityConstraintViolationException e) {
 			LOG.error("libro duplicado");
 			status = HttpServletResponse.SC_CONFLICT;
