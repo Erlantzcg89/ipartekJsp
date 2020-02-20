@@ -224,7 +224,11 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	        con = ConnectionManager.getConnection();
 	        con.setAutoCommit(false);
 	        PreparedStatement pstPokemon = con.prepareStatement(sqlPokemon, Statement.RETURN_GENERATED_KEYS );
+	        
 	        pstPokemon.setString(1, pojo.getNombre());
+	        
+			LOG.trace(pstPokemon);
+	        
 	        int affectedRows = pstPokemon.executeUpdate();
 	        if(affectedRows == 1) {
 	            ResultSet rs = pstPokemon.getGeneratedKeys();
@@ -241,6 +245,9 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	        		
 	        		pstHabilidad.setInt(1, resul.getId());
 	        		pstHabilidad.setInt(2, h.getId());
+	        		
+	    			LOG.trace(pstHabilidad);
+	        		
 	        		pstHabilidad.executeUpdate();
 	        
 	        	}

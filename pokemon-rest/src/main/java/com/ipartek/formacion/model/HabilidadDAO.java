@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +15,7 @@ import com.ipartek.formacion.model.pojo.Habilidad;
 
 public class HabilidadDAO implements IDAO<Habilidad> {
 	
-	private final static Logger LOG = LogManager.getLogger(PokemonDAO.class);
+	private final static Logger LOG = LogManager.getLogger(HabilidadDAO.class);
 	private static HabilidadDAO INSTANCE;
 
 	String filtroNombre = "AND p.nombre LIKE CONCAT('%', ?, '%')";
@@ -38,7 +36,7 @@ public class HabilidadDAO implements IDAO<Habilidad> {
 
 		LOG.debug("Entra en getAll");
 
-		String sql = " order by h.id desc limit 500;";
+		String sql = "SELECT id, nombre FROM habilidades ORDER BY id ASC LIMIT 500;";
 		ArrayList<Habilidad> resultado = new ArrayList<Habilidad>();
 
 		try (Connection con = ConnectionManager.getConnection();
@@ -51,6 +49,35 @@ public class HabilidadDAO implements IDAO<Habilidad> {
 					
 					resultado.add(mapperHabilidad(rs));
 
+			}
+
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+
+		return resultado;
+	}
+	
+	public List<Habilidad> getAllNombre(String nombre) {
+
+		LOG.debug("Entra en getAllNombre");
+
+		String sql = "";
+		ArrayList<Habilidad> resultado = new ArrayList<Habilidad>();
+
+		try (Connection con = ConnectionManager.getConnection();
+				PreparedStatement pst = con.prepareStatement(sql);) {
+
+			pst.setString(1, nombre);
+
+			LOG.trace(pst);
+
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+
+					resultado.add(mapperHabilidad(rs));
+
+				}
 			}
 
 		} catch (Exception e) {
@@ -189,8 +216,8 @@ public class HabilidadDAO implements IDAO<Habilidad> {
 	private Habilidad mapperHabilidad(ResultSet rs) throws SQLException {
 
 		Habilidad h = new Habilidad();
-		h.setId(rs.getInt("id_habilidad"));
-		h.setNombre(rs.getString("nombre_habilidad"));
+		h.setId(rs.getInt("id"));
+		h.setNombre(rs.getString("nombre"));
 
 		return h;
 	}

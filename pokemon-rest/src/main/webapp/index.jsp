@@ -25,11 +25,25 @@
 		<h1 class="text-center mt-3">Documentación</h1>
 		<p class="text-center  mb-3">&copy; Erlantz Caballero 2020</p>
 		<p class="text-center mb-4">
-			Endpoint: <b>${pageContext.request.contextPath}/api/pokemon/</b>
+			Endpoint: <b>${pageContext.request.contextPath}/api/habilidad/</b>
 		</p>
 	</header>
 
 	<main class="container-fluid">
+	
+			<div class="alert alert-info bg-info" role="alert">
+			<div class="alert alert-info mt-4" role="alert">
+				GET <a class="" target="_blank"
+					href="${pageContext.request.contextPath}/api/habilidad/">/api/habilidad/</a><br>
+				Recurso: Listar<br>Códigos de estado: <span
+					class="text-success">200 éxito</span> | <span class="text-success">204
+					listado vacio</span>
+			</div>
+		</div>
+		
+		<p class="text-center mb-4">
+			Endpoint: <b>${pageContext.request.contextPath}/api/pokemon/</b>
+		</p>
 
 		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">

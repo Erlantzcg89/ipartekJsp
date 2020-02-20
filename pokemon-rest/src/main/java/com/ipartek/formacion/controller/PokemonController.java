@@ -28,18 +28,6 @@ public class PokemonController extends HttpServlet {
 	private final static Logger LOG = LogManager.getLogger(PokemonController.class);
 	PokemonDAO dao;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public PokemonController() {
-
-		super();
-
-	}
-
-	/**
-	 * @see Servlet#init(ServletConfig)
-	 */
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
@@ -47,19 +35,12 @@ public class PokemonController extends HttpServlet {
 
 	}
 
-	/**
-	 * @see Servlet#destroy()
-	 */
 	public void destroy() {
 
 		dao = null;
 
 	}
 
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -72,10 +53,6 @@ public class PokemonController extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -257,7 +234,7 @@ public class PokemonController extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		LOG.trace("entrando en deDelete");
+		LOG.trace("entrando en doPut");
 
 		String pathInfo = request.getPathInfo();
 
