@@ -120,7 +120,6 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		LOG.debug("Entra en getbyId");
 
 		String sql = "SELECT p.id AS 'id_pokemon', p.nombre AS 'nombre_pokemon', h.id AS 'id_habilidad', h.nombre AS 'nombre_habilidad' FROM (pokemons_habilidades ph INNER JOIN habilidades h ON ph.id_habilidad=h.id) RIGHT JOIN pokemons p ON ph.id_pokemon=p.id where p.id= ? order by p.id desc limit 500;";
-		;
 		Pokemon resul = null;
 
 		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
