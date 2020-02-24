@@ -71,7 +71,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		ArrayList<Pokemon> resultado = new ArrayList<Pokemon>(coleccionPokemons);
 
 		return resultado;
-	}
+	}// getAll
 
 	public List<Pokemon> getAllNombre(String nombre) {
 
@@ -112,7 +112,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		ArrayList<Pokemon> resultado = new ArrayList<Pokemon>(coleccionPokemons);
 
 		return resultado;
-	}
+	}// getAllNombre
 
 	@Override
 	public Pokemon getById(int id) {
@@ -149,7 +149,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		}
 		return resul;
 
-	}
+	}// getById
 
 	@Override
 	public Pokemon delete(int id) throws Exception {
@@ -178,38 +178,66 @@ public class PokemonDAO implements IDAO<Pokemon> {
 			LOG.error(e);
 		}
 		return resultado;
-	}
+	}// delete
 
 	@Override
-	public Pokemon update(int id, Pokemon pojo) throws Exception {
+	public Pokemon update(Pokemon pojo) throws Exception {
 		
 		LOG.debug("Entra en update");
 
 		String sql = "UPDATE pokemons SET nombre = ? WHERE id = ?";
+		String sqlHabilidad1 = "DELETE from pokemons_habilidades where id_pokemon = ?;";
+		String sqlHabilidad2 = "INSERT INTO pokemons_habilidades (id_pokemon, id_habilidad) VALUES (?,?);";
 		
-		try(Connection con = ConnectionManager.getConnection();
-				PreparedStatement pst = con.prepareStatement(sql)) {
-			
-			pst.setString(1, pojo.getNombre());
-			pst.setInt(2, id);
-			
-			int affectedRows = pst.executeUpdate();
-			
-			if(affectedRows == 1) {
-				LOG.trace("Update realizado");
-			} else {
-				LOG.error("Error se han actualizado más de una fila");
-			}
-		} catch (Exception e) {
-			LOG.error(e);
-			throw e;
-		}
 		
-		return pojo;
+		 Pokemon resul = null;
+		    Connection con = null;
+		    try{
+		        con = ConnectionManager.getConnection();
+		        con.setAutoCommit(false);
+		        PreparedStatement pstPokemon = con.prepareStatement(sql);
+		        
+		        pstPokemon.setString(1, pojo.getNombre());
+		        pstPokemon.setInt(2, pojo.getId());
+		        
+				LOG.trace(pstPokemon);
+		        
+		        int affectedRows = pstPokemon.executeUpdate();
+		        if(affectedRows == 1) {	
+		        	
+		        	//paso borrar habilidades del pokemon
+		        	PreparedStatement pstHabilidad1 = con.prepareStatement(sqlHabilidad1);
+	        		pstHabilidad1.setInt(1, pojo.getId());
+	        		LOG.trace(pstHabilidad1);
+	        		pstHabilidad1.executeUpdate();
+		            
+	        		// paso introducir habilidades actuales
+		        	ArrayList<Habilidad> habilidades = (ArrayList<Habilidad>) pojo.getHabilidades();
+		        	for(Habilidad h : habilidades){
+		        
+		        		PreparedStatement pstHabilidad2 = con.prepareStatement(sqlHabilidad2);
+		        		pstHabilidad2.setInt(1, pojo.getId());
+		        		pstHabilidad2.setInt(2, h.getId());
+		        		LOG.trace(pstHabilidad2);
+		        		pstHabilidad2.executeUpdate();
+		        
+		        	}
+		            resul = pojo;
+		            con.commit();
+		        }
+		    } catch (Exception e) {
+		        con.rollback();
+		        throw e;
+		    } finally {
+		        if(con != null) {
+		            con.close();
+		        }
+		    }
+		    return resul;
 
-	}
+	}	// update atómico
 	
-	// update atómico
+
 	
 
 	@Override
@@ -265,7 +293,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 	        }
 	    }
 	    return resul;
-	}
+	}// post atómico
 
 	/**
 	 * Utilidad para mapear un Pokemon
@@ -283,7 +311,7 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		p.getHabilidades().add(mapperHabilidad(rs));
 
 		return p;
-	}
+	}// mapperPokemon
 
 	/**
 	 * Utilidad para mapear una Habilidad
@@ -299,6 +327,6 @@ public class PokemonDAO implements IDAO<Pokemon> {
 		h.setNombre(rs.getString("nombre_habilidad"));
 
 		return h;
-	}
+	}// mapperHabilidad
 
-}
+}// PokemonDAO

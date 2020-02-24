@@ -248,11 +248,10 @@ public class PokemonController extends HttpServlet {
 		int status = 0;
 
 		try {
-			int id = Utilidades.obtenerId(request.getPathInfo());
-			pokemon = dao.update(id, pokemon);
+			pokemon = dao.update(pokemon);
 			status = HttpServletResponse.SC_OK;
 		}catch(MySQLIntegrityConstraintViolationException e) {
-			LOG.error("libro duplicado");
+			LOG.error("pokemon duplicado");
 			status = HttpServletResponse.SC_CONFLICT;
 		}
 		catch (Exception e) {

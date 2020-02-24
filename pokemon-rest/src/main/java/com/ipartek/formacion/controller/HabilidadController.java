@@ -248,8 +248,7 @@ public class HabilidadController extends HttpServlet {
 		int status = 0;
 
 		try {
-			int id = Utilidades.obtenerId(request.getPathInfo());
-			habilidad = dao.update(id, habilidad);
+			habilidad = dao.update(habilidad);
 			status = HttpServletResponse.SC_OK;
 		}catch(MySQLIntegrityConstraintViolationException e) {
 			LOG.error("entrada duplicada");

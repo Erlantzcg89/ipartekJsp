@@ -146,7 +146,7 @@ public class HabilidadDAO implements IDAO<Habilidad> {
 	}
 
 	@Override
-	public Habilidad update(int id, Habilidad pojo) throws Exception {
+	public Habilidad update(Habilidad pojo) throws Exception {
 		
 		LOG.debug("Entra en update");
 
@@ -156,7 +156,7 @@ public class HabilidadDAO implements IDAO<Habilidad> {
 				PreparedStatement pst = con.prepareStatement(sql)) {
 			
 			pst.setString(1, pojo.getNombre());
-			pst.setInt(2, id);
+			pst.setInt(2, pojo.getId());
 			
 			int affectedRows = pst.executeUpdate();
 			
