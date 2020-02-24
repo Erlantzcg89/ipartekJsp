@@ -24,14 +24,29 @@
 	<header>
 		<h1 class="text-center mt-3">Documentación</h1>
 		<p class="text-center  mb-3">&copy; Erlantz Caballero 2020</p>
-		<p class="text-center mb-4">
-			Endpoint: <b>${pageContext.request.contextPath}/api/habilidad/</b>
-		</p>
 	</header>
 
 	<main class="container-fluid">
-	
-			<div class="alert alert-info bg-info" role="alert">
+
+		<p class="text-center mb-4">
+			Endpoint: <b>${pageContext.request.contextPath}/api/usuario/</b>
+		</p>
+
+		<div class="alert alert-info bg-info" role="alert">
+			<div class="alert alert-info mt-4" role="alert">
+				GET <a class="" target="_blank"
+					href="${pageContext.request.contextPath}/api/usuario/?nombre=admin&contra=admin">/api/usuario/?nombre de usuario & contraseña</a><br>
+				Recurso: Login, devuelve detalle de usuario si es exitoso<br>Códigos de estado: <span
+					class="text-success">200 éxito</span> | <span class="text-danger">404
+					recurso no encontrado</span>
+			</div>
+		</div>
+
+		<p class="text-center mb-4">
+			Endpoint: <b>${pageContext.request.contextPath}/api/habilidad/</b>
+		</p>
+
+		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">
 				GET <a class="" target="_blank"
 					href="${pageContext.request.contextPath}/api/habilidad/">/api/habilidad/</a><br>
@@ -40,7 +55,7 @@
 					listado vacio</span>
 			</div>
 		</div>
-		
+
 		<p class="text-center mb-4">
 			Endpoint: <b>${pageContext.request.contextPath}/api/pokemon/</b>
 		</p>
@@ -89,8 +104,8 @@
 				PUT <a class="" href="pokemon-rest">/api/pokemon/{id}</a><br>
 				Recurso: Update<br>Códigos de estado: <span
 					class="text-success">200 éxito</span> | <span class="text-danger">400
-					conflicto (parámetros incorrectos)</span>, <span class="text-danger">404 recurso
-				no encontrado</span>, <span class="text-danger">409
+					conflicto (parámetros incorrectos)</span>, <span class="text-danger">404
+					recurso no encontrado</span>, <span class="text-danger">409
 					conflicto (unique key)</span>
 			</div>
 		</div>

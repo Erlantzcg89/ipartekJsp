@@ -209,6 +209,8 @@ public class PokemonDAO implements IDAO<Pokemon> {
 
 	}
 	
+	// update atómico
+	
 
 	@Override
 	public Pokemon create(Pokemon pojo) throws Exception {
