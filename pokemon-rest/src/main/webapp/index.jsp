@@ -35,7 +35,7 @@
 		<div class="alert alert-info bg-info" role="alert">
 			<div class="alert alert-info mt-4" role="alert">
 				GET <a class="" target="_blank"
-					href="${pageContext.request.contextPath}/api/usuario/?nombre=admin&contra=admin">/api/usuario/?nombre de usuario & contraseña</a><br>
+					href="${pageContext.request.contextPath}/api/usuario/?nombre=admin&password=admin">/api/usuario/?nombre de usuario & contraseña</a><br>
 				Recurso: Login, devuelve detalle de usuario si es exitoso<br>Códigos de estado: <span
 					class="text-success">200 éxito</span> | <span class="text-danger">404
 					recurso no encontrado</span>

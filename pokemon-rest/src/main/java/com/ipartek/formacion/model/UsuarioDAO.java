@@ -15,7 +15,20 @@ public class UsuarioDAO implements IDAO<Usuario>{
 	
 	private final static Logger LOG = LogManager.getLogger(UsuarioDAO.class);
 	
-	public Usuario getLogin(Usuario usuario){
+	private static UsuarioDAO INSTANCE;
+
+	private UsuarioDAO() {
+		super();
+	}
+
+	public static UsuarioDAO getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new UsuarioDAO();
+		}
+		return INSTANCE;
+	}
+	
+	public Usuario getLogin(String nombre, String password){
 		
 		String sql = "Select id, nombre, password from usuarios where nombre=? and password=?;";
 		
@@ -23,8 +36,8 @@ public class UsuarioDAO implements IDAO<Usuario>{
 		
 		try (Connection con = ConnectionManager.getConnection(); PreparedStatement pst = con.prepareStatement(sql)) {
 
-			pst.setString(1, usuario.getNombre());
-			pst.setString(2, usuario.getPassword());
+			pst.setString(1, nombre);
+			pst.setString(2, password);
 
 			LOG.trace(pst);
 
