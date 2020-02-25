@@ -24,10 +24,10 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 @WebServlet("/api/habilidad/*")
 public class HabilidadController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	private final static Logger LOG = LogManager.getLogger(HabilidadController.class);
+    private static final Logger LOG = LogManager.getLogger(HabilidadController.class);
 	HabilidadDAO dao;
 
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
@@ -35,12 +35,14 @@ public class HabilidadController extends HttpServlet {
 
 	}
 
+	@Override
 	public void destroy() {
 
 		dao = null;
 
 	}
   
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -53,6 +55,7 @@ public class HabilidadController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -60,13 +63,13 @@ public class HabilidadController extends HttpServlet {
 
 		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
 
-		String pathInfo = request.getPathInfo();
+		 
 
-		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("PathInfo:*" + request.getPathInfo() + "*");
 		LOG.debug("Parámetro");
 
 		try {
-			if (pathInfo == null) {
+			if (request.getPathInfo() == null) {
 
 				LOG.trace("recurso no encontrado");
 
@@ -106,7 +109,7 @@ public class HabilidadController extends HttpServlet {
 
 				}
 
-			} else if (pathInfo.equals("/")) {
+			} else if (request.getPathInfo().equals("/")) {
 
 				LOG.trace("entrando en el getAll()");
 
@@ -137,7 +140,7 @@ public class HabilidadController extends HttpServlet {
 
 			} else {
 
-				int id = Utilidades.obtenerId(pathInfo);
+				int id = Utilidades.obtenerId(request.getPathInfo());
 
 				if (id != -1) {
 
@@ -187,14 +190,13 @@ public class HabilidadController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en doPost");
 
-		String pathInfo = request.getPathInfo();
-
-		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("PathInfo:*" + request.getPathInfo() + "*");
 
 		
 		BufferedReader reader = request.getReader();
@@ -231,14 +233,13 @@ public class HabilidadController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en deDelete");
 
-		String pathInfo = request.getPathInfo();
-
-		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("PathInfo:*" + request.getPathInfo() + "*");
 		
 		
 		BufferedReader reader = request.getReader();
@@ -272,14 +273,13 @@ public class HabilidadController extends HttpServlet {
 		}
 	}
 	
+	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en doDelete");
 
-		String pathInfo = request.getPathInfo();
-
-		LOG.debug("PathInfo:*" + pathInfo + "*");
+		LOG.debug("PathInfo:*" + request.getPathInfo() + "*");
 
 		
 		int id = -1;

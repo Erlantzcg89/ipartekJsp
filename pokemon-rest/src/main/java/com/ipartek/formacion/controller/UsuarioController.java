@@ -24,9 +24,13 @@ import com.ipartek.formacion.model.pojo.Usuario;
 @WebServlet("/api/usuario/*")
 public class UsuarioController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final static Logger LOG = LogManager.getLogger(UsuarioDAO.class);
+	private static final Logger LOG = LogManager.getLogger(UsuarioDAO.class);
+	
+	private static String pathInfo = null;
+
 	UsuarioDAO dao;
 
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
@@ -34,12 +38,14 @@ public class UsuarioController extends HttpServlet {
 
 	}
 
+	@Override
 	public void destroy() {
 
 		dao = null;
 
 	}
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,6 +58,7 @@ public class UsuarioController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -59,8 +66,9 @@ public class UsuarioController extends HttpServlet {
 
 		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
 		String password = (request.getParameter("password") == null) ? "" : request.getParameter("password");
-		String pathInfo = request.getPathInfo();
 
+		pathInfo = request.getPathInfo();
+		
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 		LOG.debug("Parámetro");
 
@@ -131,6 +139,7 @@ public class UsuarioController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 

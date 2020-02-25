@@ -25,9 +25,12 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 public class PokemonController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private final static Logger LOG = LogManager.getLogger(PokemonController.class);
+	private static final Logger LOG = LogManager.getLogger(PokemonController.class);
 	PokemonDAO dao;
+	
+	private static String pathInfo = null;
 
+	@Override
 	public void init(ServletConfig config) throws ServletException {
 
 		super.init(config);
@@ -35,12 +38,14 @@ public class PokemonController extends HttpServlet {
 
 	}
 
+	@Override
 	public void destroy() {
 
 		dao = null;
 
 	}
 
+	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -53,6 +58,7 @@ public class PokemonController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -60,7 +66,7 @@ public class PokemonController extends HttpServlet {
 
 		String nombre = (request.getParameter("nombre") == null) ? "" : request.getParameter("nombre");
 
-		String pathInfo = request.getPathInfo();
+		pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 		LOG.debug("Parámetro");
@@ -187,12 +193,13 @@ public class PokemonController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en doPost");
 
-		String pathInfo = request.getPathInfo();
+		pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 
@@ -231,12 +238,13 @@ public class PokemonController extends HttpServlet {
 
 	}
 
+	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en doPut");
 
-		String pathInfo = request.getPathInfo();
+		pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 		
@@ -272,12 +280,13 @@ public class PokemonController extends HttpServlet {
 		}
 	}
 	
+	@Override
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		LOG.trace("entrando en deDelete");
 
-		String pathInfo = request.getPathInfo();
+		pathInfo = request.getPathInfo();
 
 		LOG.debug("PathInfo:*" + pathInfo + "*");
 

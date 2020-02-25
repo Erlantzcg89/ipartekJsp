@@ -31,7 +31,7 @@ import com.ipartek.formacion.model.pojo.Usuario;
 				DispatcherType.INCLUDE, 
 				DispatcherType.ERROR
 		}
-					, urlPatterns = { "/api/*" })
+					, urlPatterns = { "/*" })
 public class SeguridadFilter implements Filter {
 	
 	private final static Logger LOG = LogManager.getLogger(SeguridadFilter.class);
@@ -42,9 +42,7 @@ public class SeguridadFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		
 		LOG.trace("init");		
-		ServletContext sc = fConfig.getServletContext(); 
-		sc.setAttribute("numeroUsuariosIndebidos", 0);    	
-		sc.setAttribute("ips", new HashSet<String>());
+
 	}
 
   
@@ -60,44 +58,15 @@ public class SeguridadFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		
-		if( "GET".equalsIgnoreCase( req.getMethod() ) ){
-			// dejamos continuar
-			LOG.trace("acceso permitido");
-			chain.doFilter(request, response);
-			
-			
-		}else {
-			
-			HttpSession session = req.getSession();
-			Usuario usuarioSession = (Usuario) session.getAttribute("usuarioLogeado");
-			
-			
-			if (  usuarioSession != null ) {
-			
-				// dejamos continuar
-				LOG.trace("acceso permitido " + usuarioSession);
-				chain.doFilter(request, response);
-									
-			}else {
-
-				//acceso denegado
-				LOG.warn("acceso denegado");
-				res.setStatus(304);
-				
-
-			}
-			
-			
-			
-		}
+        res.addHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        res.addHeader("Access-Control-Allow-Credentials", "true");
+        res.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
+        res.addHeader("Access-Control-Allow-Headers", "Content-Type");
 		
-		
-		
-		
-		
+		chain.doFilter(request, response);
+					
 	}
 
 

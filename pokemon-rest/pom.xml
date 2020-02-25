@@ -8,8 +8,6 @@
 	<version>0.0.1</version>
 	<name>pokemon-rest</name>
 
-
-	<!-- variables comunes para todo el POM -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java-version>1.8</java-version>
@@ -17,6 +15,12 @@
 		<javax.servlet.api>3.0.1</javax.servlet.api>
 		<javax.servlet.jsp.version>2.2</javax.servlet.jsp.version>
 		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
+
+		<!-- sonarcloud config -->
+		<sonar.projectKey>Erlantzcg89_ipartekJsp</sonar.projectKey>
+		<sonar.organization>erlantzcg89</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>8967ea22d721d7f8af97e6e01caf3a3ae22011b9</sonar.login>
 	</properties>
 
 	<!-- librerias que vamos a usar u otros proyectos maven -->
