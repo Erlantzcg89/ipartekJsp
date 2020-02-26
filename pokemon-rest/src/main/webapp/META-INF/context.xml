@@ -7,7 +7,7 @@
 		maxWait="10000" 
 		name="jdbc/mydb"	 
 		type="javax.sql.DataSource"
-		url="jdbc:mysql://localhost:3307/pokemon_db?useSSL=false"
+		url="jdbc:mysql://localhost:3306/pokemon_erlantz?useSSL=false"
 		username="root"
 		password="root" 
 		/>

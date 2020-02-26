@@ -12,114 +12,107 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Volcando estructura de base de datos para ipartek
-CREATE DATABASE IF NOT EXISTS `ipartek` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ipartek`;
+-- Volcando estructura de base de datos para pokemon_db
+DROP DATABASE IF EXISTS `pokemon_db`;
+CREATE DATABASE IF NOT EXISTS `pokemon_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `pokemon_db`;
 
--- Volcando estructura para tabla ipartek.asitencia
-CREATE TABLE IF NOT EXISTS `asitencia` (
-  `id_curso` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  UNIQUE KEY `id_curso_id_usuario` (`id_curso`,`id_usuario`),
-  KEY `FK_asitencia_usuario` (`id_usuario`),
-  CONSTRAINT `FK_asitencia_curso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id`),
-  CONSTRAINT `FK_asitencia_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla ipartek.asitencia: ~6 rows (aproximadamente)
-DELETE FROM `asitencia`;
-/*!40000 ALTER TABLE `asitencia` DISABLE KEYS */;
-INSERT INTO `asitencia` (`id_curso`, `id_usuario`) VALUES
-	(2, 0),
-	(2, 1),
-	(2, 2),
-	(2, 3),
-	(3, 1),
-	(3, 2);
-/*!40000 ALTER TABLE `asitencia` ENABLE KEYS */;
-
--- Volcando estructura para tabla ipartek.curso
-CREATE TABLE IF NOT EXISTS `curso` (
+-- Volcando estructura para tabla pokemon_db.habilidades
+DROP TABLE IF EXISTS `habilidades`;
+CREATE TABLE IF NOT EXISTS `habilidades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL DEFAULT '0',
-  `finicio` varchar(100) NOT NULL DEFAULT '',
-  `ffin` varchar(100) NOT NULL DEFAULT '',
-  `horas` int(11) NOT NULL DEFAULT '0',
-  `id_profesor` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nombre` (`nombre`),
-  KEY `fkProfesor` (`id_profesor`),
-  CONSTRAINT `fkProfesor` FOREIGN KEY (`id_profesor`) REFERENCES `profesor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla ipartek.curso: ~3 rows (aproximadamente)
-DELETE FROM `curso`;
-/*!40000 ALTER TABLE `curso` DISABLE KEYS */;
-INSERT INTO `curso` (`id`, `nombre`, `finicio`, `ffin`, `horas`, `id_profesor`) VALUES
-	(1, 'Excel Avanzado', '2020-01-03', '2020-02-03', 20, 3),
-	(2, 'Lenguaje JAVASCRIPT - Online', '2019-11-03', '2019-11-24', 50, 2),
-	(3, 'Desarrollo Avanzado Web con JAVA - JEE - Hibernate', '2020-02-03', '2020-05-03', 250, 1);
-/*!40000 ALTER TABLE `curso` ENABLE KEYS */;
-
--- Volcando estructura para tabla ipartek.profesor
-CREATE TABLE IF NOT EXISTS `profesor` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) DEFAULT NULL,
-  `apellidos` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nombre` (`nombre`,`apellidos`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
--- Volcando datos para la tabla ipartek.profesor: ~0 rows (aproximadamente)
-DELETE FROM `profesor`;
-/*!40000 ALTER TABLE `profesor` DISABLE KEYS */;
-INSERT INTO `profesor` (`id`, `nombre`, `apellidos`) VALUES
-	(1, 'Andres', 'Buruaga'),
-	(3, 'Jalain', 'Molares'),
-	(2, 'Javier', 'Letrado');
-/*!40000 ALTER TABLE `profesor` ENABLE KEYS */;
-
--- Volcando estructura para tabla ipartek.usuario
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `nombre` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla ipartek.usuario: ~0 rows (aproximadamente)
-DELETE FROM `usuario`;
-/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` (`id`, `nombre`) VALUES
-	(3, 'Anastasia'),
-	(2, 'Josefina'),
-	(1, 'Manolito'),
-	(0, 'Pepe');
-/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+-- Volcando datos para la tabla pokemon_db.habilidades: ~7 rows (aproximadamente)
+DELETE FROM `habilidades`;
+/*!40000 ALTER TABLE `habilidades` DISABLE KEYS */;
+INSERT INTO `habilidades` (`id`, `nombre`) VALUES
+	(6, 'ascua'),
+	(5, 'electricidad estatica'),
+	(2, 'foco interno'),
+	(7, 'hedor'),
+	(1, 'impasible'),
+	(3, 'justiciero'),
+	(4, 'para rayos');
+/*!40000 ALTER TABLE `habilidades` ENABLE KEYS */;
 
--- Volcando estructura para tabla ipartek.valoraciones
-CREATE TABLE IF NOT EXISTS `valoraciones` (
-  `nota` int(11) DEFAULT NULL,
-  `comentario` varchar(250) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `id_curso` int(11) DEFAULT NULL,
+-- Volcando estructura para tabla pokemon_db.pokemons
+DROP TABLE IF EXISTS `pokemons`;
+CREATE TABLE IF NOT EXISTS `pokemons` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `fkUsuario` (`id_usuario`),
-  KEY `fkCurso` (`id_curso`),
-  CONSTRAINT `fkCurso` FOREIGN KEY (`id_curso`) REFERENCES `curso` (`id`),
-  CONSTRAINT `fkUsuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `nombre` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla ipartek.valoraciones: ~0 rows (aproximadamente)
-DELETE FROM `valoraciones`;
-/*!40000 ALTER TABLE `valoraciones` DISABLE KEYS */;
-INSERT INTO `valoraciones` (`nota`, `comentario`, `id_usuario`, `id_curso`, `id`) VALUES
-	(3, 'Muy interesante y complementario con mi formacion', 1, 2, 1),
-	(5, 'Me encanta', 3, 2, 2),
-	(4, 'Buenisima formación, muy practico', 2, 3, 3),
-	(4, 'Cuando lo empece necesitaba un trabajo urgentemente', 1, 2, 4);
-/*!40000 ALTER TABLE `valoraciones` ENABLE KEYS */;
+-- Volcando datos para la tabla pokemon_db.pokemons: ~8 rows (aproximadamente)
+DELETE FROM `pokemons`;
+/*!40000 ALTER TABLE `pokemons` DISABLE KEYS */;
+INSERT INTO `pokemons` (`id`, `nombre`) VALUES
+	(20, 'Alejandro Pepito'),
+	(4, 'bulbasaur'),
+	(3, 'charmander'),
+	(10, 'Erlantz Caballero'),
+	(1, 'lucario'),
+	(2, 'pikachu'),
+	(21, 'Super Sayan Mortal');
+/*!40000 ALTER TABLE `pokemons` ENABLE KEYS */;
+
+-- Volcando estructura para tabla pokemon_db.pokemons_habilidades
+DROP TABLE IF EXISTS `pokemons_habilidades`;
+CREATE TABLE IF NOT EXISTS `pokemons_habilidades` (
+  `id_pokemon` int(11) NOT NULL DEFAULT '0',
+  `id_habilidad` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_pokemon`,`id_habilidad`),
+  KEY `fkHabilidad` (`id_habilidad`),
+  CONSTRAINT `fkHabilidad` FOREIGN KEY (`id_habilidad`) REFERENCES `habilidades` (`id`),
+  CONSTRAINT `fkPokemon` FOREIGN KEY (`id_pokemon`) REFERENCES `pokemons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Volcando datos para la tabla pokemon_db.pokemons_habilidades: ~21 rows (aproximadamente)
+DELETE FROM `pokemons_habilidades`;
+/*!40000 ALTER TABLE `pokemons_habilidades` DISABLE KEYS */;
+INSERT INTO `pokemons_habilidades` (`id_pokemon`, `id_habilidad`) VALUES
+	(1, 1),
+	(3, 1),
+	(4, 1),
+	(21, 1),
+	(1, 2),
+	(21, 2),
+	(1, 3),
+	(3, 3),
+	(20, 3),
+	(21, 3),
+	(2, 4),
+	(20, 4),
+	(21, 4),
+	(2, 5),
+	(21, 5),
+	(3, 6),
+	(20, 6),
+	(21, 6),
+	(4, 7),
+	(21, 7);
+/*!40000 ALTER TABLE `pokemons_habilidades` ENABLE KEYS */;
+
+-- Volcando estructura para tabla pokemon_db.usuarios
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT '',
+  `password` varchar(100) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Volcando datos para la tabla pokemon_db.usuarios: ~0 rows (aproximadamente)
+DELETE FROM `usuarios`;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` (`id`, `nombre`, `password`) VALUES
+	(1, 'admin', 'admin');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
